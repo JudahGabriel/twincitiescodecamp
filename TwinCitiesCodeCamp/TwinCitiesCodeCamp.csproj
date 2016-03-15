@@ -180,12 +180,12 @@
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\Talk.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\Views\Home.html" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\wide_sepia.jpg" />
     <Content Include="Content\Site.css">
@@ -268,7 +268,10 @@
     <Content Include="Service References\Application Insights\ConnectedService.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App\" />
+    <Folder Include="App\Common\" />
+    <Folder Include="App\Controllers\" />
+    <Folder Include="App\Models\" />
+    <Folder Include="App\Services\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
@@ -283,6 +286,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="App\App.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />

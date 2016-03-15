@@ -9,6 +9,6 @@ namespace TwinCitiesCodeCamp.Models
     {
         public string RegisterUrl { get; set; }
         public DateTime DateTime { get; set; }
-        
+
     }
 }

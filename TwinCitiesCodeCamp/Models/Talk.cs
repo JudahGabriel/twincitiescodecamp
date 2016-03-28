@@ -13,6 +13,5 @@ namespace TwinCitiesCodeCamp.Models
         public string AuthorBio { get; set; }
         public string AuthorTwitter { get; set; }
         public string Room { get; set; }
-
     }
 }

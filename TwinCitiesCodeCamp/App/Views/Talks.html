@@ -1,0 +1,20 @@
+﻿<section class="talks-page" ng-controller="SessionsController as vm">
+    <div class="page-header">
+        <h1><strong>Talks</strong> at Twin Cities Code Camp {{vm.event.number}}</h1>
+    </div>
+
+    <div class="media" ng-repeat="talk in vm.talks">
+        <div class="media-left">
+            <a href="#">
+                <img class="media-object img-circle" ng-src="{{talk.pictureUrl}}" alt="Profile pic of {{talk.author}}">
+            </a>
+        </div>
+        <div class="media-body">
+            <h2 class="media-heading">
+                <a ng-href="#/{{talk.id}}">{{talk.title}}</a>
+            </h2>
+            <h4><small class="text-muted">by</small> {{talk.author}}</h4>
+            <p class="abstract" ng-bind-html="talk.htmlSafeAbstract"></p>
+        </div>
+    </div>
+</section>

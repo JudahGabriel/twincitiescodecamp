@@ -1,0 +1,20 @@
+﻿<section ng-controller="EventController as vm">
+    <div class="page-header text-center">
+        <h1>Twin Cities Code Camp {{vm.event.number}}</h1>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <h4>Code Camp takes place <span class="text-primary">{{vm.event.friendlyDate}}</span></h4>
+            <h4>at {{vm.event.locationFriendlyName}}</h4>
+            <h4><a ng-href="https://www.google.com/maps/search/{{vm.escapedAddress}}">{{vm.event.address}}</a></h4>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <h4>
+                Coming to the event? Please <a ng-href="{{vm.event.registerUrl}}" class="btn btn-primary" target="_blank">register</a>
+            </h4>
+            <h4>
+                Interested in speaking? See <a href="#/callforspeakers">call for speakers</a>.
+            </h4>
+        </div>
+    </div>
+</section>

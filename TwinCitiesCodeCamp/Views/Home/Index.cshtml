@@ -2,78 +2,48 @@
     ViewBag.Title = "Twin Cities Code Camp";
 }
 
-<header id="header" role="banner">
-    <div class="container">
-        <div id="navbar" class="navbar navbar-default">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html"></a>
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="#main-slider">
-                            <i class="fa fa-home"></i>
-                        </a>
-                    </li>
-                    <li><a href="#services">Call for speakers</a></li>
-                    <li><a href="#portfolio">Schedule</a></li>
-                    <li><a href="#pricing">Sessions</a></li>
-                    <li><a href="#about-us">Speakers</a></li>
-                    <li><a href="#contact">Sponsors</a></li>
-                    <li><a href="#contact">Past events</a></li>
-                    <li><a href="#contact">About us</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</header><!--/#header-->
-<section id="main-slider" class="carousel">
-    <div class="carousel-inner">
-        <div class="item active">
-            <div class="container">
-                <div class="carousel-content">
-                    <h1 class="text-primary">April 16th</h1>
-                    <h1>Twin Cities Code Camp</h1>
-                    <p class="lead">Minnesota's free grassroots event for developers and by developers</p>
+<div data-ng-app="TcccApp">
+
+    <header id="header" class="row" role="banner">
+        @*<div class="row">
+            <img src="~/Content/Images/wide_sepia.jpg" class="img-responsive" />
+        </div>*@
+        <div class="container">
+            <div id="navbar" class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#"><i class="fa fa-code"></i></a></li>
+                        <li><a href="#/event">Event</a></li>
+                        <li><a href="#/callforspeakers">Call for speakers</a></li>
+                        <li><a href="#/schedule">Schedule</a></li>
+                        <li><a href="#/talks">Talks</a></li>
+                        @*<li><a href="#/speakers">Speakers</a></li>*@
+                        <li><a href="#/sponsors">Sponsors</a></li>
+                        @*<li><a href="#/pastevents">Past events</a></li>*@
+                        <li><a href="#/about">About us</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a class="btn btn-primary" target="_blank" href="http://tccc20.eventbrite.com/">Register</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </div><!--/.carousel-inner-->
-    <a class="prev" href="#main-slider" data-slide="prev"><i class="icon-angle-left"></i></a>
-    <a class="next" href="#main-slider" data-slide="next"><i class="icon-angle-right"></i></a>
-</section><!--/#main-slider-->
-<section id="services">
-    <div class="container">
-        <div class="box first">
-            <div class="row">
-                <div class="col-md-4 col-sm-6">
-                    <div class="center">
-                        <i class="icon-md icon-color1 fa fa-rocket"></i>
-                        <h4>Learn</h4>
-                        <p>Being a developer means learning and growing your skills. At Code Camp, you'll catch talks by seasoned developers on web, mobile, cloud, and native development.</p>
-                    </div>
-                </div><!--/.col-md-4-->
-                <div class="col-md-4 col-sm-6">
-                    <div class="center">
-                        <i class="icon-md icon-color2 fa fa-object-group"></i>
-                        <h4>Build</h4>
-                        <p>Practical, hands-on and interactive sessions to grow your skills and build your career. Learn stuff you can use at work and in your side projects.</p>
-                    </div>
-                </div><!--/.col-md-4-->
-                <div class="col-md-4 col-sm-6">
-                    <div class="center">
-                        <i class="icon-md icon-color3 fa fa-connectdevelop"></i>
-                        <h4>Connect</h4>
-                        <p>Code Camp is where you can connect with peers and leaders in the Minnesota tech community.</p>
-                    </div>
-                </div><!--/.col-md-4-->
-            </div><!--/.row-->
-        </div><!--/.box-->
-    </div><!--/.container-->
-</section><!--/#services--> 
+        <div class="container content">
+            <h1 class="title"><i class="fa fa-code"></i> Twin Cities Code Camp</h1>
+            <small class="hidden-xs">#tccc20</small>
+            <h1 class="event-date text-primary">April 16th, 8:15am</h1>
+            <small class="muted hidden-xs">at Rapson Hall, University of Minnesota</small>
+        </div>
+    </header>
+    <section class="page container">
+        <div data-ng-view></div>
+    </section>
+</div>

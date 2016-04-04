@@ -4,23 +4,34 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Twin Cities Code Camp</title>
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Titillium+Web|Lato:300,400,700);" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         @Styles.Render("~/Content/css")
+        <link rel="icon" type="image/png" href="~/Content/Images/favico.png" />
     </head>
     <body>
         <div class="container-fluid body-content">
             @RenderBody()
             <hr />
             <footer>
-                <p>&copy; Twin Cities Code Camp. Go llamas.</p>
+                <p>Twin Cities Code Camp @DateTime.UtcNow.Year. This site is <a href="https://github.com/JudahGabriel/twincitiescodecamp">built</a> with Angular, TypeScript, and RavenDB. Go llamas.</p>
             </footer>
         </div>
 
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
         @Scripts.Render("~/bundles/angular")
+        @Scripts.Render("~/bundles/nprogress")
+        @Scripts.Render("~/bundles/moment")
         @Scripts.Render("~/bundles/app")
         @RenderSection("scripts", required: false)
+        <script type="text/javascript">
+            $(document).on('click', '.navbar-collapse.in', function (e) {
+                if ($(e.target).is('a') && ($(e.target).attr('class') != 'dropdown-toggle')) {
+                    $(this).collapse('hide');
+                }
+            });
+        </script>
     </body>
 
 </html>

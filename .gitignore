@@ -234,3 +234,6 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+/TwinCitiesCodeCamp2/Web.Release.config
+/TwinCitiesCodeCamp2/Web.Debug.config
+/TwinCitiesCodeCamp2/Web.config

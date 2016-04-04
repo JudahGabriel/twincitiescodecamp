@@ -7,8 +7,11 @@ namespace TwinCitiesCodeCamp.Models
 {
     public class Event
     {
+        public string Id { get; set; }
         public string RegisterUrl { get; set; }
         public DateTime DateTime { get; set; }
-
+        public string LocationFriendlyName { get; set; }
+        public string Address { get; set; }
+        public int Number { get; set; }
     }
 }

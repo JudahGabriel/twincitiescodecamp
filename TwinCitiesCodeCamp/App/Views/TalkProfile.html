@@ -1,0 +1,39 @@
+﻿<section class="talk-profile-page" ng-controller="TalkProfileController as vm">
+
+    <div class="media">
+        <div class="media-left">
+            <a href="#">
+                <img class="media-object img-circle" ng-src="{{vm.talk.pictureUrl}}" alt="Profile pic of {{vm.talk.author}}">
+            </a>
+        </div>
+        <div class="media-body">
+            <h2 class="media-heading">{{vm.talk.title}} </h2>
+            <h4>
+                <small class="text-muted">by</small> 
+                {{vm.talk.author}} 
+                <br ng-show="vm.talk.authorTwitter" />
+                <a ng-show="vm.talk.authorTwitter" ng-href="https://twitter.com/{{vm.talk.authorTwitter}}"> 
+                    <i class="fa fa-twitter"></i>
+                    {{vm.talk.authorTwitter}}
+                </a> 
+                <br ng-show="vm.talk.authorUrl" />
+                <a ng-show="vm.talk.authorUrl" ng-href="{{vm.talk.authorUrl}}">
+                    <i class="fa fa-link"></i>
+                    {{vm.talk.authorUrl}}
+                </a>
+                <br />
+                <small class="text-muted">in</small> 
+                {{vm.talk.room}}
+                <br />
+                <small class="text-muted">at</small>
+                {{vm.talk.timeFriendly}}
+            </h4>
+            <p class="abstract" ng-bind-html="vm.talk.htmlSafeAbstract"></p>
+            <hr />
+            <p class="bio">
+                <span class="text-muted">About the author:</span>
+                {{vm.talk.authorBio}}
+            </p>
+        </div>
+    </div>
+</section>

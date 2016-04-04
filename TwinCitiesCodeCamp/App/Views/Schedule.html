@@ -1,0 +1,26 @@
+﻿<section class="schedule-page" ng-controller="ScheduleController as vm">
+    <div class="page-header text-center">
+        <h1>Twin Cities Code Camp {{vm.event.number}} - Schedule</h1>
+    </div>
+
+    <div class="schedule">
+        <div class="timeslot" ng-repeat="timeslot in vm.schedule.timeslots">
+            <h3 class="time">{{timeslot.startFriendly}}</h3>
+            <div class="well item" ng-repeat="item in timeslot.items">
+                <h2>
+                    <a ng-show="item.talkId" ng-href="#/{{item.talkId}}">{{item.title}}</a>
+                    <span ng-hide="item.talkId">{{item.title}}</span>
+                </h2>
+                <span ng-show="item.author">
+                    <span class="text-muted">by</span>
+                    {{item.author}}
+                </span>
+                <span ng-show="item.room">
+                    <span class="text-muted">in room</span>
+                    {{item.room}}
+                </span>
+            </div>
+            <hr />
+        </div>
+    </div>
+</section>

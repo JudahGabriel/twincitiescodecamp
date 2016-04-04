@@ -25,3 +25,4 @@ var Tccc;
                 .otherwise({ redirectTo: "/home" });
         }]);
 })(Tccc || (Tccc = {}));
+//# sourceMappingURL=App.js.map

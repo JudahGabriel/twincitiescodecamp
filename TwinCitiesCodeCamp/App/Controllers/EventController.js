@@ -21,3 +21,4 @@ var Tccc;
     Tccc.EventController = EventController;
     Tccc.App.controller("EventController", EventController);
 })(Tccc || (Tccc = {}));
+//# sourceMappingURL=EventController.js.map

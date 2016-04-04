@@ -15,3 +15,4 @@ var Tccc;
     Tccc.ScheduleService = ScheduleService;
     Tccc.App.service("scheduleApi", ScheduleService);
 })(Tccc || (Tccc = {}));
+//# sourceMappingURL=ScheduleService.js.map

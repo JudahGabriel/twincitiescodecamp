@@ -75,7 +75,7 @@ var Tccc;
         };
         ApiService.$inject = ["loadingProgress", "$http", "$q"];
         return ApiService;
-    })();
+    }());
     Tccc.ApiService = ApiService;
     Tccc.App.service("apiService", ApiService);
 })(Tccc || (Tccc = {}));

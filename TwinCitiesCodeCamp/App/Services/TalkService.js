@@ -16,7 +16,7 @@ var Tccc;
         };
         TalkService.$inject = ["apiService"];
         return TalkService;
-    })();
+    }());
     Tccc.TalkService = TalkService;
     Tccc.App.service("talkApi", TalkService);
 })(Tccc || (Tccc = {}));

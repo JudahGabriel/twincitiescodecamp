@@ -6,7 +6,7 @@ var Tccc;
             this.timeslots = serverObj.timeslots.map(function (s) { return new Tccc.ScheduleTimeslot(s); });
         }
         return Schedule;
-    })();
+    }());
     Tccc.Schedule = Schedule;
 })(Tccc || (Tccc = {}));
 //# sourceMappingURL=Schedule.js.map

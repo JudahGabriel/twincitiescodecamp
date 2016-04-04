@@ -17,7 +17,7 @@ var Tccc;
         });
         EventController.$inject = ["eventApi"];
         return EventController;
-    })();
+    }());
     Tccc.EventController = EventController;
     Tccc.App.controller("EventController", EventController);
 })(Tccc || (Tccc = {}));

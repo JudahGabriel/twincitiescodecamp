@@ -11,7 +11,7 @@ var Tccc;
         };
         ScheduleService.$inject = ["apiService"];
         return ScheduleService;
-    })();
+    }());
     Tccc.ScheduleService = ScheduleService;
     Tccc.App.service("scheduleApi", ScheduleService);
 })(Tccc || (Tccc = {}));

@@ -4,7 +4,8 @@ var Tccc;
         "ngRoute",
         "ngAnimate",
         "ui.bootstrap",
-        "ui.bootstrap.tpls"
+        "ui.bootstrap.tpls",
+        "LocalStorageModule"
     ];
     Tccc.App = angular.module("TcccApp", modules);
     Tccc.App.config(["$routeProvider", function ($routeProvider) {

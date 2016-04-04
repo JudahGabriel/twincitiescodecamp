@@ -14,7 +14,7 @@ var Tccc;
             configurable: true
         });
         return Event;
-    })();
+    }());
     Tccc.Event = Event;
 })(Tccc || (Tccc = {}));
 //# sourceMappingURL=Event.js.map

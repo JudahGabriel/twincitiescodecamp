@@ -19,7 +19,7 @@ var Tccc;
         };
         EventService.$inject = ["apiService"];
         return EventService;
-    })();
+    }());
     Tccc.EventService = EventService;
     Tccc.App.service("eventApi", EventService);
 })(Tccc || (Tccc = {}));

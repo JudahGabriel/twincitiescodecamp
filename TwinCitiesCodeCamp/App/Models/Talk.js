@@ -17,7 +17,7 @@ var Tccc;
             configurable: true
         });
         return Talk;
-    })();
+    }());
     Tccc.Talk = Talk;
 })(Tccc || (Tccc = {}));
 //# sourceMappingURL=Talk.js.map

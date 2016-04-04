@@ -13,7 +13,7 @@ var Tccc;
         }
         TalkProfileController.$inject = ["talkApi", "$sce", "$routeParams"];
         return TalkProfileController;
-    })();
+    }());
     Tccc.TalkProfileController = TalkProfileController;
     Tccc.App.controller("TalkProfileController", TalkProfileController);
 })(Tccc || (Tccc = {}));

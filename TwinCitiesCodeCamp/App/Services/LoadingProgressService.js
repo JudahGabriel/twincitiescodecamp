@@ -33,7 +33,7 @@ var Tccc;
         };
         LoadingProgressService.$inject = ["$q"];
         return LoadingProgressService;
-    })();
+    }());
     Tccc.LoadingProgressService = LoadingProgressService;
     Tccc.App.service("loadingProgress", LoadingProgressService);
 })(Tccc || (Tccc = {}));

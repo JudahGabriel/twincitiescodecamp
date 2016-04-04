@@ -23,6 +23,7 @@ namespace TwinCitiesCodeCamp
                 "~/Scripts/angular-route.js",
                 "~/Scripts/angular-ui/ui-bootstrap.js",
                 "~/Scripts/angular-ui/ui-bootstrap-tpls.js",
+                "~/Scripts/angular-local-storage.js",
                 "~/Scripts/nprogress.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(

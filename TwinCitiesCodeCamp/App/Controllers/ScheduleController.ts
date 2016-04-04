@@ -1,11 +1,22 @@
 ﻿namespace Tccc {
     export class ScheduleController {
-
-        static $inject = ["eventApi", "scheduleApi"];
+        
         event: Server.Event = null;
         schedule: Server.Schedule;
 
-        constructor(private eventApi: EventService, private scheduleApi: ScheduleService) {
+        static $inject = ["eventApi", "scheduleApi", "localStorageService"];
+        static scheduleCacheKey = "schedule";
+
+        constructor(
+            private eventApi: EventService,
+            private scheduleApi: ScheduleService,
+            private localStorageService: ng.local.storage.ILocalStorageService) {
+
+            var cachedSchedule = localStorageService.get<Server.Schedule>(ScheduleController.scheduleCacheKey);
+            if (cachedSchedule) {
+                this.scheduleLoaded(cachedSchedule);
+            }
+
             eventApi.getMostRecentEvent()
                 .then(e => {
                     this.event = e;

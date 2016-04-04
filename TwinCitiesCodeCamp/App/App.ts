@@ -3,7 +3,8 @@
         "ngRoute",
         "ngAnimate",
         "ui.bootstrap",
-        "ui.bootstrap.tpls"
+        "ui.bootstrap.tpls",
+        "LocalStorageModule"
     ];
 
     export var App = angular.module("TcccApp", modules);

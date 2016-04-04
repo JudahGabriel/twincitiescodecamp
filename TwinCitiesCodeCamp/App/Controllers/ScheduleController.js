@@ -21,6 +21,7 @@ var Tccc;
         ScheduleController.prototype.scheduleLoaded = function (schedule) {
             this.schedule = schedule;
             this.schedule.timeslots.sort(function (a, b) { return a.start > b.start ? 1 : a.start < b.start ? -1 : 0; });
+            this.localStorageService.set(ScheduleController.scheduleCacheKey, schedule);
         };
         ScheduleController.prototype.print = function () {
             window.print();

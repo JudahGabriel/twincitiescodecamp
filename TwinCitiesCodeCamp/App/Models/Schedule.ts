@@ -19,6 +19,7 @@
                 });
             });
 
+            rooms.sort();
             return rooms;
         }
     }

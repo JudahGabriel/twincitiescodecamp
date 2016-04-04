@@ -121,7 +121,7 @@ header .content .title .fa-code {
 .printable-schedule-page .table-container {
   margin-left: auto;
   margin-right: auto;
-  max-width: 800px;
+  max-width: 820px;
   background-color: white;
 }
 @media print {

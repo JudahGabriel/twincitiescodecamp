@@ -14,6 +14,7 @@ var Tccc;
                     }
                 });
             });
+            rooms.sort();
             return rooms;
         };
         return Schedule;

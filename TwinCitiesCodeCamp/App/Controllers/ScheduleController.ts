@@ -28,6 +28,9 @@
         scheduleLoaded(schedule: Server.Schedule) {
             this.schedule = schedule;
             this.schedule.timeslots.sort((a, b) => a.start > b.start ? 1 : a.start < b.start ? -1 : 0);
+            this.schedule.timeslots.forEach(t => {
+                t.items.sort((first, second) => first.room > second.room ? 1 : first.room < second.room ? -1 : 0);
+            });
             this.localStorageService.set(ScheduleController.scheduleCacheKey, schedule);
         }
 

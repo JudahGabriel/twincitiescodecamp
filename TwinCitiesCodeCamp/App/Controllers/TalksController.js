@@ -34,4 +34,3 @@ var Tccc;
     Tccc.TalksController = TalksController;
     Tccc.App.controller("TalksController", TalksController);
 })(Tccc || (Tccc = {}));
-//# sourceMappingURL=TalksController.js.map

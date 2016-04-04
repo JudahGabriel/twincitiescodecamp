@@ -39,6 +39,7 @@ header {
 
     @media(max-width: @screen-sm-max) {
         background-size: cover;
+        background-position-y: 0;
     }
 
     .navbar {
@@ -66,7 +67,7 @@ header {
         text-align: center;
 
         @media(max-width: @screen-xs-max) {
-            height: 150px;
+            height: 180px;
             padding-top: 30px;
 
             .event-date {
@@ -85,7 +86,13 @@ header {
 
             .fa-code {
                 color: @brand-primary;
-                text-shadow: 0 4px @brand-warning, 0 8px @brand-info, 0 12px @brand-success;
+                text-shadow: 1px 4px @brand-warning, 2px 8px @brand-success, 3px 12px @brand-info;
+                -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent), to(rgba(255,255,255,0.2)));
+
+
+                @media(max-width: @screen-xs-max) {
+                    text-shadow: 1px 2px @brand-warning, 2px 4px @brand-success, 3px 6px @brand-info;
+                }
             }
         }
     }
@@ -132,6 +139,38 @@ header {
 
         .text-muted {
             color: lighten(@gray-light, 30%);
+        }
+    }
+}
+
+.printable-schedule-page {
+
+    .table-container {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 800px;
+        background-color: white;
+
+        @media print {
+            max-width: 900px;
+            width: 900px;
+        }
+    }
+
+    .table {
+        font-size: 15px;
+        color: black;
+
+        a {
+            color: @brand-primary;
+
+            @media print {
+                text-decoration: none;
+            }
+        }
+
+        td {
+            border-color: @gray;
         }
     }
 }

@@ -29,6 +29,10 @@
             this.schedule = schedule;
             this.schedule.timeslots.sort((a, b) => a.start > b.start ? 1 : a.start < b.start ? -1 : 0);
         }
+
+        print() {
+            window.print();
+        }
     }
 
     App.controller("ScheduleController", ScheduleController);

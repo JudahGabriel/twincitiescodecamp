@@ -22,6 +22,9 @@ var Tccc;
             this.schedule = schedule;
             this.schedule.timeslots.sort(function (a, b) { return a.start > b.start ? 1 : a.start < b.start ? -1 : 0; });
         };
+        ScheduleController.prototype.print = function () {
+            window.print();
+        };
         ScheduleController.$inject = ["eventApi", "scheduleApi", "localStorageService"];
         ScheduleController.scheduleCacheKey = "schedule";
         return ScheduleController;
@@ -29,4 +32,3 @@ var Tccc;
     Tccc.ScheduleController = ScheduleController;
     Tccc.App.controller("ScheduleController", ScheduleController);
 })(Tccc || (Tccc = {}));
-//# sourceMappingURL=ScheduleController.js.map

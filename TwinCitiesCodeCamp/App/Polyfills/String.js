@@ -22,4 +22,3 @@ if (!String.prototype.startsWith) {
         return this.lastIndexOf(searchString, position) === position;
     };
 }
-//# sourceMappingURL=String.js.map

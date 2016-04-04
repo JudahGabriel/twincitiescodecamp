@@ -20,4 +20,3 @@ var Tccc;
     Tccc.TalkService = TalkService;
     Tccc.App.service("talkApi", TalkService);
 })(Tccc || (Tccc = {}));
-//# sourceMappingURL=TalkService.js.map

@@ -8,5 +8,18 @@
             angular.copy(serverObj, this);
             this.timeslots = serverObj.timeslots.map(s => new ScheduleTimeslot(s));
         }
+
+        getRooms(): string[] {
+            var rooms: string[] = [];
+            this.timeslots.forEach(t => {
+                t.items.forEach(i => {
+                    if (i.room && !rooms.includes(i.room)) {
+                        rooms.push(i.room);
+                    }
+                });
+            });
+
+            return rooms;
+        }
     }
 }

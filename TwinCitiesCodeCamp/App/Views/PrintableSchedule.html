@@ -1,0 +1,32 @@
+﻿<section class="printable-schedule-page" ng-controller="ScheduleController as vm">
+    <div class="page-header hidden-print">
+        <h1>Printable schedule for Twin Cities Code Camp {{event.number}}</h1>
+        <button class="btn btn-primary" title="Print schedule, kill trees" ng-click="vm.print()">
+            <i class="fa fa-print"></i>
+            Print schedule
+        </button>
+    </div>
+    
+    <div class="table-container">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <td>Time</td>
+                    <td ng-repeat="room in vm.schedule.getRooms()">
+                        {{room}}
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="timeslot in vm.schedule.timeslots">
+                    <td>{{timeslot.startFriendly}}</td>
+                    <td ng-repeat="item in timeslot.items" ng-attr-colspan="{{item.talkId ? 1 : 7}}">
+                        <a ng-show="item.talkId" ng-href="#/{{item.talkId}}"><strong>{{item.title}}</strong></a>
+                        <span ng-show="item.talkId" class="text-muted">by</span> {{item.author}}
+                        <span ng-hide="item.talkId">{{item.title}}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

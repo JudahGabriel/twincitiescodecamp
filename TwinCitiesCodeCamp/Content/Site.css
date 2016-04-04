@@ -31,6 +31,7 @@ header {
 @media (max-width: 991px) {
   header {
     background-size: cover;
+    background-position-y: 0;
   }
 }
 header .navbar {
@@ -58,7 +59,7 @@ header .content {
 }
 @media (max-width: 767px) {
   header .content {
-    height: 150px;
+    height: 180px;
     padding-top: 30px;
   }
   header .content .event-date {
@@ -77,7 +78,13 @@ header .content .title {
 }
 header .content .title .fa-code {
   color: #DF691A;
-  text-shadow: 0 4px #f0ad4e, 0 8px #5bc0de, 0 12px #5cb85c;
+  text-shadow: 1px 4px #f0ad4e, 2px 8px #5cb85c, 3px 12px #5bc0de;
+  -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent), to(rgba(255, 255, 255, 0.2)));
+}
+@media (max-width: 767px) {
+  header .content .title .fa-code {
+    text-shadow: 1px 2px #f0ad4e, 2px 4px #5cb85c, 3px 6px #5bc0de;
+  }
 }
 .home-page .page-header {
   font-family: 'Titillium Web', sans-serif;
@@ -110,6 +117,33 @@ header .content .title .fa-code {
 }
 .schedule-page .timeslot .text-muted {
   color: #9caab7;
+}
+.printable-schedule-page .table-container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 800px;
+  background-color: white;
+}
+@media print {
+  .printable-schedule-page .table-container {
+    max-width: 900px;
+    width: 900px;
+  }
+}
+.printable-schedule-page .table {
+  font-size: 15px;
+  color: black;
+}
+.printable-schedule-page .table a {
+  color: #DF691A;
+}
+@media print {
+  .printable-schedule-page .table a {
+    text-decoration: none;
+  }
+}
+.printable-schedule-page .table td {
+  border-color: #555555;
 }
 .talk-profile-page {
   margin-top: 50px;

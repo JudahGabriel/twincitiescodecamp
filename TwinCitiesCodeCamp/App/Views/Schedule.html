@@ -1,7 +1,11 @@
 ﻿<section class="schedule-page" ng-controller="ScheduleController as vm">
-    <div class="page-header text-center">
-        <h1>Twin Cities Code Camp {{vm.event.number}} - Schedule</h1>
+    <div class="page-header">
+        <h1><strong>Schedule</strong> for Twin Cities Code Camp {{vm.event.number}}</h1>
+        <a href="#/schedule/printable">Printable schedule</a>
     </div>
+    <p>
+        
+    </p>
 
     <div class="schedule">
         <div class="timeslot" ng-repeat="timeslot in vm.schedule.timeslots">

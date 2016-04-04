@@ -220,6 +220,7 @@
     <Content Include="App\Views\Event.html" />
     <Content Include="App\Views\Home.html" />
     <Content Include="App\Views\PastEvents.html" />
+    <Content Include="App\Views\PrintableSchedule.html" />
     <Content Include="App\Views\Schedule.html" />
     <Content Include="App\Views\TalkProfile.html" />
     <Content Include="App\Views\Talks.html" />

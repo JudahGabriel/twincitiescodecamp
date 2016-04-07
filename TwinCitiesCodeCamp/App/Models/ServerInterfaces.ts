@@ -38,4 +38,16 @@
         eventId: string;
         timeslots: ScheduleTimeslot[];
     }
+
+    export interface Sponsor {
+        id: string;
+        eventId: string;
+        name: string;
+        about: string;
+        logo: string;
+        url: string;
+        twitter: string;
+        level: SponsorshipLevel;
+        createDate: string;
+    }
 }

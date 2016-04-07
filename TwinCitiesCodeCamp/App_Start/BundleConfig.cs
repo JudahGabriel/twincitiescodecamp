@@ -27,8 +27,8 @@ namespace TwinCitiesCodeCamp
                 "~/Scripts/nprogress.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
-                "~/App/Polyfills/*.js",
-                "~/App/App.js",
+                "~/App/Polyfills/*.js")
+                .Include("~/App/App.js", new AngularViewCacheBuster()).Include(
                 "~/App/Common/*.js",
                 "~/App/Controllers/*.js",
                 "~/App/Models/*.js",

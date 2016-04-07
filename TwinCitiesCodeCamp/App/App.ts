@@ -23,8 +23,7 @@
             .when("/pastevents", { templateUrl: "/App/Views/PastEvents.html" })
             .when("/about", { templateUrl: "/App/Views/AboutUs.html" })
             .when("/talks/:id", { templateUrl: "/App/Views/TalkProfile.html" })
+            .when("/policies", { templateUrl: "/App/Views/Policies.html" })
             .otherwise({ redirectTo: "/home" });
     }]);
-    
-    //App.run(["$rootScope", function ($rootScope: ng.IRootScopeService) { }]);
 }

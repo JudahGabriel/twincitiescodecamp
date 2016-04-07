@@ -1,51 +1,68 @@
-﻿<section class="sponsors-page">
+﻿<section class="sponsors-page" ng-controller="SponsorsController as vm">
     <div class="page-header">
-        <h1>Twin Cities Code Camp {{vm.event.number}} sponsors</h1>
+        <h1>
+            <strong>Sponsors</strong> of Twin Cities Code Camp {{vm.event.number}}
+        </h1>
+        <h5>A huge <span class="text-primary">THANK YOU</span> to our sponsors; these are the excellent companies who enable us to put on Code Camp. Please check out their websites and utilize their services as a way to thank them for their support of #tccc{{vm.event.number}}.</h5>
     </div>
 
-    <!--TODO: this should not be hard-coded. Store sponsors in DB, maybe the images in RavenFS. -->
-    <h2>Gold Sponsors</h2>
-    <div class="row">
-        <div class="sponsor col-xs-12">
-            <a href="http://devjam.com">
-                <img src="../../Content/Images/Sponsors/DevJam.jpg" />
-            </a>
+    <div ng-show="vm.goldSponsors.length">
+        <h2>
+            <i class="fa fa-circle" style="color: gold;"></i>
+            Gold Sponsors
+        </h2>
+        <p>Gold sponsors are the biggest supporters of Twin Cities Code Camp. While you're at the event, check out the booths of our gold sponsors and engage with these fine companies who enable Code Camp to take place.</p>
+        <div class="row">
+            <div class="sponsor col-xs-12" ng-repeat="sponsor in vm.goldSponsors">
+                <div class="well">
+                    <a ng-href="{{sponsor.url}}">
+                        <img ng-src="{{sponsor.logo}}" />
+                    </a>
+                    <h1><a ng-href="{{sponsor.url}}">{{sponsor.urlFriendly}}</a></h1>
+                    <p ng-show="sponsor.about" ng-bind-html="sponsor.aboutHtmlSafe">
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="sponsor col-xs-12">
-            <a href="http://www.powerobjects.com/">
-                <img src="../../Content/Images/Sponsors/PowerObjects.jpg" />
-            </a>
-        </div>
-        <div class="sponsor col-xs-12">
-            <a href="http://www.thesoftwareguild.com/">
-                <img src="../../Content/Images/Sponsors/SoftwareGuild.jpg" />
-            </a>
-        </div>
-        <div class="sponsor col-xs-12">
-            <a href="http://magenic.com">
-                <img src="http://www.twincitiescodecamp.com/Images/Magenic.png" />
-            </a>
-        </div>
-        <div class="sponsor col-xs-12">
-            <a href="http://www.omniresources.com/">
-                <img src="http://www.twincitiescodecamp.com/Images/Omni.jpg" />
-            </a>
-        </div>
+        <hr />
     </div>
 
-    <h2>Silver Sponsors</h2>
-
-    <h2>Bronze Sponsors</h2>
-    <div class="row">
-        <div class="sponsor col-xs-12">
-            <a href="http://www.omniresources.com/">
-                <img src="http://www.twincitiescodecamp.com/Images/OpenSystems.png" />
-            </a>
+    <div ng-show="vm.silverSponsors.length">
+        <h2>
+            <i class="fa fa-circle" style="color: silver;"></i>
+            Silver Sponsors
+        </h2>
+        <div class="row">
+            <div class="sponsor col-xs-12" ng-repeat="sponsor in vm.silverSponsors">
+                <div class="well">
+                    <a ng-href="{{sponsor.url}}">
+                        <img ng-src="{{sponsor.logo}}" />
+                    </a>
+                    <h1><a ng-href="{{sponsor.url}}">{{sponsor.urlFriendly}}</a></h1>
+                    <p ng-show="sponsor.about" ng-bind-html="sponsor.aboutHtmlSafe">
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="sponsor col-xs-12">
-            <a href="http://supergofaster.com/">
-                <img src="http://www.twincitiescodecamp.com/Images/SuperGoFaster.jpg" />
-            </a>
+        <hr />
+    </div>
+
+    <div ng-show="vm.bronzeSponsors.length">
+        <h2>
+            <i class="fa fa-circle" style="color: rgb(205,127,50);"></i>
+            Bronze Sponsors
+        </h2>
+        <div class="row">
+            <div class="sponsor col-xs-12" ng-repeat="sponsor in vm.bronzeSponsors">
+                <div class="well">
+                    <a ng-href="{{sponsor.url}}">
+                        <img ng-src="{{sponsor.logo}}" />
+                    </a>
+                    <h1><a ng-href="{{sponsor.url}}">{{sponsor.urlFriendly}}</a></h1>
+                    <p ng-show="sponsor.about" ng-bind-html="sponsor.aboutHtmlSafe">
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </section>

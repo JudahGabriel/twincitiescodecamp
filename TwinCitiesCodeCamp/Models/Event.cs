@@ -13,5 +13,6 @@ namespace TwinCitiesCodeCamp.Models
         public string LocationFriendlyName { get; set; }
         public string Address { get; set; }
         public int Number { get; set; }
+        public string SeasonYear { get; set; }
     }
 }

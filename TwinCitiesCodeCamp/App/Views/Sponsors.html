@@ -16,9 +16,12 @@
             <div class="sponsor col-xs-12" ng-repeat="sponsor in vm.goldSponsors">
                 <div class="well">
                     <a ng-href="{{sponsor.url}}">
-                        <img ng-src="{{sponsor.logo}}" />
+                        <img class="img-responsive" ng-src="{{sponsor.logo}}" />
                     </a>
-                    <h1><a ng-href="{{sponsor.url}}">{{sponsor.urlFriendly}}</a></h1>
+                    <h3 class="website"><a ng-href="{{sponsor.url}}">{{sponsor.urlFriendly}}</a></h3>
+                    <h4>
+                        <i class="fa fa-twitter" style="color: #00aced"></i> <a ng-href="https://twitter.com/{{sponsor.twitter}}">{{sponsor.twitter}}</a>
+                    </h4>
                     <p ng-show="sponsor.about" ng-bind-html="sponsor.aboutHtmlSafe">
                     </p>
                 </div>
@@ -36,9 +39,12 @@
             <div class="sponsor col-xs-12" ng-repeat="sponsor in vm.silverSponsors">
                 <div class="well">
                     <a ng-href="{{sponsor.url}}">
-                        <img ng-src="{{sponsor.logo}}" />
+                        <img class="img-responsive" ng-src="{{sponsor.logo}}" />
                     </a>
-                    <h1><a ng-href="{{sponsor.url}}">{{sponsor.urlFriendly}}</a></h1>
+                    <h3 class="website"><a ng-href="{{sponsor.url}}">{{sponsor.urlFriendly}}</a></h3>
+                    <h4>
+                        <i class="fa fa-twitter" style="color: #00aced"></i> <a ng-href="https://twitter.com/{{sponsor.twitter}}">{{sponsor.twitter}}</a>
+                    </h4>
                     <p ng-show="sponsor.about" ng-bind-html="sponsor.aboutHtmlSafe">
                     </p>
                 </div>
@@ -56,9 +62,12 @@
             <div class="sponsor col-xs-12" ng-repeat="sponsor in vm.bronzeSponsors">
                 <div class="well">
                     <a ng-href="{{sponsor.url}}">
-                        <img ng-src="{{sponsor.logo}}" />
+                        <img class="img-responsive" ng-src="{{sponsor.logo}}" />
                     </a>
-                    <h1><a ng-href="{{sponsor.url}}">{{sponsor.urlFriendly}}</a></h1>
+                    <h3 class="website"><a ng-href="{{sponsor.url}}">{{sponsor.urlFriendly}}</a></h3>
+                    <h4>
+                        <i class="fa fa-twitter" style="color: #00aced"></i> <a ng-href="https://twitter.com/{{sponsor.twitter}}">{{sponsor.twitter}}</a>
+                    </h4>
                     <p ng-show="sponsor.about" ng-bind-html="sponsor.aboutHtmlSafe">
                     </p>
                 </div>

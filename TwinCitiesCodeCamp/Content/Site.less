@@ -212,10 +212,22 @@ header {
 .sponsors-page {
     .sponsor {
         margin: 30px;
-    }
 
-    img {
-        -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(70%, transparent), to(rgba(255,255,255,0.2)));
+        .website {
+            overflow-x: hidden;
+            text-overflow: ellipsis;
+        }
+
+        img {
+            -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(70%, transparent), to(rgba(255,255,255,0.2)));
+            transition: all .2s linear;
+        }
+
+        &:hover {
+            img {
+                transform: perspective(50em) rotateY(20deg);
+            }
+        }
     }
 
     .fa-circle {

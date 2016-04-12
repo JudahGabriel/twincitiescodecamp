@@ -23,8 +23,9 @@ namespace TwinCitiesCodeCamp.Controllers
                 {
                     throw new ArgumentException("Couldn't find event for " + seasonYearSpaces);
                 }
-                
-                return View("Sessions", ev.Id);
+
+                object model = ev.Id;
+                return View(model);
             }
         }
     }

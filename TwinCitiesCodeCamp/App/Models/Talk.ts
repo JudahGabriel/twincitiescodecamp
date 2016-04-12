@@ -9,11 +9,17 @@
         room: string;
         hour: number;
         eventId: string;
+        pictureUrl: string;
 
         htmlSafeAbstract: any;
+        htmlSafeBio: any;
 
         constructor(serverObj: Server.Talk) {
             angular.copy(serverObj, this);
+        }
+
+        get pictureUrlOrDefault(): string {
+            return this.pictureUrl || "../Content/Images/unknown-speaker.jpg";
         }
 
         get timeFriendly(): string {

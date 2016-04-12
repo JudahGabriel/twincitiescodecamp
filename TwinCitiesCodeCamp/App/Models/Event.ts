@@ -6,6 +6,7 @@
         locationFriendlyName: string;
         address: string;
         number: number;
+        seasonYear: string;
 
         constructor(serverObj?: Server.Event) {
             if (serverObj) {

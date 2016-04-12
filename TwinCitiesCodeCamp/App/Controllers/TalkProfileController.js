@@ -9,6 +9,7 @@ var Tccc;
             talkApi.get("Talks/" + talkId).then(function (talk) {
                 _this.talk = talk;
                 _this.talk.htmlSafeAbstract = $sce.trustAsHtml(talk.abstract);
+                _this.talk.htmlSafeBio = $sce.trustAsHtml(talk.authorBio);
             });
         }
         TalkProfileController.$inject = ["talkApi", "$sce", "$routeParams"];

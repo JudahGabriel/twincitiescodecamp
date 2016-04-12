@@ -6,6 +6,7 @@
         locationFriendlyName: string;
         address: string;
         number: number;
+        seasonYear: string;
     }
 
     export interface Talk {
@@ -18,6 +19,7 @@
         room: string;
         hour: number;
         eventId: string;
+        pictureUrl: string;
     }
 
     export interface ScheduleTimeslot {

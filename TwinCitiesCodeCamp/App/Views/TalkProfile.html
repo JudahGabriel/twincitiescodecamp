@@ -3,7 +3,7 @@
     <div class="media">
         <div class="media-left">
             <a href="#">
-                <img class="media-object img-circle" ng-src="{{vm.talk.pictureUrl}}" alt="Profile pic of {{vm.talk.author}}">
+                <img class="media-object img-circle" ng-src="{{vm.talk.pictureUrlOrDefault}}" alt="Profile pic of {{vm.talk.author}}">
             </a>
         </div>
         <div class="media-body">
@@ -32,7 +32,7 @@
             <hr />
             <p class="bio">
                 <span class="text-muted">About the author:</span>
-                {{vm.talk.authorBio}}
+                <span ng-bind-html="vm.talk.htmlSafeBio"></span>
             </p>
         </div>
     </div>

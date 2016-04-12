@@ -223,6 +223,7 @@
     <Content Include="App\Views\CallForSpeakers.html" />
     <Content Include="App\Views\Event.html" />
     <Content Include="App\Views\Home.html" />
+    <Content Include="App\Views\PastEventDetails.html" />
     <Content Include="App\Views\PastEvents.html" />
     <Content Include="App\Views\Policies.html" />
     <Content Include="App\Views\PrintableSchedule.html" />
@@ -243,6 +244,7 @@
     <Content Include="Content\Images\Sponsors\SoftwareGuild.jpg" />
     <Content Include="Content\Images\Sponsors\SuperGoFaster.jpg" />
     <Content Include="Content\Images\team.jpg" />
+    <Content Include="Content\Images\unknown-speaker.jpg" />
     <Content Include="Content\Images\wide_sepia.jpg" />
     <Content Include="Content\nprogress.css" />
     <Content Include="Content\Site.css">
@@ -351,6 +353,8 @@
   <ItemGroup>
     <TypeScriptCompile Include="App\App.ts" />
     <TypeScriptCompile Include="App\Controllers\EventController.ts" />
+    <TypeScriptCompile Include="App\Controllers\PastEventDetailsController.ts" />
+    <TypeScriptCompile Include="App\Controllers\PastEventsController.ts" />
     <TypeScriptCompile Include="App\Controllers\ScheduleController.ts" />
     <TypeScriptCompile Include="App\Controllers\SponsorsController.ts" />
     <TypeScriptCompile Include="App\Controllers\TalkProfileController.ts" />

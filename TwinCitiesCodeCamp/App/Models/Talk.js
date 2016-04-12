@@ -4,6 +4,13 @@ var Tccc;
         function Talk(serverObj) {
             angular.copy(serverObj, this);
         }
+        Object.defineProperty(Talk.prototype, "pictureUrlOrDefault", {
+            get: function () {
+                return this.pictureUrl || "../Content/Images/unknown-speaker.jpg";
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(Talk.prototype, "timeFriendly", {
             get: function () {
                 return moment()

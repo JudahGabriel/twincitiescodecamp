@@ -2,23 +2,27 @@
     export class TalksController {
         talks: Talk[] = [];
         event: Event;
+        eventId: string;
 
-        static $inject = ["eventApi", "talkApi", "$sce", "localStorageService"];
+        static $inject = ["eventApi", "talkApi", "$sce", "$routeParams", "localStorageService"];
         static talksCacheKey = "talks";
 
         constructor(
             private eventApi: EventService,
             private talkApi: TalkService,
             private $sce: ng.ISCEService,
+            $routeParams: ng.route.IRouteParamsService,
             private localStorageService: ng.local.storage.ILocalStorageService) {
+            
+            this.eventId = $routeParams["eventId"];
+            
+            eventApi.getEvent(`Events/${this.eventId}`)
+                .then(e => this.eventLoaded(e));
 
-            var cachedTalks = this.localStorageService.get<Talk[]>(TalksController.talksCacheKey);
+            var cachedTalks = this.localStorageService.get<Talk[]>(TalksController.talksCacheKey + this.eventId);
             if (cachedTalks) {
                 this.talksLoaded(cachedTalks);
-            }
-
-            eventApi.getMostRecentEvent()
-                .then(e => this.eventLoaded(e));
+            }                
         }
 
         eventLoaded(e: Event) {
@@ -29,8 +33,8 @@
 
         talksLoaded(talks: Talk[]) {
             talks.forEach(t => t.htmlSafeAbstract = this.$sce.trustAsHtml(t.abstract));
-            this.localStorageService.set(TalksController.talksCacheKey, talks);
             this.talks = talks;
+            this.localStorageService.set(TalksController.talksCacheKey + this.eventId, talks);
         }
     }
 

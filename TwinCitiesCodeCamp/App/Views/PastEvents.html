@@ -1,3 +1,14 @@
-﻿<section>
-    
+﻿<section class="past-events-page" ng-controller="PastEventsController as vm">
+    <div class="page-header">
+        <h1><strong>Past events</strong> <small>Take a stroll down memory lane and browse our past <span ng-show="vm.allEvents.length">{{vm.allEvents.length - 1}}</span> events.</small></h1>
+    </div>
+
+    <div class="list-group">
+        <a ng-repeat="event in vm.allEvents" ng-href="#/{{event.id}}/talks" class="list-group-item">
+            <h2>
+                #tccc{{event.number}}
+            </h2>
+            {{event.seasonYear}}
+        </a>
+    </div>
 </section>

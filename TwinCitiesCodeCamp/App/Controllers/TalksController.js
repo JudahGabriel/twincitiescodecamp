@@ -1,19 +1,20 @@
 var Tccc;
 (function (Tccc) {
     var TalksController = (function () {
-        function TalksController(eventApi, talkApi, $sce, localStorageService) {
+        function TalksController(eventApi, talkApi, $sce, $routeParams, localStorageService) {
             var _this = this;
             this.eventApi = eventApi;
             this.talkApi = talkApi;
             this.$sce = $sce;
             this.localStorageService = localStorageService;
             this.talks = [];
-            var cachedTalks = this.localStorageService.get(TalksController.talksCacheKey);
+            this.eventId = $routeParams["eventId"];
+            eventApi.getEvent("Events/" + this.eventId)
+                .then(function (e) { return _this.eventLoaded(e); });
+            var cachedTalks = this.localStorageService.get(TalksController.talksCacheKey + this.eventId);
             if (cachedTalks) {
                 this.talksLoaded(cachedTalks);
             }
-            eventApi.getMostRecentEvent()
-                .then(function (e) { return _this.eventLoaded(e); });
         }
         TalksController.prototype.eventLoaded = function (e) {
             var _this = this;
@@ -24,10 +25,10 @@ var Tccc;
         TalksController.prototype.talksLoaded = function (talks) {
             var _this = this;
             talks.forEach(function (t) { return t.htmlSafeAbstract = _this.$sce.trustAsHtml(t.abstract); });
-            this.localStorageService.set(TalksController.talksCacheKey, talks);
             this.talks = talks;
+            this.localStorageService.set(TalksController.talksCacheKey + this.eventId, talks);
         };
-        TalksController.$inject = ["eventApi", "talkApi", "$sce", "localStorageService"];
+        TalksController.$inject = ["eventApi", "talkApi", "$sce", "$routeParams", "localStorageService"];
         TalksController.talksCacheKey = "talks";
         return TalksController;
     }());

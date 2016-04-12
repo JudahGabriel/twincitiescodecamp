@@ -13,6 +13,7 @@
             talkApi.get("Talks/" + talkId).then(talk => {
                 this.talk = talk;
                 this.talk.htmlSafeAbstract = $sce.trustAsHtml(talk.abstract);
+                this.talk.htmlSafeBio = $sce.trustAsHtml(talk.authorBio);
             });
         }
     }

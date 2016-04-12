@@ -17,7 +17,7 @@
             .when("/callforspeakers", { templateUrl: "/App/Views/CallForSpeakers.html" })
             .when("/schedule", { templateUrl: "/App/Views/Schedule.html" })
             .when("/schedule/printable", { templateUrl: "/App/Views/PrintableSchedule.html" })
-            .when("/talks", { templateUrl: "/App/Views/Talks.html" })
+            .when("/events/:eventId/talks", { templateUrl: "/App/Views/Talks.html" })
             .when("/speakers", { templateUrl: "/App/Views/Speakers.html" })
             .when("/sponsors", { templateUrl: "/App/Views/Sponsors.html" })
             .when("/pastevents", { templateUrl: "/App/Views/PastEvents.html" })

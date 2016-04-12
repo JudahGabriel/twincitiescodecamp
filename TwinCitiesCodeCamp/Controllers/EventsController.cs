@@ -32,7 +32,10 @@ namespace TwinCitiesCodeCamp.Controllers
         [Route("getall")]
         public Task<IList<Event>> GetAll()
         {
-            return DbSession.Query<Event>().ToListAsync();
+            return DbSession
+                .Query<Event>()
+                .OrderBy(e => e.Number)
+                .ToListAsync();
         }
     }
 }

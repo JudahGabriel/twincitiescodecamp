@@ -12,13 +12,13 @@
                 <small class="text-muted">by</small> 
                 {{vm.talk.author}} 
                 <br ng-show="vm.talk.authorTwitter" />
+                <i class="fa fa-twitter" style="color: #00aced"></i>
                 <a ng-show="vm.talk.authorTwitter" ng-href="https://twitter.com/{{vm.talk.authorTwitter}}"> 
-                    <i class="fa fa-twitter"></i>
                     {{vm.talk.authorTwitter}}
                 </a> 
                 <br ng-show="vm.talk.authorUrl" />
+                <i class="fa fa-link"></i>
                 <a ng-show="vm.talk.authorUrl" ng-href="{{vm.talk.authorUrl}}">
-                    <i class="fa fa-link"></i>
                     {{vm.talk.authorUrl}}
                 </a>
                 <br />

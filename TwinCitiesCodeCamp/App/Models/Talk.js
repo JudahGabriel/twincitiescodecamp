@@ -13,12 +13,15 @@ var Tccc;
         });
         Object.defineProperty(Talk.prototype, "timeFriendly", {
             get: function () {
-                return moment()
-                    .hour(0)
-                    .minute(0)
-                    .second(0)
-                    .add(this.hour, "hours")
-                    .format("h:mm a");
+                if (this.hour) {
+                    return moment()
+                        .hour(0)
+                        .minute(0)
+                        .second(0)
+                        .add(this.hour, "hours")
+                        .format("h:mm a");
+                }
+                return "";
             },
             enumerable: true,
             configurable: true

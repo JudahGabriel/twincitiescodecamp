@@ -196,6 +196,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LegacyController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RavenApiController.cs" />
     <Compile Include="Controllers\SchedulesController.cs" />
@@ -285,6 +286,7 @@
     <Content Include="Content\variables.less" />
     <None Include="Properties\PublishProfiles\bitshuva - Web Deploy.pubxml" />
     <Content Include="Scripts\angular-local-storage.min.js.map" />
+    <None Include="Properties\PublishProfiles\BitShuva.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -303,7 +305,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -337,6 +341,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Legacy\Sessions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\Common\" />

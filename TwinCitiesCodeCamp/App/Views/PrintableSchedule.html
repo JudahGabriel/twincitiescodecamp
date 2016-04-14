@@ -24,6 +24,7 @@
                         <a ng-show="item.talkId" ng-href="#/{{item.talkId}}"><strong>{{item.title}}</strong></a>
                         <span ng-show="item.talkId" class="text-muted">by</span> {{item.author}}
                         <span ng-hide="item.talkId">{{item.title}}</span>
+                        <span ng-show="!item.talkId && item.room">in room {{item.room}}</span>
                     </td>
                 </tr>
             </tbody>

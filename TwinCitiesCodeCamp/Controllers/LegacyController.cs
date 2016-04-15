@@ -28,5 +28,24 @@ namespace TwinCitiesCodeCamp.Controllers
                 return View(model);
             }
         }
+
+        [Route("schedule/{seasonYear}")]
+        public ActionResult Schedule(string seasonYear)
+        {
+            using (var session = RavenContext.Db.OpenSession())
+            {
+                var seasonYearSpaces = seasonYear
+                    .Replace("Fall", "Fall ")
+                    .Replace("Spring", "Spring ");
+                var ev = session.Query<Event>().FirstOrDefault(e => e.SeasonYear == seasonYearSpaces);
+                if (ev == null)
+                {
+                    throw new ArgumentException("Couldn't find event for " + seasonYearSpaces);
+                }
+
+                object model = ev.Id;
+                return View(model);
+            }
+        }
     }
 }

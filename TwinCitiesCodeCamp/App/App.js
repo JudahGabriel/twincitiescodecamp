@@ -35,4 +35,3 @@ var Tccc;
     }
     goLlamas();
 })(Tccc || (Tccc = {}));
-//# sourceMappingURL=App.js.map

@@ -17,4 +17,3 @@ var Tccc;
     Tccc.SponsorService = SponsorService;
     Tccc.App.service("sponsorApi", SponsorService);
 })(Tccc || (Tccc = {}));
-//# sourceMappingURL=SponsorService.js.map

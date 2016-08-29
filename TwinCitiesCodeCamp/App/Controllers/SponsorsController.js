@@ -14,7 +14,7 @@ var Tccc;
                 .then(function (s) { return _this.sponsorsLoaded(s); });
             var cachedSponsors = localStorage.getItem(SponsorsController.sponsorsKey);
             if (cachedSponsors) {
-                this.sponsorsLoaded(cachedSponsors);
+                this.rehydrateSponsors(cachedSponsors);
             }
         }
         SponsorsController.prototype.sponsorsLoaded = function (sponsors) {
@@ -23,6 +23,15 @@ var Tccc;
             this.bronzeSponsors = sponsors.filter(function (s) { return s.level === Tccc.SponsorshipLevel.Bronze; });
             this.localStorageService.set(SponsorsController.sponsorsKey, sponsors);
         };
+        SponsorsController.prototype.rehydrateSponsors = function (sponsorsJson) {
+            try {
+                var rehyrdated = JSON.parse(sponsorsJson);
+                this.sponsorsLoaded(rehyrdated);
+            }
+            catch (error) {
+                console.log("Unable to rehydrate sponsors JSON.", error);
+            }
+        };
         SponsorsController.$inject = ["eventApi", "sponsorApi", "localStorageService"];
         SponsorsController.sponsorsKey = "sponsors";
         return SponsorsController;
@@ -30,4 +39,3 @@ var Tccc;
     Tccc.SponsorsController = SponsorsController;
     Tccc.App.controller("SponsorsController", SponsorsController);
 })(Tccc || (Tccc = {}));
-//# sourceMappingURL=SponsorsController.js.map

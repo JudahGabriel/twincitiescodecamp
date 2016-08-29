@@ -36,4 +36,3 @@ var Tccc;
     Tccc.ScheduleController = ScheduleController;
     Tccc.App.controller("ScheduleController", ScheduleController);
 })(Tccc || (Tccc = {}));
-//# sourceMappingURL=ScheduleController.js.map

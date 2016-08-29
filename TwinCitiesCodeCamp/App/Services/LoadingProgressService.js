@@ -37,4 +37,3 @@ var Tccc;
     Tccc.LoadingProgressService = LoadingProgressService;
     Tccc.App.service("loadingProgress", LoadingProgressService);
 })(Tccc || (Tccc = {}));
-//# sourceMappingURL=LoadingProgressService.js.map

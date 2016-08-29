@@ -8,4 +8,3 @@ var Tccc;
     }());
     Tccc.ScheduleItem = ScheduleItem;
 })(Tccc || (Tccc = {}));
-//# sourceMappingURL=ScheduleItem.js.map

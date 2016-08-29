@@ -16,7 +16,7 @@
 
             var cachedSponsors = localStorage.getItem(SponsorsController.sponsorsKey);
             if (cachedSponsors) {
-                this.sponsorsLoaded(cachedSponsors);
+                this.rehydrateSponsors(cachedSponsors);
             }
         }
 
@@ -25,6 +25,16 @@
             this.silverSponsors = sponsors.filter(s => s.level === SponsorshipLevel.Silver);
             this.bronzeSponsors = sponsors.filter(s => s.level === SponsorshipLevel.Bronze);
             this.localStorageService.set(SponsorsController.sponsorsKey, sponsors);
+        }
+
+        rehydrateSponsors(sponsorsJson: string) {
+            try {
+                var rehyrdated: Sponsor[] = JSON.parse(sponsorsJson);
+                this.sponsorsLoaded(rehyrdated);
+            }
+            catch(error) {
+                console.log("Unable to rehydrate sponsors JSON.", error);
+            }
         }
     }
 

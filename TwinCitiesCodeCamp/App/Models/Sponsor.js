@@ -14,4 +14,3 @@ var Tccc;
     }());
     Tccc.Sponsor = Sponsor;
 })(Tccc || (Tccc = {}));
-//# sourceMappingURL=Sponsor.js.map

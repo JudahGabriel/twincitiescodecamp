@@ -24,7 +24,12 @@
                         <a ng-show="item.talkId" ng-href="#/{{item.talkId}}"><strong>{{item.title}}</strong></a>
                         <span ng-show="item.talkId" class="text-muted">by</span> {{item.author}}
                         <span ng-hide="item.talkId">{{item.title}}</span>
-                        <span ng-show="!item.talkId && item.room">in room {{item.room}}</span>
+
+                        <!--Show the room for opening and closing session, even though there is no talk ID.-->
+                        <span ng-show="!item.talkId && item.room">
+                            <span class="text-muted">in room</span> 
+                            {{item.room}}
+                        </span>
                     </td>
                 </tr>
             </tbody>

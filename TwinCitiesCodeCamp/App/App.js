@@ -25,6 +25,21 @@ var Tccc;
                 .when("/policies", { templateUrl: "/App/Views/Policies.html" })
                 .otherwise({ redirectTo: "/home" });
         }]);
+    // Store the partials and modals as constants. These values will be cache-busted by the build. See AngularViewCacheBuster.cs
+    var partials = {
+        header: "/App/Views/Header.html",
+    };
+    Tccc.App.constant("partials", partials);
+    Tccc.App.run([
+        "partials",
+        "$rootScope",
+        function (partials, $rootScope) {
+            // Attach the names of the partials to the root scope so that we can refer to them in the views.
+            // This allows us to bust invalidated view caches while still refering to these partials inside other views.
+            for (var prop in partials) {
+                $rootScope[prop] = partials[prop];
+            }
+        }]);
     function goLlamas() {
         var script = document.createElement("script");
         script.type = "text/javascript";

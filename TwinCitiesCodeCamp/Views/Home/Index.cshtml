@@ -8,43 +8,9 @@
         @*<div class="row">
             <img src="~/Content/Images/wide_sepia.jpg" class="img-responsive" />
         </div>*@
-        <div class="container">
-            <div id="navbar" class="navbar navbar-default">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="#"><i class="fa fa-code"></i></a></li>
-                        <li><a href="#/event">Event</a></li>
-                        @*<li><a href="#/callforspeakers">Call for speakers</a></li>*@
-                        <li><a href="#/schedule">Schedule</a></li>
-                        <li><a href="#/events/20/talks">Talks</a></li>
-                        @*<li><a href="#/speakers">Speakers</a></li>*@
-                        <li><a href="#/sponsors">Sponsors</a></li>
-                        <li><a href="#/pastevents">Past events</a></li>
-                        <li><a href="#/policies">Code of conduct</a></li>
-                        <li><a href="#/about">About us</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a class="btn btn-primary" target="_blank" href="http://tccc20.eventbrite.com/">Register</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="container content">
-            <h1 class="title"><i class="fa fa-code"></i> Twin Cities Code Camp</h1>
-            <small class="hidden-xs">#tccc21</small>
-            <h1 class="event-date text-primary"><a href="#/event">Spring 2017</a></h1>
-            <small class="muted hidden-xs">at secret undisclosed location</small>
-        </div>
+        <div ng-include="header"></div>
     </header>
     <section class="page container">
-        <div data-ng-view></div>
+        <div ng-view></div>
     </section>
 </div>

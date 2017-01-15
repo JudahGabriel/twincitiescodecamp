@@ -31,9 +31,9 @@ var Tccc;
                 NProgress.done();
             }
         };
-        LoadingProgressService.$inject = ["$q"];
         return LoadingProgressService;
     }());
+    LoadingProgressService.$inject = ["$q"];
     Tccc.LoadingProgressService = LoadingProgressService;
     Tccc.App.service("loadingProgress", LoadingProgressService);
 })(Tccc || (Tccc = {}));

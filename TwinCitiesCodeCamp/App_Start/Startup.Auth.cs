@@ -6,6 +6,8 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using TwinCitiesCodeCamp.Models;
+using Raven.Client;
+using TwinCitiesCodeCamp.Data;
 
 namespace TwinCitiesCodeCamp
 {
@@ -15,7 +17,7 @@ namespace TwinCitiesCodeCamp
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context, user manager and signin manager to use a single instance per request
-            app.CreatePerOwinContext(ApplicationDbContext.Create);
+            app.CreatePerOwinContext(() => RavenContext.Db.OpenAsyncSession());
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 

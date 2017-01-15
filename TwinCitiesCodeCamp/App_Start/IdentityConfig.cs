@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using TwinCitiesCodeCamp.Models;
+using RavenDB.AspNet.Identity;
+using Raven.Client;
 
 namespace TwinCitiesCodeCamp
 {
@@ -42,7 +42,8 @@ namespace TwinCitiesCodeCamp
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
+            var ravenSession = context.Get<IAsyncDocumentSession>();
+            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(ravenSession));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {

@@ -73,9 +73,9 @@ var Tccc;
             //        .result.finally(() => this.isShowingApiError = false);
             //}
         };
-        ApiService.$inject = ["loadingProgress", "$http", "$q"];
         return ApiService;
     }());
+    ApiService.$inject = ["loadingProgress", "$http", "$q"];
     Tccc.ApiService = ApiService;
     Tccc.App.service("apiService", ApiService);
 })(Tccc || (Tccc = {}));

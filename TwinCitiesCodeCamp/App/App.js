@@ -39,7 +39,8 @@ var Tccc;
             for (var prop in partials) {
                 $rootScope[prop] = partials[prop];
             }
-        }]);
+        }
+    ]);
     function goLlamas() {
         var script = document.createElement("script");
         script.type = "text/javascript";

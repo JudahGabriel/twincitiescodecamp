@@ -9,9 +9,9 @@ var Tccc;
             talkApi.getTalks(eventId).then(function (results) { return _this.talks = results; });
             eventApi.getEvent(eventId).then(function (results) { return _this.event = results; });
         }
-        PastEventDetailsController.$inject = ["talkApi", "eventApi", "$routeParams"];
         return PastEventDetailsController;
     }());
+    PastEventDetailsController.$inject = ["talkApi", "eventApi", "$routeParams"];
     Tccc.PastEventDetailsController = PastEventDetailsController;
     Tccc.App.controller("PastEventDetailsController", PastEventDetailsController);
 })(Tccc || (Tccc = {}));

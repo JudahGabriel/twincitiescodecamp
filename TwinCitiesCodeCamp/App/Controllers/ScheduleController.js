@@ -29,10 +29,10 @@ var Tccc;
         ScheduleController.prototype.print = function () {
             window.print();
         };
-        ScheduleController.$inject = ["eventApi", "scheduleApi", "localStorageService"];
-        ScheduleController.scheduleCacheKey = "schedule";
         return ScheduleController;
     }());
+    ScheduleController.$inject = ["eventApi", "scheduleApi", "localStorageService"];
+    ScheduleController.scheduleCacheKey = "schedule";
     Tccc.ScheduleController = ScheduleController;
     Tccc.App.controller("ScheduleController", ScheduleController);
 })(Tccc || (Tccc = {}));

@@ -8,9 +8,9 @@ var Tccc;
             eventApi.getAll()
                 .then(function (events) { return _this.allEvents = events; });
         }
-        PastEventsController.$inject = ["eventApi"];
         return PastEventsController;
     }());
+    PastEventsController.$inject = ["eventApi"];
     Tccc.PastEventsController = PastEventsController;
     Tccc.App.controller("PastEventsController", PastEventsController);
 })(Tccc || (Tccc = {}));

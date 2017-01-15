@@ -12,9 +12,9 @@ var Tccc;
                 _this.talk.htmlSafeBio = $sce.trustAsHtml(talk.authorBio);
             });
         }
-        TalkProfileController.$inject = ["talkApi", "$sce", "$routeParams"];
         return TalkProfileController;
     }());
+    TalkProfileController.$inject = ["talkApi", "$sce", "$routeParams"];
     Tccc.TalkProfileController = TalkProfileController;
     Tccc.App.controller("TalkProfileController", TalkProfileController);
 })(Tccc || (Tccc = {}));

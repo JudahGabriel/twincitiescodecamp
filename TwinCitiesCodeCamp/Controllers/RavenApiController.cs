@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Controllers;
+using Microsoft.AspNet.Identity.Owin;
 using TwinCitiesCodeCamp.Data;
 
 namespace TwinCitiesCodeCamp.Controllers
@@ -33,7 +34,7 @@ namespace TwinCitiesCodeCamp.Controllers
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             base.Initialize(controllerContext);
-            DbSession = RavenContext.Db.OpenAsyncSession();
+            DbSession = controllerContext.Request.GetOwinContext().Get<IAsyncDocumentSession>();
         }
 
         public IAsyncDocumentSession DbSession { get; private set; }

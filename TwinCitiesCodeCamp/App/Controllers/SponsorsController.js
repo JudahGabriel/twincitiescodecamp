@@ -32,10 +32,10 @@ var Tccc;
                 console.log("Unable to rehydrate sponsors JSON.", error);
             }
         };
-        SponsorsController.$inject = ["eventApi", "sponsorApi", "localStorageService"];
-        SponsorsController.sponsorsKey = "sponsors";
         return SponsorsController;
     }());
+    SponsorsController.$inject = ["eventApi", "sponsorApi", "localStorageService"];
+    SponsorsController.sponsorsKey = "sponsors";
     Tccc.SponsorsController = SponsorsController;
     Tccc.App.controller("SponsorsController", SponsorsController);
 })(Tccc || (Tccc = {}));

@@ -13,7 +13,7 @@ using TwinCitiesCodeCamp.Models;
 namespace TwinCitiesCodeCamp.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : RavenController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -22,7 +22,7 @@ namespace TwinCitiesCodeCamp.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -151,7 +151,13 @@ namespace TwinCitiesCodeCamp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    Id = "ApplicationUsers/" + model.Email,
+                    UserName = model.Email,
+                    Email = model.Email
+                };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

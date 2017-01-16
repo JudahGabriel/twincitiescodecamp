@@ -264,6 +264,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\favico.png" />
     <Content Include="Content\Images\People\bock.jpg" />
+    <Content Include="Content\Images\People\sheila2.jpg" />
     <Content Include="Content\Images\Sponsors\BeaconHill.jpg" />
     <Content Include="Content\Images\Sponsors\DevJam.jpg" />
     <Content Include="Content\Images\Sponsors\IlmService.gif" />

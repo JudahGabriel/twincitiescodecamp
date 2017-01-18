@@ -14,7 +14,6 @@
         $routeProvider
             .when("/home", { templateUrl: "/App/Views/Home.html" })
             .when("/event", { templateUrl: "/App/Views/Event.html" })
-            .when("/callforspeakers", { templateUrl: "/App/Views/CallForSpeakers.html" })
             .when("/schedule", { templateUrl: "/App/Views/Schedule.html" })
             .when("/schedule/printable", { templateUrl: "/App/Views/PrintableSchedule.html" })
             .when("/events/:eventId/talks", { templateUrl: "/App/Views/Talks.html" })
@@ -24,6 +23,10 @@
             .when("/about", { templateUrl: "/App/Views/AboutUs.html" })
             .when("/talks/:id", { templateUrl: "/App/Views/TalkProfile.html" })
             .when("/policies", { templateUrl: "/App/Views/Policies.html" })
+            //.when("/callforspeakers", { templateUrl: "/App/Views/CallForSpeakers.html" })
+            .when("/callforspeakers", { templateUrl: "/App/Views/SubmitTalk.html" })
+            .when("/adminsubmissions", { templateUrl: "/App/Views/AdminSubmissions.html" })
+            .when("/sponsors/paypal", { templateUrl: "/App/Views/SponsorPayPal.html" })
             .otherwise({ redirectTo: "/home" });
     }]);
 
@@ -32,6 +35,15 @@
         header: "/App/Views/Header.html",
     };
     App.constant("partials", partials);
+
+    // Store some initialization config passedin from Razor as Angular constants for use in our controllers.
+    var homeViewModel = window["Tccc.HomeViewModel"] as Server.HomeViewModel | null;
+    if (homeViewModel) {
+        App.constant("currentUserName", homeViewModel.userName);
+        App.constant("currentUserId", homeViewModel.userId);
+        App.constant("isSignedIn", homeViewModel.isSignedIn);
+        App.constant("isUserAdmin", homeViewModel.isUserAdmin);
+    }
 
     App.run([
         "partials",

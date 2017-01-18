@@ -30,7 +30,13 @@ var Tccc;
         };
         return TalksController;
     }());
-    TalksController.$inject = ["eventApi", "talkApi", "$sce", "$routeParams", "localStorageService"];
+    TalksController.$inject = [
+        "eventApi",
+        "talkApi",
+        "$sce",
+        "$routeParams",
+        "localStorageService"
+    ];
     TalksController.talksCacheKey = "talks";
     Tccc.TalksController = TalksController;
     Tccc.App.controller("TalksController", TalksController);

@@ -15,7 +15,15 @@
         getTalks(eventId: string): ng.IPromise<Talk[]> {
             var args = { eventId: eventId };
             var selector = (talks: Server.Talk[]) => talks.map(t => new Talk(t));
-            return this.apiService.query("/talks/gettalksforevent", args, selector);
+            return this.apiService.query("/talks/getTalksForEvent", args, selector);
+        }
+
+        submitTalk(talk: Server.TalkSubmission): ng.IPromise<Server.TalkSubmission> {
+            return this.apiService.post("/talks/submit", talk);
+        }
+
+        getSubmissions(): ng.IPromise<Server.TalkSubmission[]> {
+            return this.apiService.query("/talks/getSubmissions");
         }
     }
 

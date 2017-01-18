@@ -13,7 +13,6 @@ var Tccc;
             $routeProvider
                 .when("/home", { templateUrl: "/App/Views/Home.html" })
                 .when("/event", { templateUrl: "/App/Views/Event.html" })
-                .when("/callforspeakers", { templateUrl: "/App/Views/CallForSpeakers.html" })
                 .when("/schedule", { templateUrl: "/App/Views/Schedule.html" })
                 .when("/schedule/printable", { templateUrl: "/App/Views/PrintableSchedule.html" })
                 .when("/events/:eventId/talks", { templateUrl: "/App/Views/Talks.html" })
@@ -23,6 +22,9 @@ var Tccc;
                 .when("/about", { templateUrl: "/App/Views/AboutUs.html" })
                 .when("/talks/:id", { templateUrl: "/App/Views/TalkProfile.html" })
                 .when("/policies", { templateUrl: "/App/Views/Policies.html" })
+                .when("/callforspeakers", { templateUrl: "/App/Views/SubmitTalk.html" })
+                .when("/adminsubmissions", { templateUrl: "/App/Views/AdminSubmissions.html" })
+                .when("/sponsors/paypal", { templateUrl: "/App/Views/SponsorPayPal.html" })
                 .otherwise({ redirectTo: "/home" });
         }]);
     // Store the partials and modals as constants. These values will be cache-busted by the build. See AngularViewCacheBuster.cs
@@ -30,6 +32,14 @@ var Tccc;
         header: "/App/Views/Header.html",
     };
     Tccc.App.constant("partials", partials);
+    // Store some initialization config passedin from Razor as Angular constants for use in our controllers.
+    var homeViewModel = window["Tccc.HomeViewModel"];
+    if (homeViewModel) {
+        Tccc.App.constant("currentUserName", homeViewModel.userName);
+        Tccc.App.constant("currentUserId", homeViewModel.userId);
+        Tccc.App.constant("isSignedIn", homeViewModel.isSignedIn);
+        Tccc.App.constant("isUserAdmin", homeViewModel.isUserAdmin);
+    }
     Tccc.App.run([
         "partials",
         "$rootScope",

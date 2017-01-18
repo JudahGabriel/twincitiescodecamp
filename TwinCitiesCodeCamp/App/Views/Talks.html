@@ -3,6 +3,14 @@
         <h1><strong>Talks</strong> at #tccc{{vm.event.number}} - {{vm.event.seasonYear}}</h1>
     </div>
 
+    <div class="alert alert-info" ng-show="vm.event.isAcceptingTalkSubmissions">
+        <h2>
+            <i class="fa fa-info-circle"></i> Interested in speaking at Twin Cities Code Camp? We're accepting submissions.
+            <br />
+            <br /><a class="btn btn-primary" href="#/callforspeakers">Submit your talk</a>
+        </h2>
+    </div>
+
     <div class="media" ng-repeat="talk in vm.talks">
         <div class="media-left">
             <a ng-href="#/{{talk.id}}">

@@ -1,30 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using TwinCitiesCodeCamp.Models;
 
 namespace TwinCitiesCodeCamp.Controllers
 {
-    public class HomeController : Controller
+    [RequireHttps]
+    public class HomeController : RavenController
     {
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
-        }
+            var user = default(ApplicationUser);
+            if (!string.IsNullOrEmpty(User.Identity.Name))
+            {
+                user = await DbSession.LoadAsync<ApplicationUser>("ApplicationUsers/" + User.Identity.Name);
+            }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
+            var vm = new HomeViewModel
+            {
+                UserName = User.Identity.Name,
+                IsSignedIn = User.Identity.IsAuthenticated,
+                UserId = user?.Id,
+                IsUserAdmin = (user?.Roles?.Contains("Admin")).GetValueOrDefault()
+            };
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return View(vm);
         }
     }
 }

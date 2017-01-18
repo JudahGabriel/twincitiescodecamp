@@ -19,7 +19,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44347</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -99,6 +99,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -235,6 +236,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Schedule.cs" />
@@ -243,11 +245,13 @@
     <Compile Include="Models\Sponsor.cs" />
     <Compile Include="Models\SponsorshipLevel.cs" />
     <Compile Include="Models\Talk.cs" />
+    <Compile Include="Models\TalkSubmission.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\Views\AboutUs.html" />
+    <Content Include="App\Views\AdminSubmissions.html" />
     <Content Include="App\Views\CallForSpeakers.html" />
     <Content Include="App\Views\Event.html" />
     <Content Include="App\Views\Header.html" />
@@ -257,6 +261,8 @@
     <Content Include="App\Views\Policies.html" />
     <Content Include="App\Views\PrintableSchedule.html" />
     <Content Include="App\Views\Schedule.html" />
+    <Content Include="App\Views\SponsorPayPal.html" />
+    <Content Include="App\Views\SubmitTalk.html" />
     <Content Include="App\Views\TalkProfile.html" />
     <Content Include="App\Views\Talks.html" />
     <Content Include="App\Views\Speakers.html" />
@@ -389,12 +395,14 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="App\App.ts" />
+    <TypeScriptCompile Include="App\Controllers\AdminSubmissionsController.ts" />
     <TypeScriptCompile Include="App\Controllers\EventController.ts" />
     <TypeScriptCompile Include="App\Controllers\HeaderController.ts" />
     <TypeScriptCompile Include="App\Controllers\PastEventDetailsController.ts" />
     <TypeScriptCompile Include="App\Controllers\PastEventsController.ts" />
     <TypeScriptCompile Include="App\Controllers\ScheduleController.ts" />
     <TypeScriptCompile Include="App\Controllers\SponsorsController.ts" />
+    <TypeScriptCompile Include="App\Controllers\SubmitTalkController.ts" />
     <TypeScriptCompile Include="App\Controllers\TalkProfileController.ts" />
     <TypeScriptCompile Include="App\Controllers\TalksController.ts" />
     <TypeScriptCompile Include="App\Models\Event.ts" />
@@ -449,7 +457,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>4958</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:4958/</IISUrl>
+          <IISUrl>https://localhost:44347/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -1,0 +1,52 @@
+﻿<section class="admin-submissions" ng-controller="AdminSubmissionsController as vm">
+    <h2>Talk submissions</h2>
+    <div class="row">
+        <div class="col-xs-12 col-sm-4">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation" ng-repeat="talk in vm.submissions" ng-class="{ active: vm.currentTalk === talk }" ng-click="vm.currentTalk = talk">
+                    <a href="javascript:void(0)">{{talk.title}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-12 col-sm-8">
+            <div class="well">
+                <form ng-show="vm.currentTalk">
+                    <div class="form-group">
+                        <label>Author</label>
+                        <p class="form-control-static">{{vm.currentTalk.author}}</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <p class="form-control-static">{{vm.currentTalkEmail}}</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Title</label>
+                        <p class="form-control-static">{{vm.currentTalk.title}}</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Abstract</label>
+                        <p class="form-control-static">{{vm.currentTalk.abstract}}</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Bio</label>
+                        <p class="form-control-static">{{vm.currentTalk.authorBio}}</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Twitter handle</label>
+                        <p class="form-control-static">{{vm.currentTalk.authorTwitter}}</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>GitHub account</label>
+                        <p class="form-control-static">{{vm.currentTalk.authorGitHub}}</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

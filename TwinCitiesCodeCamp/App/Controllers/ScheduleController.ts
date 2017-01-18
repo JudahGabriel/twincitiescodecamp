@@ -4,7 +4,11 @@
         event: Server.Event = null;
         schedule: Server.Schedule;
 
-        static $inject = ["eventApi", "scheduleApi", "localStorageService"];
+        static $inject = [
+            "eventApi",
+            "scheduleApi",
+            "localStorageService"
+        ];
         static scheduleCacheKey = "schedule";
 
         constructor(

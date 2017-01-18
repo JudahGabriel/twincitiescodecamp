@@ -1,6 +1,16 @@
-﻿@{
+﻿@model TwinCitiesCodeCamp.Models.HomeViewModel
+@{
     ViewBag.Title = "Twin Cities Code Camp";
 }
+
+<script type="text/javascript">
+    window["Tccc.HomeViewModel"] = {
+        isSignedIn: @(Model.IsSignedIn ? bool.TrueString.ToLower() : bool.FalseString.ToLower()),
+        userName: "@Model.UserName",
+        userId: "@Model.UserId",
+        isUserAdmin: @(Model.IsUserAdmin ? bool.TrueString.ToLower() : bool.FalseString.ToLower())
+    };
+</script>
 
 <div data-ng-app="TcccApp">
 

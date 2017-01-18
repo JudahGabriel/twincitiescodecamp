@@ -31,7 +31,11 @@ var Tccc;
         };
         return ScheduleController;
     }());
-    ScheduleController.$inject = ["eventApi", "scheduleApi", "localStorageService"];
+    ScheduleController.$inject = [
+        "eventApi",
+        "scheduleApi",
+        "localStorageService"
+    ];
     ScheduleController.scheduleCacheKey = "schedule";
     Tccc.ScheduleController = ScheduleController;
     Tccc.App.controller("ScheduleController", ScheduleController);

@@ -7,6 +7,7 @@
         address: string;
         number: number;
         seasonYear: string;
+        isAcceptingTalkSubmissions: boolean;
 
         constructor(serverObj?: Server.Event) {
             if (serverObj) {

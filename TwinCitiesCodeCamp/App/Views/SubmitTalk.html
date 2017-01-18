@@ -1,0 +1,73 @@
+﻿<section class="submit-talk-page" ng-controller="SubmitTalkController as vm">
+    <br />
+    <br />
+    <div class="alert alert-info" ng-hide="vm.isSignedIn">
+        <h2>
+            Before submitting a talk, please <a class="alert-link" href="/account/login?returnUrl=%2F%23%2Fsubmittalk"><i class="fa fa-sign-in"></i> sign in</a> or <a class="alert-link" href="/account/register"><i class="fa fa-user-plus"></i> create a new account</a>.
+        </h2>
+    </div>
+
+    <div class="alert alert-success" ng-show="vm.submissionSuccessful">
+        <h2><i class="fa fa-check"></i> Celebrate! (づ｡◕‿‿◕｡)づ (✿◠‿◠) ✌.ʕʘ‿ʘʔ.✌</h2> <br />Your talk is submitted. We'll let you know via email whether your talk is approved." - maybe change to "Your talk is submitted. We'll let you know by mid-March if your talk is approved.
+    </div>
+
+    <div ng-show="vm.isSignedIn && !vm.submissionSuccessful">
+        <form name="talkForm">
+            <div class="form-group" ng-class="{ 'has-error': talkForm.nameInput.$invalid && talkForm.nameInput.$touched }">
+                <label for="nameInput">Your name</label>
+                <input type="text" name="nameInput" class="form-control" id="nameInput" ng-model="vm.submission.author" placeholder="Louis Llama" required>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': talkForm.titleInput.$invalid && talkForm.titleInput.$touched }">
+                <label for="titleInput">Title</label>
+                <input type="text" class="form-control" id="titleInput" name="titleInput" placeholder="Why Llamas Are the Best Animals in the World" ng-model="vm.submission.title" required>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': talkForm.abstractInput.$invalid && talkForm.abstractInput.$touched }">
+                <label for="abstractInput">Abstract</label>
+                <textarea id="abstractInput" name="abstractInput" placeholder="Sunrise over the turquoise mountains, messenger birds in sight. They came up through the valley, both sides at a time. Through the cold steady rain Raid! I bend down. Poke a double decker on a llama. Llama, Taboot Taboot" class="form-control" rows="3" ng-model="vm.submission.abstract" required></textarea>
+                <p class="help-block">What's the talk about?</p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': talkForm.bioInput.$invalid && talkForm.bioInput.$touched }">
+                <label for="bioInput">Bio</label>
+                <textarea id="bioInput" name="bioInput" class="form-control" rows="3" ng-model="vm.submission.authorBio" placeholder="I live on a farm and eat grass. Also, I'm awesome." required></textarea>
+                <p class="help-block">Tell us about yourself in a paragraph or two.</p>
+            </div>
+
+            <div class="form-group">
+                <label for="twitterInput">Twitter handle</label>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-twitter"></i></span>
+                    <input type="text" id="twitterInput" class="form-control" placeholder="@llamadelrey" aria-describedby="basic-addon1" ng-model="vm.submission.authorTwitter">
+                </div>
+                <p class="help-block">Optional. Got a Twitter handle?</p>
+            </div>
+
+            <div class="form-group">
+                <label for="gitHubInput">GitHub account</label>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2"><i class="fa fa-github"></i></span>
+                    <input type="text" id="gitHubInput" class="form-control" placeholder="LlamasLoveYou" aria-describedby="basic-addon2" ng-model="vm.submission.authorGitHub">
+                </div>
+                <p class="help-block">Optional. Got a GitHub account?</p>
+            </div>
+
+            <!--<div class="form-group">
+                <label for="urlImg">Your profile pic URL [optional]</label>
+                <input type="email" class="form-control" id="emailInput" placeholder="http://mywebsite.com/arentipretty.jpg">
+                <p class="help-block">Optional. This should be a URL to a JPG. Should be square unless you want to look weird on this site. Should be smaller than a few MB.</p>
+            </div>-->
+            <button type="submit" class="btn btn-default" ng-disabled="vm.isSaving || talkForm.$invalid" ng-click="vm.save()">
+                <i ng-show="vm.isSaving" class="fa fa-spin fa-cog"></i>
+                Submit
+            </button>
+            
+            <!--Show any error upon submission-->
+            <div ng-show="vm.submissionError" class="alert alert-danger" role="alert">
+                <i class="fa fa-exclamation-circle"></i>
+                Woops, we hit an error submitting your talk.<br /><small>Try again, or if you're still hitting troubles, email your talk to tccodecamp@gmail.com</small>
+                <br />
+                <br />
+                <pre>{{vm.submissionError}}</pre>
+            </div>
+        </form>
+    </div>
+</section>

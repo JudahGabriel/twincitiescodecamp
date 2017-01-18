@@ -4,7 +4,13 @@
         event: Event;
         eventId: string;
 
-        static $inject = ["eventApi", "talkApi", "$sce", "$routeParams", "localStorageService"];
+        static $inject = [
+            "eventApi",
+            "talkApi",
+            "$sce",
+            "$routeParams",
+            "localStorageService"
+        ];
         static talksCacheKey = "talks";
 
         constructor(

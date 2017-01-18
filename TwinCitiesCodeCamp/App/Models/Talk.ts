@@ -6,6 +6,7 @@
         author: string;
         authorBio: string;
         authorTwitter: string;
+        authorGitHub: string;
         room: string;
         hour: number;
         eventId: string;

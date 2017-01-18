@@ -14,5 +14,6 @@ namespace TwinCitiesCodeCamp.Models
         public string Address { get; set; }
         public int Number { get; set; }
         public string SeasonYear { get; set; }
+        public bool IsAcceptingTalkSubmissions { get; set; }
     }
 }

@@ -1,12 +1,28 @@
 var Tccc;
 (function (Tccc) {
     var EventService = (function () {
-        function EventService(apiService) {
+        function EventService(apiService, localStorageService, $q) {
             this.apiService = apiService;
+            this.localStorageService = localStorageService;
+            this.$q = $q;
         }
         EventService.prototype.getMostRecentEvent = function () {
+            var _this = this;
             var selector = function (e) { return new Tccc.Event(e); };
-            return this.apiService.query("/events/mostrecent", null, selector);
+            var deferred = this.$q.defer();
+            // See if we have the most recent event cache.
+            var cachedMostRecentEvent = this.localStorageService.get(EventService.mostRecentEventCacheKey);
+            if (cachedMostRecentEvent) {
+                deferred.notify(new Tccc.Event(cachedMostRecentEvent));
+            }
+            // Fetch the most recent and 
+            this.apiService.query("/events/mostrecent", null, selector)
+                .then(function (result) {
+                deferred.resolve(result);
+                _this.localStorageService.set(EventService.mostRecentEventCacheKey, result);
+            })
+                .catch(function (error) { return deferred.reject(error); });
+            return deferred.promise;
         };
         EventService.prototype.getEvent = function (eventId) {
             var args = { eventId: eventId };
@@ -19,7 +35,12 @@ var Tccc;
         };
         return EventService;
     }());
-    EventService.$inject = ["apiService"];
+    EventService.$inject = [
+        "apiService",
+        "localStorageService",
+        "$q"
+    ];
+    EventService.mostRecentEventCacheKey = "mostRecentEvent";
     Tccc.EventService = EventService;
     Tccc.App.service("eventApi", EventService);
 })(Tccc || (Tccc = {}));

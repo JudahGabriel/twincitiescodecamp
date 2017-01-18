@@ -12,7 +12,13 @@ var Tccc;
         TalkService.prototype.getTalks = function (eventId) {
             var args = { eventId: eventId };
             var selector = function (talks) { return talks.map(function (t) { return new Tccc.Talk(t); }); };
-            return this.apiService.query("/talks/gettalksforevent", args, selector);
+            return this.apiService.query("/talks/getTalksForEvent", args, selector);
+        };
+        TalkService.prototype.submitTalk = function (talk) {
+            return this.apiService.post("/talks/submit", talk);
+        };
+        TalkService.prototype.getSubmissions = function () {
+            return this.apiService.query("/talks/getSubmissions");
         };
         return TalkService;
     }());

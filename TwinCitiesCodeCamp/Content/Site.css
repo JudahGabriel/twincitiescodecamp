@@ -11,6 +11,9 @@
 ::-webkit-scrollbar-thumb:window-inactive {
   background: #19242f;
 }
+.alert .alert-link {
+  text-decoration: underline;
+}
 header {
   background-image: url('../../../../Content/Images/wide_sepia.jpg');
   background-size: cover;

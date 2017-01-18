@@ -7,14 +7,6 @@ var Tccc;
             this.event = null;
             eventApi.getMostRecentEvent()
                 .then(function (e) { return _this.event = e; });
-            // Grab it from the cache if we've got it.
-            var cachedEvent = localStorageService.get(HeaderController.eventCacheKey);
-            if (cachedEvent) {
-                this.event = cachedEvent;
-            }
-            // Load it fresh from the server in case it's been updated.
-            eventApi.getMostRecentEvent()
-                .then(function (e) { return _this.loadedMostRecentEvent(e); });
         }
         Object.defineProperty(HeaderController.prototype, "eventDateFriendly", {
             get: function () {
@@ -26,13 +18,8 @@ var Tccc;
             enumerable: true,
             configurable: true
         });
-        HeaderController.prototype.loadedMostRecentEvent = function (e) {
-            this.event = e;
-            this.localStorageService.set(HeaderController.eventCacheKey, e);
-        };
         return HeaderController;
     }());
-    HeaderController.eventCacheKey = "mostRecentEvent";
     HeaderController.$inject = ["eventApi", "localStorageService"];
     Tccc.HeaderController = HeaderController;
     Tccc.App.controller("HeaderController", HeaderController);

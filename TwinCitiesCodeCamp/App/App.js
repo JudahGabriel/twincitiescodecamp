@@ -8,8 +8,9 @@ var Tccc;
         "LocalStorageModule"
     ];
     Tccc.App = angular.module("TcccApp", modules);
-    Tccc.App.config(["$routeProvider", function ($routeProvider) {
+    Tccc.App.config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
             $routeProvider.caseInsensitiveMatch = true;
+            $locationProvider.hashPrefix('');
             $routeProvider
                 .when("/home", { templateUrl: "/App/Views/Home.html" })
                 .when("/event", { templateUrl: "/App/Views/Event.html" })
@@ -20,6 +21,7 @@ var Tccc;
                 .when("/sponsors", { templateUrl: "/App/Views/Sponsors.html" })
                 .when("/pastevents", { templateUrl: "/App/Views/PastEvents.html" })
                 .when("/about", { templateUrl: "/App/Views/AboutUs.html" })
+                .when("/talks/mine", { templateUrl: "/App/Views/MyTalks.html" })
                 .when("/talks/:id", { templateUrl: "/App/Views/TalkProfile.html" })
                 .when("/policies", { templateUrl: "/App/Views/Policies.html" })
                 .when("/callforspeakers", { templateUrl: "/App/Views/SubmitTalk.html" })
@@ -60,4 +62,6 @@ var Tccc;
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
     }
     goLlamas();
+    // Setup Fastclick to remove the 300ms click delay on mobile browsers.
+    document.addEventListener("DOMContentLoaded", function () { return FastClick.attach(document.body); }, false);
 })(Tccc || (Tccc = {}));

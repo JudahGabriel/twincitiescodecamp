@@ -22,10 +22,18 @@ namespace TwinCitiesCodeCamp.Controllers
         {
             using (DbSession)
             {
-                var result = await base.ExecuteAsync(controllerContext, cancellationToken);
-                await DbSession.SaveChangesAsync();
+                try
+                {
+                    var result = await base.ExecuteAsync(controllerContext, cancellationToken);
+                    await DbSession.SaveChangesAsync();
 
-                return result;
+                    return result;
+                }
+                catch (Exception error)
+                {
+                    Console.WriteLine(error.Message);
+                    throw;
+                }
             }
         }
 

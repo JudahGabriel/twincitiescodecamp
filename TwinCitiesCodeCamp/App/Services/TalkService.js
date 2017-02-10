@@ -20,6 +20,9 @@ var Tccc;
         TalkService.prototype.getSubmissions = function () {
             return this.apiService.query("/talks/getSubmissions");
         };
+        TalkService.prototype.getMySubmissions = function () {
+            return this.apiService.query("/talks/getMySubmissions");
+        };
         return TalkService;
     }());
     TalkService.$inject = ["apiService"];

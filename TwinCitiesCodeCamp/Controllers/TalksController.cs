@@ -6,7 +6,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using TwinCitiesCodeCamp.Models;
+using TwinCitiesCodeCamp.Common;
 using Raven.Client;
+using Optional;
 
 namespace TwinCitiesCodeCamp.Controllers
 {
@@ -45,9 +47,26 @@ namespace TwinCitiesCodeCamp.Controllers
         [Route("getSubmissions")]
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public Task<IList<TalkSubmission>> GetTalkSubmissions()
+        public Task<IList<TalkSubmission>> GetSubmissions()
         {
             return DbSession.Query<TalkSubmission>()
+                .ToListAsync();
+        }
+
+        [Route("getMySubmissions")]
+        [HttpGet]
+        [Authorize]
+        public async Task<IList<TalkSubmission>> GetMySubmissions()
+        {
+            var userId = "ApplicationUsers/" + User.Identity.Name;
+            var user = await DbSession.LoadAsync<ApplicationUser>(userId);
+            if (user == null)
+            {
+                return new List<TalkSubmission>(0);
+            }
+
+            return await DbSession.Query<TalkSubmission>()
+                .Where(t => t.SubmittedByUserId == userId)
                 .ToListAsync();
         }
     }

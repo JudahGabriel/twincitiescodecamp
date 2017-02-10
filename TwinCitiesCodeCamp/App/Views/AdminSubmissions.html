@@ -1,8 +1,8 @@
 ﻿<section class="admin-submissions" ng-controller="AdminSubmissionsController as vm">
-    <h2>Talk submissions</h2>
+    <h2>{{vm.submissions.length}} talk submissions</h2>
     <div class="row">
         <div class="col-xs-12 col-sm-4">
-            <ul class="nav nav-pills nav-stacked">
+            <ul class="nav nav-pills nav-stacked" style="overflow: auto; max-height: 500px;">
                 <li role="presentation" ng-repeat="talk in vm.submissions" ng-class="{ active: vm.currentTalk === talk }" ng-click="vm.currentTalk = talk">
                     <a href="javascript:void(0)">{{talk.title}}</a>
                 </li>

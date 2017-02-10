@@ -9,8 +9,9 @@
 
     export var App = angular.module("TcccApp", modules);
     
-    App.config(["$routeProvider", function ($routeProvider: ng.route.IRouteProvider) {
+    App.config(["$routeProvider", "$locationProvider", function ($routeProvider: ng.route.IRouteProvider, $locationProvider: ng.ILocationProvider) {
         $routeProvider.caseInsensitiveMatch = true;
+        $locationProvider.hashPrefix('');
         $routeProvider
             .when("/home", { templateUrl: "/App/Views/Home.html" })
             .when("/event", { templateUrl: "/App/Views/Event.html" })
@@ -21,6 +22,7 @@
             .when("/sponsors", { templateUrl: "/App/Views/Sponsors.html" })
             .when("/pastevents", { templateUrl: "/App/Views/PastEvents.html" })
             .when("/about", { templateUrl: "/App/Views/AboutUs.html" })
+            .when("/talks/mine", { templateUrl: "/App/Views/MyTalks.html" })
             .when("/talks/:id", { templateUrl: "/App/Views/TalkProfile.html" })
             .when("/policies", { templateUrl: "/App/Views/Policies.html" })
             //.when("/callforspeakers", { templateUrl: "/App/Views/CallForSpeakers.html" })
@@ -66,4 +68,7 @@
     }
 
     goLlamas();
+
+    // Setup Fastclick to remove the 300ms click delay on mobile browsers.
+    document.addEventListener("DOMContentLoaded", () => FastClick.attach(document.body), false);
 }

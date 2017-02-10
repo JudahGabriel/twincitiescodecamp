@@ -25,6 +25,10 @@
         getSubmissions(): ng.IPromise<Server.TalkSubmission[]> {
             return this.apiService.query("/talks/getSubmissions");
         }
+
+        getMySubmissions(): ng.IPromise<Server.TalkSubmission[]> {
+            return this.apiService.query("/talks/getMySubmissions");
+        }
     }
 
     App.service("talkApi", TalkService);

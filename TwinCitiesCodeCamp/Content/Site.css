@@ -302,4 +302,8 @@ header .content .title .fa-code {
 footer {
   font-size: 12px;
   color: #EBEBEB;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding-right: 25px;
 }

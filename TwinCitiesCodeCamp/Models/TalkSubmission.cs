@@ -9,5 +9,6 @@ namespace TwinCitiesCodeCamp.Models
     {
         public DateTime SubmissionDate { get; set; }
         public string SubmittedByUserId { get; set; }
+        public TalkApproval Status { get; set; }
     }
 }

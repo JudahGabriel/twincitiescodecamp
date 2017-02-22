@@ -17,13 +17,21 @@
                 <p>Twin Cities Code Camp @DateTime.UtcNow.Year. This site is <a href="https://github.com/JudahGabriel/twincitiescodecamp">built</a> with Angular, TypeScript, and RavenDB. <span style="cursor: vertical-text; border-bottom: 1px dashed silver;" title="Konami code :-)">Go llamas.</span></p>
             </footer>
         </div>
-
+        
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
-        @Scripts.Render("~/bundles/angular")
-        @Scripts.Render("~/bundles/nprogress")
         @Scripts.Render("~/bundles/moment")
+        @Scripts.Render("~/bundles/angular")
+        @Scripts.Render("~/bundles/angular-animate")
+        @Scripts.Render("~/bundles/angular-route")
+        @Scripts.Render("~/bundles/angular-bootstrap")
+        @Scripts.Render("~/bundles/angular-bootstrap-templates")
+        @Scripts.Render("~/bundles/angular-local-storage")
+        @Scripts.Render("~/bundles/fastclick")
+        @Scripts.Render("~/bundles/nprogress")
+        @Scripts.Render("~/bundles/lodash")
         @Scripts.Render("~/bundles/app")
+
         @RenderSection("scripts", required: false)
         <script type="text/javascript">
             $(document).on('click', '.navbar-collapse.in', function (e) {

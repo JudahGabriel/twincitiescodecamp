@@ -34,6 +34,7 @@
     export interface TalkSubmission extends Talk {
         submissionDate: string;
         submittedByUserId: string;
+        status: TalkApproval;
     }
 
     export interface ScheduleTimeslot {

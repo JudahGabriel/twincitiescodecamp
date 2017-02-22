@@ -1,0 +1,50 @@
+﻿<section ng-controller="MyTalksController as vm">
+    <h2>My talk submissions</h2>
+
+    <div ng-hide="vm.isSignedIn">
+        <h3>
+            <i class="fa fa-info-circle text-info"></i> Woops, you're not signed in.
+        </h3>
+        <p>
+            <a href="/account/login">Sign in</a> or <a href="/account/register">register</a>
+        </p>
+    </div>
+
+    <div ng-show="vm.submissions.isLoadedWithData">
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="submission in vm.submissions.items" ng-class="{ 'list-group-item-success': submission.status === 2, 'list-group-item-danger': submission.status === 1 }">
+                <h4 class="list-group-item-heading">
+                    {{submission.title}}
+                    <span class="pull-right">
+                        Status: 
+                        <span class="text-info" ng-show="submission.status === 0">
+                            Under consideration 
+                            <br />
+                            <small>Check back later! ʘ‿ʘ</small>
+                        </span>
+                        <span ng-show="submission.status === 1">
+                            <i class="fa fa-ban"></i> Rejected 
+                            <br />
+                            <small>Oh noes! Sorry, this talk didn't make the cut. ಥ_ಥ</small>
+                        </span>
+                        <span ng-show="submission.status === 2">
+                            <i class="fa fa-check"></i> Approved 
+                            <br />
+                            <small>You're giving this talk at Code Camp! ヾ(⌐■_■)ノ♪</small>
+                        </span>
+                    </span>
+                </h4>
+                <p class="list-group-item-text">{{submission.abstract}}</p>
+            </li>
+        </ul>
+    </div>
+
+    <div ng-show="vm.submissions.isLoadedAndEmpty">
+        <h3>
+            <i class="fa fa-info-circle text-info"></i> Hrmmm, you don't have any talks.
+        </h3>
+        <p>
+            <a href="#/callforspeakers">Submit one now</a>
+        </p>
+    </div>
+</section>

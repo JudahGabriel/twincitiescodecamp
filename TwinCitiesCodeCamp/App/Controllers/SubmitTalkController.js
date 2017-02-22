@@ -18,7 +18,8 @@ var Tccc;
                 room: "",
                 submissionDate: "",
                 submittedByUserId: "",
-                title: ""
+                title: "",
+                status: Tccc.TalkApproval.Pending
             };
             this.submissionSuccessful = false;
             this.submissionError = "";

@@ -15,7 +15,8 @@
             room: "",
             submissionDate: "",
             submittedByUserId: "",
-            title: ""
+            title: "",
+            status: TalkApproval.Pending
         };
         submissionSuccessful = false;
         submissionError = "";

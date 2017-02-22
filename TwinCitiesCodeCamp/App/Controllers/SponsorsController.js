@@ -5,6 +5,7 @@ var Tccc;
             var _this = this;
             this.localStorageService = localStorageService;
             this.event = null;
+            this.platinumSponsors = [];
             this.goldSponsors = [];
             this.silverSponsors = [];
             this.bronzeSponsors = [];
@@ -21,6 +22,7 @@ var Tccc;
             this.goldSponsors = sponsors.filter(function (s) { return s.level === Tccc.SponsorshipLevel.Gold; });
             this.silverSponsors = sponsors.filter(function (s) { return s.level === Tccc.SponsorshipLevel.Silver; });
             this.bronzeSponsors = sponsors.filter(function (s) { return s.level === Tccc.SponsorshipLevel.Bronze; });
+            this.platinumSponsors = sponsors.filter(function (s) { return s.level === Tccc.SponsorshipLevel.Platinum; });
             this.localStorageService.set(SponsorsController.sponsorsKey, sponsors);
         };
         SponsorsController.prototype.rehydrateSponsors = function (sponsorsJson) {

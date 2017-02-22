@@ -137,12 +137,36 @@ Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';f
 $mcj = jQuery.noConflict(true);</script>
     <!--End mc_embed_signup-->
 
+    <div ng-show="vm.plationumSponsors.length">
+        <h2>
+            <i class="fa fa-circle" style="color: #e5e4e2;"></i>
+            Platinum Sponsors
+        </h2>
+        <p>Platinum sponsors are the biggest contributors to Twin Cities Code Camp. While you're at the event, check out their booths and thank them for supporting Code Camp!</p>
+        <div class="row">
+            <div class="sponsor col-xs-12" ng-repeat="sponsor in vm.platinumSponsors">
+                <div class="well">
+                    <a ng-href="{{sponsor.url}}">
+                        <img class="img-responsive" ng-src="{{sponsor.logo}}" />
+                    </a>
+                    <h3 class="website"><a ng-href="{{sponsor.url}}">{{sponsor.urlFriendly}}</a></h3>
+                    <h4>
+                        <i class="fa fa-twitter" style="color: #00aced"></i> <a ng-href="https://twitter.com/{{sponsor.twitter}}">{{sponsor.twitter}}</a>
+                    </h4>
+                    <p ng-show="sponsor.about" ng-bind-html="sponsor.aboutHtmlSafe">
+                    </p>
+                </div>
+            </div>
+        </div>
+        <hr />
+    </div>
+
     <div ng-show="vm.goldSponsors.length">
         <h2>
             <i class="fa fa-circle" style="color: gold;"></i>
             Gold Sponsors
         </h2>
-        <p>Gold sponsors are the biggest supporters of Twin Cities Code Camp. While you're at the event, check out the booths of our gold sponsors and engage with these fine companies who enable Code Camp to take place.</p>
+        <p>Gold sponsors are some of the biggest contributors to Twin Cities Code Camp. While you're at the event, check out the booths of our gold sponsors and engage with these fine companies who enable Code Camp to take place.</p>
         <div class="row">
             <div class="sponsor col-xs-12" ng-repeat="sponsor in vm.goldSponsors">
                 <div class="well">

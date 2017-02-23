@@ -268,6 +268,7 @@
     <Content Include="App\Views\Policies.html" />
     <Content Include="App\Views\PrintableSchedule.html" />
     <Content Include="App\Views\Schedule.html" />
+    <Content Include="App\Views\SponsorshipOpportunity.html" />
     <Content Include="App\Views\SponsorPayPal.html" />
     <Content Include="App\Views\SubmitTalk.html" />
     <Content Include="App\Views\TalkProfile.html" />
@@ -281,6 +282,7 @@
     <Content Include="Content\Images\Sponsors\BeaconHill.jpg" />
     <Content Include="Content\Images\Sponsors\DevJam.jpg" />
     <Content Include="Content\Images\Sponsors\IlmService.gif" />
+    <Content Include="Content\Images\Sponsors\LifeTouch.jpg" />
     <Content Include="Content\Images\Sponsors\Magenic.png" />
     <Content Include="Content\Images\Sponsors\Omni.jpg" />
     <Content Include="Content\Images\Sponsors\OpenSystems.jpg" />
@@ -426,6 +428,7 @@
     <TypeScriptCompile Include="App\Models\ScheduleTimeslot.ts" />
     <TypeScriptCompile Include="App\Models\ServerInterfaces.ts" />
     <TypeScriptCompile Include="App\Models\Sponsor.ts" />
+    <TypeScriptCompile Include="App\Models\SponsorGroup.ts" />
     <TypeScriptCompile Include="App\Models\SponsorshipLevel.ts" />
     <TypeScriptCompile Include="App\Models\Talk.ts" />
     <TypeScriptCompile Include="App\Models\TalkApproval.ts" />

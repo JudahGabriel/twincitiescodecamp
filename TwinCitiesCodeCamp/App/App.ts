@@ -20,6 +20,7 @@
             .when("/events/:eventId/talks", { templateUrl: "/App/Views/Talks.html" })
             .when("/speakers", { templateUrl: "/App/Views/Speakers.html" })
             .when("/sponsors", { templateUrl: "/App/Views/Sponsors.html" })
+            .when("/sponsorship", { templateUrl: "/App/Views/SponsorshipOpportunity.html" })
             .when("/pastevents", { templateUrl: "/App/Views/PastEvents.html" })
             .when("/about", { templateUrl: "/App/Views/AboutUs.html" })
             .when("/talks/mine", { templateUrl: "/App/Views/MyTalks.html" })

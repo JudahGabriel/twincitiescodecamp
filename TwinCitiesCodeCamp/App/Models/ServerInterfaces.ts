@@ -57,7 +57,7 @@
     }
 
     export interface Sponsor {
-        id: string;
+        id: string | null;
         eventId: string;
         name: string;
         about: string;

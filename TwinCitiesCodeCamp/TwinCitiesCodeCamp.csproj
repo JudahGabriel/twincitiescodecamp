@@ -65,6 +65,7 @@
     <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
     <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
     <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+			<TypeScriptStrictNullChecks>True</TypeScriptStrictNullChecks>
     <TypeScriptOutFile />
     <TypeScriptOutDir />
     <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
@@ -257,6 +258,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\Views\AboutUs.html" />
+    <Content Include="App\Views\AdminSponsors.html" />
     <Content Include="App\Views\AdminSubmissions.html" />
     <Content Include="App\Views\CallForSpeakers.html" />
     <Content Include="App\Views\Event.html" />
@@ -283,10 +285,12 @@
     <Content Include="Content\Images\Sponsors\DevJam.jpg" />
     <Content Include="Content\Images\Sponsors\IlmService.gif" />
     <Content Include="Content\Images\Sponsors\LifeTouch.jpg" />
-    <Content Include="Content\Images\Sponsors\Magenic.png" />
+    <Content Include="Content\Images\Sponsors\Magenic.jpg" />
     <Content Include="Content\Images\Sponsors\Omni.jpg" />
     <Content Include="Content\Images\Sponsors\OpenSystems.jpg" />
     <Content Include="Content\Images\Sponsors\PowerObjects.jpg" />
+    <Content Include="Content\Images\Sponsors\Microsoft.jpg" />
+    <Content Include="Content\Images\Sponsors\RavenDB.jpg" />
     <Content Include="Content\Images\Sponsors\SoftwareGuild.jpg" />
     <Content Include="Content\Images\Sponsors\SuperGoFaster.jpg" />
     <Content Include="Content\Images\team.jpg" />

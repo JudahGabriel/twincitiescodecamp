@@ -1,6 +1,6 @@
 ﻿namespace Tccc {
     export class TalkProfileController {
-        talk: Talk = null;
+        talk: Talk | null = null;
 
         static $inject = ["talkApi", "$sce", "$routeParams"];
 

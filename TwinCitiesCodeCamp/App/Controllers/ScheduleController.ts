@@ -1,7 +1,7 @@
 ﻿namespace Tccc {
     export class ScheduleController {
         
-        event: Server.Event = null;
+        event: Server.Event | null = null;
         schedule: Server.Schedule;
 
         static $inject = [

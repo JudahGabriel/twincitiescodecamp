@@ -1,6 +1,6 @@
 ﻿namespace Tccc {
     export class EventController {
-        event: Server.Event = null;
+        event: Server.Event | null = null;
 
         static $inject = ["eventApi"];
 

@@ -24,7 +24,7 @@
                 deferred.notify(new Event(cachedMostRecentEvent));
             }
 
-            // Fetch the most recent and 
+            // Fetch the most recent 
             this.apiService.query("/events/mostrecent", null, selector)
                 .then(result => {
                     deferred.resolve(result);

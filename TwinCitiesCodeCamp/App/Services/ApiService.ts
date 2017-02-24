@@ -16,7 +16,7 @@
          * Performs an AJAX GET request.
          * @params 
          */
-        query<T>(relativeUrl: string, args: any = null, selector: (rawResult: any) => T = null, showProgress = true): ng.IPromise<T> {
+        query<T>(relativeUrl: string, args: any = null, selector?: (rawResult: any) => T, showProgress = true): ng.IPromise<T> {
             var progress: ng.IDeferred<T>;
             if (showProgress) {
                 progress = this.loadingProgress.start<T>();
@@ -42,7 +42,7 @@
             return progress.promise;
         }
 
-        post<T>(relativeUrl: string, args: any, selector: (rawResult: any) => T = null, showProgress = true): ng.IPromise<T> {
+        post<T>(relativeUrl: string, args: any, selector?: (rawResult: any) => T, showProgress = true): ng.IPromise<T> {
             var deferred: ng.IDeferred<T>;
             if (showProgress) {
                 deferred = this.loadingProgress.start<T>();

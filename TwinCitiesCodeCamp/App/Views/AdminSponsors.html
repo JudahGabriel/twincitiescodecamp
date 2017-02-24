@@ -1,0 +1,70 @@
+﻿<section class="admin-submissions" ng-controller="AdminSponsorsController as vm">
+    <h2>{{vm.sponsors.length}} sponsors</h2>
+    <div class="row">
+        <div class="col-xs-12 col-sm-4">
+            <button class="btn btn-default btn-block" ng-click="vm.addSponsor()">
+                <i class="fa fa-plus"></i> Add a sponsor
+            </button>
+            <ul class="nav nav-pills nav-stacked" style="overflow: auto; max-height: 500px;">
+                <li role="presentation" ng-repeat="sponsor in vm.sponsors" ng-class="{ active: vm.currentSponsor === sponsor }" ng-click="vm.currentSponsor = sponsor">
+                    <a href="javascript:void(0)">
+                        {{sponsor.name}}
+                        - 
+                        <i class="fa fa-circle" ng-style="{ color: sponsor.levelColor }"></i>
+                        {{sponsor.levelText}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-12 col-sm-8">
+            <div class="well">
+                <form ng-show="vm.currentSponsor">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input class="form-control" type="text" ng-model="vm.currentSponsor.name" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Logo URL</label>
+                        <input class="form-control" type="text" ng-model="vm.currentSponsor.logo" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Website</label>
+                        <input class="form-control" type="url" ng-model="vm.currentSponsor.url" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Twitter handle</label>
+                        <input class="form-control" type="text" ng-model="vm.currentSponsor.twitter" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>About</label>
+                        <textarea class="form-control" type="text" ng-model="vm.currentSponsor.about" rows="5"></textarea>
+                        <p class="help-block">HTML allowed</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sponsorship Level</label>
+                        <select class="form-control" ng-model="vm.currentSponsor.level" ng-options="level.value as level.name for level in vm.sponsorshipLevels">
+                            
+                        </select>
+                    </div>
+
+                    <div class="pull-right">
+                        <button class="btn btn-danger" ng-disabled="vm.isSaving" ng-click="vm.deleteSponsor(vm.currentSponsor)">
+                            <i class="fa fa-trash-o"></i>
+                            Delete
+                        </button>
+                        <button class="btn btn-primary btn-lg" ng-disabled="vm.isSaving" ng-click="vm.saveSponsor(vm.currentSponsor)">
+                            <i class="fa fa-save"></i>
+                            Save
+                        </button>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

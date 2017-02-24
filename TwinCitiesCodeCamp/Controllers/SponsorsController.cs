@@ -21,5 +21,28 @@ namespace TwinCitiesCodeCamp.Controllers
                 .OrderBy(s => s.CreateDate)
                 .ToListAsync();
         }
+
+        [HttpPost]
+        [Route("save")]
+        [Authorize(Roles = "Admin")]
+        public async Task<Sponsor> Save(Sponsor sponsor)
+        {
+            await DbSession.StoreAsync(sponsor);
+            return sponsor;
+        }
+
+        [HttpPost]
+        [Route("delete")]
+        [Authorize(Roles = "Admin")]
+        public void Delete(string sponsorId)
+        {
+            if (!sponsorId.StartsWith("sponsors/", StringComparison.InvariantCultureIgnoreCase))
+            {
+                throw new InvalidOperationException("Invalid ID");
+            }
+
+
+            DbSession.Delete(sponsorId);
+        }
     }
 }

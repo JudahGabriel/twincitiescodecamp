@@ -15,7 +15,7 @@ var Tccc;
             if (cachedMostRecentEvent) {
                 deferred.notify(new Tccc.Event(cachedMostRecentEvent));
             }
-            // Fetch the most recent and 
+            // Fetch the most recent 
             this.apiService.query("/events/mostrecent", null, selector)
                 .then(function (result) {
                 deferred.resolve(result);

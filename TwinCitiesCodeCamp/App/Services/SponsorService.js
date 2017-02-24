@@ -9,7 +9,13 @@ var Tccc;
             var _this = this;
             var args = { eventId: eventId };
             var selector = function (serverObjs) { return serverObjs.map(function (s) { return new Tccc.Sponsor(s, _this.$sce); }); };
-            return this.apiService.query("/sponsors/getsponsorsforevent", args, selector);
+            return this.apiService.query("/sponsors/getSponsorsForEvent", args, selector);
+        };
+        SponsorService.prototype.save = function (sponsor) {
+            return this.apiService.post("/sponsors/save", sponsor);
+        };
+        SponsorService.prototype.delete = function (sponsorId) {
+            return this.apiService.post("/sponsors/delete?sponsorId=" + sponsorId, null);
         };
         return SponsorService;
     }());

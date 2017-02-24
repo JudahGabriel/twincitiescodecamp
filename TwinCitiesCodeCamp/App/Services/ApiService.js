@@ -16,7 +16,6 @@ var Tccc;
         ApiService.prototype.query = function (relativeUrl, args, selector, showProgress) {
             var _this = this;
             if (args === void 0) { args = null; }
-            if (selector === void 0) { selector = null; }
             if (showProgress === void 0) { showProgress = true; }
             var progress;
             if (showProgress) {
@@ -42,7 +41,6 @@ var Tccc;
         };
         ApiService.prototype.post = function (relativeUrl, args, selector, showProgress) {
             var _this = this;
-            if (selector === void 0) { selector = null; }
             if (showProgress === void 0) { showProgress = true; }
             var deferred;
             if (showProgress) {

@@ -104,12 +104,36 @@ header .content .title .fa-code {
 .schedule-page .timeslot h2 a {
   color: white;
 }
-.schedule-page .timeslot .time,
-.schedule-page .timeslot .item {
+.schedule-page .timeslot .time {
   margin: 10px;
 }
 .schedule-page .timeslot .text-muted {
   color: #9caab7;
+}
+.schedule-page .timeslot .item {
+  margin: 10px;
+  /*&:hover {
+                img {
+                    transform: rotateZ(4deg);
+                }
+            }*/
+}
+.schedule-page .timeslot .item img {
+  max-height: 127px;
+  margin-top: -20px;
+  margin-left: -20px;
+  float: left;
+  margin-right: 20px;
+  box-shadow: -6px 0 5px 0 rgba(0, 0, 0, 0.1), 6px 0 2px 0 rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 767px) {
+  .schedule-page .timeslot .item img {
+    float: none;
+    max-height: none;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: initial;
+  }
 }
 .printable-schedule-page .table-container {
   margin-left: auto;
@@ -179,6 +203,7 @@ header .content .title .fa-code {
 .sponsors-page .sponsor img {
   -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(70%, transparent), to(rgba(255, 255, 255, 0.2)));
   transition: all .2s linear;
+  max-height: 200px;
 }
 .sponsors-page .sponsor:hover img {
   transform: perspective(50em) rotateY(20deg);

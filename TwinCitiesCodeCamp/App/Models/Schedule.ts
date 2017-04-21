@@ -4,9 +4,19 @@
         eventId: string;
         timeslots: ScheduleTimeslot[];
 
+        isSaving = false;
+
         constructor(serverObj: Server.Schedule) {
             angular.copy(serverObj, this);
             this.timeslots = serverObj.timeslots.map(s => new ScheduleTimeslot(s));
+        }
+
+        get friendlyName(): string {
+            if (this.eventId && this.eventId.includes("/")) {
+                return "Schedule for #tccc" + this.eventId.substr(this.eventId.indexOf("/") + 1);
+            }
+
+            return "[untitled schedule]";
         }
 
         getRooms(): string[] {
@@ -21,6 +31,14 @@
 
             rooms.sort();
             return rooms;
+        }
+
+        static empty(): Schedule {
+            return new Schedule({
+                eventId: "",
+                id: null as any,
+                timeslots: []
+            });
         }
     }
 }

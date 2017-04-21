@@ -21,3 +21,4 @@ var Tccc;
     }());
     Tccc.ScheduleTimeslot = ScheduleTimeslot;
 })(Tccc || (Tccc = {}));
+//# sourceMappingURL=ScheduleTimeslot.js.map

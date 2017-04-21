@@ -68,3 +68,4 @@ var Tccc;
     Tccc.SponsorsController = SponsorsController;
     Tccc.App.controller("SponsorsController", SponsorsController);
 })(Tccc || (Tccc = {}));
+//# sourceMappingURL=SponsorsController.js.map

@@ -10,11 +10,19 @@
         </div>
         <div class="col-xs-12 col-sm-6">
             <h4>
-                Coming to the event? Please <a ng-href="{{vm.event.registerUrl}}" class="btn btn-primary" target="_blank">register</a>
+                Coming to the event? Please <a href="#" ng-href="{{vm.event.registerUrl}}" class="btn btn-primary" target="_blank">register</a>
             </h4>
-            <h4>
+            <h4 ng-show="vm.event.isAcceptingTalkSubmissions">
                 Interested in speaking? <a href="#/callforspeakers">Submit your talk</a>.
             </h4>
         </div>
+    </div>
+    <div class="row">
+        <h3>Code Camp is held in the <span class="text-primary">Kopp Student Center</span> at Normandale Community College</h3>
+        <img class="img-responsive" src="../../Content/Images/Location/normandale-entrance.jpg" />
+        <br />
+        <img class="img-responsive" src="../../Content/Images/Location/normandale-first-floor.jpg" />
+        <br />
+        <img class="img-responsive" src="../../Content/Images/Location/normandale-second-floor.jpg" />
     </div>
 </section>

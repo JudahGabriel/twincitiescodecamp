@@ -15,3 +15,4 @@ var Tccc;
     Tccc.PastEventDetailsController = PastEventDetailsController;
     Tccc.App.controller("PastEventDetailsController", PastEventDetailsController);
 })(Tccc || (Tccc = {}));
+//# sourceMappingURL=PastEventDetailsController.js.map

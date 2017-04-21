@@ -14,12 +14,22 @@
         static $inject = [
             "eventApi",
             "sponsorApi",
+            "isUserAdmin",
             "$sce"
         ];
 
-        constructor(private eventApi: EventService, private sponsorApi: SponsorService, private $sce: ng.ISCEService) {
+        constructor(
+            private eventApi: EventService,
+            private sponsorApi: SponsorService,
+            private isUserAdmin: boolean,
+            private $sce: ng.ISCEService) {
+
             this.eventApi.getMostRecentEvent()
                 .then(e => this.mostRecentEventLoaded(e));
+
+            if (!isUserAdmin) {
+                window.location.href = "/account/login";
+            }
         }
 
         mostRecentEventLoaded(e: Event) {

@@ -1,6 +1,6 @@
 ﻿<section class="schedule-page" ng-controller="ScheduleController as vm">
     <div class="page-header">
-        <h1><strong>Schedule</strong> for Twin Cities Code Camp {{vm.event.number}}</h1>
+        <h1><strong>Schedule</strong> - #tcc{{vm.event.number}}</h1>
         <a href="#/schedule/printable"><i class="fa fa-print"></i> Printable schedule</a>
     </div>
     <p>
@@ -9,8 +9,9 @@
 
     <div class="schedule">
         <div class="timeslot" ng-repeat="timeslot in vm.schedule.timeslots">
-            <h3 class="time">{{timeslot.startFriendly}}</h3>
+            <h1 class="time">{{timeslot.startFriendly}}</h1>
             <div class="well item" ng-repeat="item in timeslot.items">
+                <img class="img-responsive" ng-show="vm.getImageForScheduleItem(item)" ng-src="{{vm.getImageForScheduleItem(item)}}" />
                 <h2>
                     <a ng-show="item.talkId" ng-href="#/{{item.talkId}}">{{item.title}}</a>
                     <span ng-hide="item.talkId">{{item.title}}</span>

@@ -77,3 +77,4 @@ var Tccc;
     Tccc.ApiService = ApiService;
     Tccc.App.service("apiService", ApiService);
 })(Tccc || (Tccc = {}));
+//# sourceMappingURL=ApiService.js.map

@@ -23,7 +23,8 @@
 
         static $inject = [
             "isSignedIn",
-            "talkApi"
+            "talkApi",
+            "eventApi"
         ];
 
         constructor(

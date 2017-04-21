@@ -7,3 +7,4 @@ var Tccc;
         TalkApproval[TalkApproval["Approved"] = 2] = "Approved";
     })(TalkApproval = Tccc.TalkApproval || (Tccc.TalkApproval = {}));
 })(Tccc || (Tccc = {}));
+//# sourceMappingURL=TalkApproval.js.map

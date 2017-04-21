@@ -18,3 +18,4 @@ var Tccc;
     Tccc.TalkProfileController = TalkProfileController;
     Tccc.App.controller("TalkProfileController", TalkProfileController);
 })(Tccc || (Tccc = {}));
+//# sourceMappingURL=TalkProfileController.js.map

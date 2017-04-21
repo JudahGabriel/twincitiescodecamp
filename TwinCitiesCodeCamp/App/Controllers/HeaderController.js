@@ -24,3 +24,4 @@ var Tccc;
     Tccc.HeaderController = HeaderController;
     Tccc.App.controller("HeaderController", HeaderController);
 })(Tccc || (Tccc = {}));
+//# sourceMappingURL=HeaderController.js.map

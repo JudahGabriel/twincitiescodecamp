@@ -44,3 +44,4 @@ var Tccc;
     Tccc.EventService = EventService;
     Tccc.App.service("eventApi", EventService);
 })(Tccc || (Tccc = {}));
+//# sourceMappingURL=EventService.js.map

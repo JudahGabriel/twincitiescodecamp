@@ -65,7 +65,7 @@
     <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
     <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
     <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
-			<TypeScriptStrictNullChecks>True</TypeScriptStrictNullChecks>
+    <TypeScriptStrictNullChecks>True</TypeScriptStrictNullChecks>
     <TypeScriptOutFile />
     <TypeScriptOutDir />
     <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
@@ -84,13 +84,14 @@
       <HintPath>..\packages\Optional.3.2.0\lib\net452\Optional.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Raven.Abstractions, Version=3.5.2.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
-      <HintPath>..\packages\RavenDB.Client.3.5.2\lib\net45\Raven.Abstractions.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Optional.Collections, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Optional.Collections.1.1.0\lib\net452\Optional.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Raven.Client.Lightweight, Version=3.5.2.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
-      <HintPath>..\packages\RavenDB.Client.3.5.2\lib\net45\Raven.Client.Lightweight.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Raven.Abstractions, Version=3.5.3.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <HintPath>..\packages\RavenDB.Client.3.5.3\lib\net45\Raven.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Client.Lightweight, Version=3.5.3.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <HintPath>..\packages\RavenDB.Client.3.5.3\lib\net45\Raven.Client.Lightweight.dll</HintPath>
     </Reference>
     <Reference Include="RavenDB.AspNet.Identity, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RavenDB.AspNet.Identity.1.0.2\lib\net45\RavenDB.AspNet.Identity.dll</HintPath>
@@ -225,9 +226,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Common\OptionalAsyncExtensions.cs" />
+    <Compile Include="Common\Optional\AsyncOption.cs" />
+    <Compile Include="Common\Optional\AsyncOptionExtensions.cs" />
+    <Compile Include="Common\Optional\OptionalAsyncExtensions.cs" />
+    <Compile Include="Common\Optional\TaskTransformationExtensions.cs" />
+    <Compile Include="Common\RavenExtensions.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
+    <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LegacyController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -258,8 +264,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\Views\AboutUs.html" />
+    <Content Include="App\Views\AdminSchedules.html" />
     <Content Include="App\Views\AdminSponsors.html" />
-    <Content Include="App\Views\AdminSubmissions.html" />
+    <Content Include="App\Views\AdminTalks.html" />
     <Content Include="App\Views\CallForSpeakers.html" />
     <Content Include="App\Views\Event.html" />
     <Content Include="App\Views\Header.html" />
@@ -279,6 +286,9 @@
     <Content Include="App\Views\Sponsors.html" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\favico.png" />
+    <Content Include="Content\Images\Location\normandale-entrance.jpg" />
+    <Content Include="Content\Images\Location\normandale-first-floor.jpg" />
+    <Content Include="Content\Images\Location\normandale-second-floor.jpg" />
     <Content Include="Content\Images\People\bock.jpg" />
     <Content Include="Content\Images\People\sheila.jpg" />
     <Content Include="Content\Images\Sponsors\BeaconHill.jpg" />
@@ -286,6 +296,7 @@
     <Content Include="Content\Images\Sponsors\IlmService.gif" />
     <Content Include="Content\Images\Sponsors\LifeTouch.jpg" />
     <Content Include="Content\Images\Sponsors\Magenic.jpg" />
+    <Content Include="Content\Images\Sponsors\Improving.jpg" />
     <Content Include="Content\Images\Sponsors\Omni.jpg" />
     <Content Include="Content\Images\Sponsors\OpenSystems.jpg" />
     <Content Include="Content\Images\Sponsors\PowerObjects.jpg" />
@@ -293,6 +304,7 @@
     <Content Include="Content\Images\Sponsors\RavenDB.jpg" />
     <Content Include="Content\Images\Sponsors\SoftwareGuild.jpg" />
     <Content Include="Content\Images\Sponsors\SuperGoFaster.jpg" />
+    <Content Include="Content\Images\Sponsors\Target.gif" />
     <Content Include="Content\Images\team.jpg" />
     <Content Include="Content\Images\unknown-speaker.jpg" />
     <Content Include="Content\Images\wide_sepia.jpg" />
@@ -400,9 +412,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Legacy\Sessions.cshtml" />
     <Content Include="Views\Legacy\Schedule.cshtml" />
+    <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Files\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -413,6 +427,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="App\App.ts" />
+    <TypeScriptCompile Include="App\Controllers\AdminSchedulesController.ts" />
     <TypeScriptCompile Include="App\Controllers\AdminSponsorsController.ts" />
     <TypeScriptCompile Include="App\Common\List.ts" />
     <TypeScriptCompile Include="App\Controllers\AdminSubmissionsController.ts" />

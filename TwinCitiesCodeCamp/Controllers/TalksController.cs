@@ -37,9 +37,15 @@ namespace TwinCitiesCodeCamp.Controllers
         [Authorize]
         public async Task<TalkSubmission> Submit(TalkSubmission talk)
         {
+            var mostRecentEvent = await DbSession
+                .Query<Event>()
+                .OrderByDescending(e => e.DateTime)
+                .FirstAsync();
+
             talk.Id = null;
             talk.SubmissionDate = DateTime.UtcNow;
             talk.SubmittedByUserId = "ApplicationUsers/" + User.Identity.Name;
+            talk.EventId = mostRecentEvent.Id;
             await DbSession.StoreAsync(talk);
             return talk;
         }
@@ -68,6 +74,28 @@ namespace TwinCitiesCodeCamp.Controllers
             return await DbSession.Query<TalkSubmission>()
                 .Where(t => t.SubmittedByUserId == userId)
                 .ToListAsync();
+        }
+
+        [Route("approve")]
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<TalkSubmission> Approve(string talkSubmissionId)
+        {
+            var talkSubmission = await DbSession.LoadNotNull<TalkSubmission>(talkSubmissionId);
+            talkSubmission.Status = TalkApproval.Approved;
+            var talk = talkSubmission.ToTalk();
+            await DbSession.StoreAsync(talk);
+            return talkSubmission;
+        }
+
+        [Route("reject")]
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<TalkSubmission> Reject(string talkSubmissionId)
+        {
+            var talkSubmission = await DbSession.LoadNotNull<TalkSubmission>(talkSubmissionId);
+            talkSubmission.Status = TalkApproval.Rejected;
+            return talkSubmission;
         }
     }
 }

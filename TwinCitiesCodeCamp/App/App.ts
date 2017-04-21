@@ -28,9 +28,9 @@
             .when("/policies", { templateUrl: "/App/Views/Policies.html" })
             //.when("/callforspeakers", { templateUrl: "/App/Views/CallForSpeakers.html" })
             .when("/callforspeakers", { templateUrl: "/App/Views/SubmitTalk.html" })
-            .when("/adminsubmissions", { templateUrl: "/App/Views/AdminSubmissions.html" }) // preserved for compat
-            .when("/admin/submissions", { templateUrl: "/App/Views/AdminSubmissions.html" })
+            .when("/admin/talks", { templateUrl: "/App/Views/AdminTalks.html" })
             .when("/admin/sponsors", { templateUrl: "/App/Views/AdminSponsors.html" })
+            .when("/admin/schedules", { templateUrl: "/App/Views/AdminSchedules.html" })
             .when("/sponsors/paypal", { templateUrl: "/App/Views/SponsorPayPal.html" })
             .otherwise({ redirectTo: "/home" });
     }]);

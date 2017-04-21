@@ -1,7 +1,18 @@
 ﻿<section class="admin-submissions" ng-controller="AdminSubmissionsController as vm">
-    <h2>{{vm.submissions.length}} talk submissions</h2>
+    <h2>
+        {{vm.totalTalks}} talk submissions
+        <a class="btn btn-default pull-right" href="/files/GetTalkSubmissionsCsv"><i class="fa fa-file-excel-o" style="color: white; background-color: rgb(31, 112, 68)"></i> Generate CSV</a>
+    </h2>
     <div class="row">
         <div class="col-xs-12 col-sm-4">
+            <ul class="nav nav-tabs">
+                <li ng-repeat="filter in vm.approvalOptions" ng-click="vm.selectedFilter = filter.value" ng-class="{ active: vm.selectedFilter === filter.value }" role="presentation">
+                    <a href="javascript:void(0)">
+                        {{filter.collection.length}} {{filter.name}}
+                    </a>
+                </li>
+            </ul>
+
             <ul class="nav nav-pills nav-stacked" style="overflow: auto; max-height: 500px;">
                 <li role="presentation" ng-repeat="talk in vm.submissions" ng-class="{ active: vm.currentTalk === talk }" ng-click="vm.currentTalk = talk">
                     <a href="javascript:void(0)">{{talk.title}}</a>
@@ -44,6 +55,17 @@
                     <div class="form-group">
                         <label>GitHub account</label>
                         <p class="form-control-static">{{vm.currentTalk.authorGitHub}}</p>
+                    </div>
+
+                    <div class="btn-group" ng-show="vm.currentTalk.status === 0">
+                        <button type="button" class="btn btn-info btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled="vm.isSaving">
+                            {{vm.currentTalkStatus}} <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="option in vm.approvalOptions" ng-hide="option.value === 0" ng-click="vm.setApprovalStatus(vm.currentTalk, option.value)">
+                                <a href="javascript:void(0)">{{option.name}}</a>
+                            </li>
+                        </ul>
                     </div>
                 </form>
             </div>

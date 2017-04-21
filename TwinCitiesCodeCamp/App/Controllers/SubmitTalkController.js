@@ -50,8 +50,10 @@ var Tccc;
     }());
     SubmitTalkController.$inject = [
         "isSignedIn",
-        "talkApi"
+        "talkApi",
+        "eventApi"
     ];
     Tccc.SubmitTalkController = SubmitTalkController;
     Tccc.App.controller("SubmitTalkController", SubmitTalkController);
 })(Tccc || (Tccc = {}));
+//# sourceMappingURL=SubmitTalkController.js.map

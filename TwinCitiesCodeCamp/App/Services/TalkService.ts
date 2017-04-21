@@ -29,6 +29,14 @@
         getMySubmissions(): ng.IPromise<Server.TalkSubmission[]> {
             return this.apiService.query("/talks/getMySubmissions");
         }
+
+        approve(talkSubmissionId: string): ng.IPromise<Server.TalkSubmission> {
+            return this.apiService.post("/talks/approve?talkSubmissionId=" + talkSubmissionId, null);
+        }
+
+        reject(talkSubmissionId: string): ng.IPromise<Server.TalkSubmission> {
+            return this.apiService.post("/talks/reject?talkSubmissionId=" + talkSubmissionId, null);
+        }
     }
 
     App.service("talkApi", TalkService);

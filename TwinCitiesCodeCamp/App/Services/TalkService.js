@@ -23,9 +23,16 @@ var Tccc;
         TalkService.prototype.getMySubmissions = function () {
             return this.apiService.query("/talks/getMySubmissions");
         };
+        TalkService.prototype.approve = function (talkSubmissionId) {
+            return this.apiService.post("/talks/approve?talkSubmissionId=" + talkSubmissionId, null);
+        };
+        TalkService.prototype.reject = function (talkSubmissionId) {
+            return this.apiService.post("/talks/reject?talkSubmissionId=" + talkSubmissionId, null);
+        };
         return TalkService;
     }());
     TalkService.$inject = ["apiService"];
     Tccc.TalkService = TalkService;
     Tccc.App.service("talkApi", TalkService);
 })(Tccc || (Tccc = {}));
+//# sourceMappingURL=TalkService.js.map

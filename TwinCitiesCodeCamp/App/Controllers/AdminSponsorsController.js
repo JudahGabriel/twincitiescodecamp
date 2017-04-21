@@ -1,10 +1,11 @@
 var Tccc;
 (function (Tccc) {
     var AdminSponsorsController = (function () {
-        function AdminSponsorsController(eventApi, sponsorApi, $sce) {
+        function AdminSponsorsController(eventApi, sponsorApi, isUserAdmin, $sce) {
             var _this = this;
             this.eventApi = eventApi;
             this.sponsorApi = sponsorApi;
+            this.isUserAdmin = isUserAdmin;
             this.$sce = $sce;
             this.sponsors = [];
             this.isSaving = false;
@@ -18,6 +19,9 @@ var Tccc;
             ];
             this.eventApi.getMostRecentEvent()
                 .then(function (e) { return _this.mostRecentEventLoaded(e); });
+            if (!isUserAdmin) {
+                window.location.href = "/account/login";
+            }
         }
         AdminSponsorsController.prototype.mostRecentEventLoaded = function (e) {
             var _this = this;
@@ -73,8 +77,10 @@ var Tccc;
     AdminSponsorsController.$inject = [
         "eventApi",
         "sponsorApi",
+        "isUserAdmin",
         "$sce"
     ];
     Tccc.AdminSponsorsController = AdminSponsorsController;
     Tccc.App.controller("AdminSponsorsController", AdminSponsorsController);
 })(Tccc || (Tccc = {}));
+//# sourceMappingURL=AdminSponsorsController.js.map

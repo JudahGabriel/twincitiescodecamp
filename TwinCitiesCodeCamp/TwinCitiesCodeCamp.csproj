@@ -276,6 +276,7 @@
     <Content Include="App\Views\PastEvents.html" />
     <Content Include="App\Views\Policies.html" />
     <Content Include="App\Views\PrintableSchedule.html" />
+    <Content Include="App\Views\RegistrationNotOpened.html" />
     <Content Include="App\Views\Schedule.html" />
     <Content Include="App\Views\SponsorshipOpportunity.html" />
     <Content Include="App\Views\SponsorPayPal.html" />
@@ -327,6 +328,8 @@
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
+    <Content Include="Scripts\angular-sanitize.js" />
+    <Content Include="Scripts\angular-sanitize.min.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
@@ -343,10 +346,12 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <Content Include="Content\variables.less" />
+    <Content Include="ConnectionStrings.Debug.Secrets.config" />
+    <Content Include="ConnectionStrings.Release.Secrets.config" />
     <None Include="Properties\PublishProfiles\bitshuva - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\BitShuva.pubxml" />
     <Content Include="Scripts\angular-local-storage.min.js.map" />
     <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\angular-sanitize.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Scripts\angular-route.min.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

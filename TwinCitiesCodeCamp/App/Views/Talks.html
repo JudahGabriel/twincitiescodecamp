@@ -3,6 +3,7 @@
         <h1><strong>Talks</strong> at #tccc{{vm.event.number}} - {{vm.event.seasonYear}}</h1>
     </div>
 
+    <!--If we're accepting submissions-->
     <div class="alert alert-info" ng-show="vm.event.isAcceptingTalkSubmissions">
         <h2>
             <i class="fa fa-info-circle"></i> Interested in speaking at Twin Cities Code Camp? We're accepting submissions.
@@ -13,7 +14,19 @@
         <p><span>Already submitted a talk? <a href="#/talks/mine">Check if your talk has been approved</a></span></p>
     </div>
 
-    <div class="media" ng-repeat="talk in vm.talks">
+    <!--No talks yet, and we're not yet accepting submissions-->
+    <div class="alert alert-info" ng-show="vm.event.isAcceptingTalkSubmissions === false && vm.talks.isLoadedAndEmpty">
+        <h2>
+            <i class="fa fa-info-circle"></i> You're early!
+        </h2>
+        <p>
+            We're not yet accepting talks for #tccc{{vm.event.number}}. Check back later.
+        </p>
+        <a href="#" class="alert-link" ng-href="{{'#/events/' + (vm.event.number - 1) + '/talks'}}">View talks from last event</a>
+    </div>
+
+    <!--We're not accepting submissions, and we have talks. Display them!-->
+    <div class="media" ng-show="vm.event.isAcceptingTalkSubmissions === false && vm.talks.isLoadedWithData" ng-repeat="talk in vm.talks.items">
         <div class="media-left">
             <a ng-href="#/{{talk.id}}">
                 <img class="media-object img-circle" ng-src="{{talk.pictureUrlOrDefault}}" alt="Profile pic of {{talk.author}}">
@@ -24,7 +37,9 @@
                 <a ng-href="#/{{talk.id}}">{{talk.title}}</a>
             </h2>
             <h4><small class="text-muted">by</small> {{talk.author}}</h4>
-            <p class="abstract" ng-bind-html="talk.htmlSafeAbstract"></p>
+            <p class="abstract" ng-bind-html="talk.abstract"></p>
         </div>
     </div>
+
+
 </section>

@@ -237,3 +237,5 @@ _Pvt_Extensions
 /TwinCitiesCodeCamp2/Web.Release.config
 /TwinCitiesCodeCamp2/Web.Debug.config
 /TwinCitiesCodeCamp2/Web.config
+/TwinCitiesCodeCamp/ConnectionStrings.Release.Secrets.config
+/TwinCitiesCodeCamp/ConnectionStrings.Debug.Secrets.config

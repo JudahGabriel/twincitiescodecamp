@@ -3,6 +3,7 @@ var Tccc;
     var modules = [
         "ngRoute",
         "ngAnimate",
+        "ngSanitize",
         "ui.bootstrap",
         "ui.bootstrap.tpls",
         "LocalStorageModule"
@@ -25,6 +26,7 @@ var Tccc;
                 .when("/talks/mine", { templateUrl: "/App/Views/MyTalks.html" })
                 .when("/talks/:id", { templateUrl: "/App/Views/TalkProfile.html" })
                 .when("/policies", { templateUrl: "/App/Views/Policies.html" })
+                .when("/register/notopened", { templateUrl: "/App/Views/RegistrationNotOpened.html" })
                 .when("/callforspeakers", { templateUrl: "/App/Views/SubmitTalk.html" })
                 .when("/admin/talks", { templateUrl: "/App/Views/AdminTalks.html" })
                 .when("/admin/sponsors", { templateUrl: "/App/Views/AdminSponsors.html" })

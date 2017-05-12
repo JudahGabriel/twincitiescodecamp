@@ -1,47 +1,39 @@
 ﻿namespace Tccc {
     export class TalksController {
-        talks: Talk[] = [];
-        event: Event;
+        talks: List<Talk>;
+        event: Event | null;
         eventId: string;
 
         static $inject = [
             "eventApi",
             "talkApi",
-            "$sce",
-            "$routeParams",
-            "localStorageService"
+            "$routeParams"
         ];
         static talksCacheKey = "talks";
 
         constructor(
             private eventApi: EventService,
             private talkApi: TalkService,
-            private $sce: ng.ISCEService,
-            $routeParams: ng.route.IRouteParamsService,
-            private localStorageService: ng.local.storage.ILocalStorageService) {
+            $routeParams: ng.route.IRouteParamsService) {
             
             this.eventId = $routeParams["eventId"];
-            
+            const talksCacheKey = TalksController.talksCacheKey + this.eventId;
+            this.talks = new List<Talk>(() => this.fetchTalks(`Events/${this.eventId}`), talksCacheKey);
+            this.talks.fetch();
+
             eventApi.getEvent(`Events/${this.eventId}`)
-                .then(e => this.eventLoaded(e));
-
-            var cachedTalks = this.localStorageService.get<Talk[]>(TalksController.talksCacheKey + this.eventId);
-            if (cachedTalks) {
-                this.talksLoaded(cachedTalks);
-            }                
+                .then(loadedEvent => this.event = loadedEvent);
         }
 
-        eventLoaded(e: Event) {
-            this.event = e;
-            this.talkApi.getTalks(e.id)
-                .then(talks => this.talksLoaded(talks));
+        fetchTalks(eventId: string): ng.IPromise<Talk[]> {
+            return this.talkApi.getTalks(eventId);
         }
 
-        talksLoaded(talks: Talk[]) {
-            talks.forEach(t => t.htmlSafeAbstract = this.$sce.trustAsHtml(t.abstract));
-            this.talks = talks;
-            this.localStorageService.set(TalksController.talksCacheKey + this.eventId, talks);
-        }
+        //talksLoaded(talks: Talk[]) {
+        //    //talks.forEach(t => t.htmlSafeAbstract = this.$sce.trustAsHtml(t.abstract));
+        //    this.talks = talks;
+        //    this.localStorageService.set(TalksController.talksCacheKey + this.eventId, talks);
+        //}
     }
 
     App.controller("TalksController", TalksController);

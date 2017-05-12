@@ -13,9 +13,10 @@ namespace TwinCitiesCodeCamp
                 JQuery = "https://code.jquery.com/jquery-2.2.4.min.js",
                 Bootstrap = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js",
                 Moment = "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js",
-                Angular = "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js",
-                AngularAnimate = "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-animate.min.js",
-                AngularRoute = "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js",
+                Angular = "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js",
+                AngularAnimate = "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-animate.min.js",
+                AngularRoute = "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-route.min.js",
+                AngularSanitize = "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js",
                 AngularBootstrap = "https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js",
                 AngularBootstrapTemplates = "https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js",
                 AngularLocalStorage = "https://cdnjs.cloudflare.com/ajax/libs/angular-local-storage/0.5.2/angular-local-storage.min.js",
@@ -30,6 +31,7 @@ namespace TwinCitiesCodeCamp
             bundles.Add(new ScriptBundle("~/bundles/angular", cdns.Angular).Include("~/Scripts/angular.js"));
             bundles.Add(new ScriptBundle("~/bundles/angular-animate", cdns.AngularAnimate).Include("~/Scripts/angular-animate.js"));
             bundles.Add(new ScriptBundle("~/bundles/angular-route", cdns.AngularRoute).Include("~/Scripts/angular-route.js"));
+            bundles.Add(new ScriptBundle("~/bundles/angular-sanitize", cdns.AngularSanitize).Include("~/Scripts/angular-sanitize.js"));
             bundles.Add(new ScriptBundle("~/bundles/angular-bootstrap", cdns.AngularBootstrap).Include("~/Scripts/angular-ui/ui-bootstrap.js"));
             bundles.Add(new ScriptBundle("~/bundles/angular-bootstrap-templates", cdns.AngularBootstrapTemplates).Include("~/Scripts/angular-ui/ui-bootstrap-tpls.js"));
             bundles.Add(new ScriptBundle("~/bundles/angular-local-storage", cdns.AngularLocalStorage).Include("~/Scripts/angular-local-storage.js"));

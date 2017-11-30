@@ -351,6 +351,87 @@ header {
     }
 }
 
+.sponsorship-opportunities-page {
+    .sponsorship-level {
+        padding: 7px;
+        text-align: center;
+        margin-bottom: 10px;
+
+        &.silver {
+            background-color: rgb(242, 242, 242);
+            color: rgb(30, 36, 42);
+
+            small {
+                color: darkgray;
+            }
+
+            .list-unstyled {
+                li {
+                    color: rgb(117, 127, 145);
+                }
+            }
+        }
+
+        &.gold {
+            background-color: rgb(13, 60, 89);
+            color: white;
+        }
+
+        &.platinum {
+            background-color: rgb(13, 60, 89);
+            color: white;
+        }
+
+        &.diamond {
+            background-color: rgb(13, 60, 89);
+            color: white;
+        }
+
+        hr {
+            border: 1px solid @brand-primary;
+        }
+
+
+        .price {
+            min-height: 50px;
+
+            small {
+                font-size: 16px;
+            }
+        }
+
+        .benefits {
+            padding-top: 20px;
+            min-height: 560px;
+
+            li {
+                color: rgb(187, 206, 217);
+                font-size: 15px;
+                padding: 8px 0 8px 0;
+                border-color: rgba(117, 127, 145, 0.2);
+                border-bottom-width: 1px;
+                border-style: solid;
+                border-top-width: 0;
+                border-left-width: 0;
+                border-right-width: 0;
+
+                &:last-child {
+                    border-bottom-width: 0;
+                }
+
+                strong {
+                    font-size: 1.1em;
+                }
+            }
+
+            li.spacer {
+                border: none;
+                padding: 20px;
+            }
+        }
+    }
+}
+
 /* Make clicks pass-through */
 #nprogress {
     pointer-events: none;
@@ -360,7 +441,7 @@ header {
         background-color: lighten(@navbar-inverse-bg, 10%);
         position: fixed;
         z-index: 1031;
-        top: 0px; 
+        top: 0px;
         left: 0;
         bottom: 0;
         width: 100%;

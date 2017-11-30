@@ -21,6 +21,9 @@ var Tccc;
                 .when("/speakers", { templateUrl: "/App/Views/Speakers.html" })
                 .when("/sponsors", { templateUrl: "/App/Views/Sponsors.html" })
                 .when("/sponsorship", { templateUrl: "/App/Views/SponsorshipOpportunity.html" })
+                .when("/sponsors/paypal", { redirectTo: "/sponsorship" })
+                .when("/sponsor/success", { templateUrl: "/App/Views/SponsorSuccess.html" })
+                .when("/sponsor/cancel", { templateUrl: "/App/Views/SponsorCancel.html" })
                 .when("/pastevents", { templateUrl: "/App/Views/PastEvents.html" })
                 .when("/about", { templateUrl: "/App/Views/AboutUs.html" })
                 .when("/talks/mine", { templateUrl: "/App/Views/MyTalks.html" })
@@ -31,7 +34,6 @@ var Tccc;
                 .when("/admin/talks", { templateUrl: "/App/Views/AdminTalks.html" })
                 .when("/admin/sponsors", { templateUrl: "/App/Views/AdminSponsors.html" })
                 .when("/admin/schedules", { templateUrl: "/App/Views/AdminSchedules.html" })
-                .when("/sponsors/paypal", { templateUrl: "/App/Views/SponsorPayPal.html" })
                 .otherwise({ redirectTo: "/home" });
         }]);
     // Store the partials and modals as constants. These values will be cache-busted by the build. See AngularViewCacheBuster.cs

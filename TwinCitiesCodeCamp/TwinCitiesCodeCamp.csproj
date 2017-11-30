@@ -27,8 +27,9 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <ApplicationInsightsResourceId>/subscriptions/1fef6e5e-07c7-4c21-a2ee-8271b240a633/resourcegroups/Default-ApplicationInsights-CentralUS/providers/microsoft.insights/components/TwinCitiesCodeCamp</ApplicationInsightsResourceId>
-    <TypeScriptToolsVersion>2.0</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
     <TypeScriptProjectDir>$(MSBuildProjectDirectory)\</TypeScriptProjectDir>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -278,8 +279,10 @@
     <Content Include="App\Views\PrintableSchedule.html" />
     <Content Include="App\Views\RegistrationNotOpened.html" />
     <Content Include="App\Views\Schedule.html" />
+    <Content Include="App\Views\SponsorCancel.html" />
     <Content Include="App\Views\SponsorshipOpportunity.html" />
     <Content Include="App\Views\SponsorPayPal.html" />
+    <Content Include="App\Views\SponsorSuccess.html" />
     <Content Include="App\Views\SubmitTalk.html" />
     <Content Include="App\Views\TalkProfile.html" />
     <Content Include="App\Views\Talks.html" />

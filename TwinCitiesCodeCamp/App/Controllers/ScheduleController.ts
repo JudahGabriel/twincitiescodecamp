@@ -2,9 +2,10 @@
     export class ScheduleController {
         
         event: Server.Event | null = null;
-        schedule: Server.Schedule;
+        schedule: Server.Schedule | null = null;
         talks = new List<Talk>(() => this.fetchTalks(), "talks");
         talkIdImageUrls = {};
+        hasAbsentSchedule = false;
 
         static $inject = [
             "eventApi",
@@ -19,17 +20,20 @@
             private scheduleApi: ScheduleService,
             private talkApi: TalkService,
             private localStorageService: ng.local.storage.ILocalStorageService) {
+            
+        }
 
-            var cachedSchedule = localStorageService.get<Server.Schedule>(ScheduleController.scheduleCacheKey);
+        $onInit() {
+            var cachedSchedule = this.localStorageService.get<Server.Schedule>(ScheduleController.scheduleCacheKey);
             if (cachedSchedule) {
                 this.scheduleLoaded(cachedSchedule);
             }
 
-            eventApi.getMostRecentEvent()
+            this.eventApi.getMostRecentEvent()
                 .then(e => {
                     this.event = e;
                     this.talks.fetch();
-                    scheduleApi.getScheduleForEvent(e.id)
+                    this.scheduleApi.getScheduleForEvent(e.id)
                         .then(s => this.scheduleLoaded(s));
                 });
         }
@@ -42,13 +46,16 @@
             return this.talkApi.getTalks(this.event.id);
         }
 
-        scheduleLoaded(schedule: Server.Schedule) {
+        scheduleLoaded(schedule: Server.Schedule | null) {
             this.schedule = schedule;
-            this.schedule.timeslots.sort((a, b) => a.start > b.start ? 1 : a.start < b.start ? -1 : 0);
-            this.schedule.timeslots.forEach(t => {
-                t.items.sort((first, second) => first.room > second.room ? 1 : first.room < second.room ? -1 : 0);
-            });
-            this.localStorageService.set(ScheduleController.scheduleCacheKey, schedule);
+            this.hasAbsentSchedule = !schedule;
+            if (this.schedule) {
+                this.schedule.timeslots.sort((a, b) => a.start > b.start ? 1 : a.start < b.start ? -1 : 0);
+                this.schedule.timeslots.forEach(t => {
+                    t.items.sort((first, second) => first.room > second.room ? 1 : first.room < second.room ? -1 : 0);
+                });
+                this.localStorageService.set(ScheduleController.scheduleCacheKey, schedule);
+            }
         }
 
         print() {

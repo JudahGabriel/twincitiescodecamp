@@ -13,17 +13,24 @@
             { value: TalkApproval.Rejected, name: "Rejected", collection: this.rejectedSubmissions },
         ];
         isSaving = false;
+        readonly eventId: string;
 
         static $inject = [
-            "isUserAdmin",
-            "talkApi"
+            "isUserAdmin",          
+            "talkApi",
+            "$routeParams"
         ];
 
         constructor(
-            isUserAdmin: boolean,
-            private talkApi: TalkService) {
+            private isUserAdmin: boolean,
+            private talkApi: TalkService,
+            $routeParams) {
 
-            if (!isUserAdmin) {
+            this.eventId = "events/" + $routeParams["eventNumber"];
+        }
+
+        $onInit() {
+            if (!this.isUserAdmin) {
                 window.location.href = "/account/login";
             }
 
@@ -58,7 +65,7 @@
         }
 
         fetchSubmissions() {
-            this.talkApi.getSubmissions()
+            this.talkApi.getSubmissions(this.eventId)
                 .then(results => {
                     this.pendingSubmissions.push(...results.filter(t => t.status === TalkApproval.Pending));
                     this.approvedSubmissions.push(...results.filter(t => t.status === TalkApproval.Approved));

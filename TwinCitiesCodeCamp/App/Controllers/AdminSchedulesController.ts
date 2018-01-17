@@ -13,8 +13,10 @@
         constructor(
             private scheduleApi: ScheduleService,
             private talkApi: TalkService) {
+        }
 
-            scheduleApi.getAll()
+        $onInit() {
+            this.scheduleApi.getAll()
                 .then(results => {
                     this.schedules = results;
                     this.setSelectedSchedule(results[0]);

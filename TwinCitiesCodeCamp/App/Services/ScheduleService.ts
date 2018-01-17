@@ -6,9 +6,9 @@
         constructor(private apiService: ApiService) {
         }
 
-        getScheduleForEvent(eventId: string): ng.IPromise<Schedule> {
+        getScheduleForEvent(eventId: string): ng.IPromise<Schedule | null> {
             var args = { eventId: eventId };
-            var selector = (s: Server.Schedule) => new Schedule(s);
+            var selector = (s: Server.Schedule | null) => s ? new Schedule(s) : null;
             return this.apiService.query("/schedules/getscheduleforevent", args, selector);
         }
 

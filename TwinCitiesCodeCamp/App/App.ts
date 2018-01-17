@@ -33,7 +33,7 @@
             .when("/register/notopened", { templateUrl: "/App/Views/RegistrationNotOpened.html" })
             //.when("/callforspeakers", { templateUrl: "/App/Views/CallForSpeakers.html" })
             .when("/callforspeakers", { templateUrl: "/App/Views/SubmitTalk.html" })
-            .when("/admin/talks", { templateUrl: "/App/Views/AdminTalks.html" })
+            .when("/admin/events/:eventNumber/talks", { templateUrl: "/App/Views/AdminTalks.html" })
             .when("/admin/sponsors", { templateUrl: "/App/Views/AdminSponsors.html" })
             .when("/admin/schedules", { templateUrl: "/App/Views/AdminSchedules.html" })
             .otherwise({ redirectTo: "/home" });

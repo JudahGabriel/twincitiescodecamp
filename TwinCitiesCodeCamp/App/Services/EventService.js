@@ -1,6 +1,6 @@
 var Tccc;
 (function (Tccc) {
-    var EventService = (function () {
+    var EventService = /** @class */ (function () {
         function EventService(apiService, localStorageService, $q) {
             this.apiService = apiService;
             this.localStorageService = localStorageService;
@@ -33,14 +33,14 @@ var Tccc;
             var selector = function (events) { return events.map(function (e) { return new Tccc.Event(e); }); };
             return this.apiService.query("/events/getall", null, selector);
         };
+        EventService.$inject = [
+            "apiService",
+            "localStorageService",
+            "$q"
+        ];
+        EventService.mostRecentEventCacheKey = "mostRecentEvent";
         return EventService;
     }());
-    EventService.$inject = [
-        "apiService",
-        "localStorageService",
-        "$q"
-    ];
-    EventService.mostRecentEventCacheKey = "mostRecentEvent";
     Tccc.EventService = EventService;
     Tccc.App.service("eventApi", EventService);
 })(Tccc || (Tccc = {}));

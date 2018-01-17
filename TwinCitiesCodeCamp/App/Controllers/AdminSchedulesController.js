@@ -1,19 +1,21 @@
 var Tccc;
 (function (Tccc) {
-    var AdminSchedulesController = (function () {
+    var AdminSchedulesController = /** @class */ (function () {
         function AdminSchedulesController(scheduleApi, talkApi) {
-            var _this = this;
             this.scheduleApi = scheduleApi;
             this.talkApi = talkApi;
             this.schedules = [];
             this.selectedSchedule = null;
             this.talks = [];
-            scheduleApi.getAll()
+        }
+        AdminSchedulesController.prototype.$onInit = function () {
+            var _this = this;
+            this.scheduleApi.getAll()
                 .then(function (results) {
                 _this.schedules = results;
                 _this.setSelectedSchedule(results[0]);
             });
-        }
+        };
         AdminSchedulesController.prototype.addSchedule = function () {
             var newSched = Tccc.Schedule.empty();
             this.schedules.push(newSched);
@@ -74,12 +76,12 @@ var Tccc;
                 }
             }
         };
+        AdminSchedulesController.$inject = [
+            "scheduleApi",
+            "talkApi"
+        ];
         return AdminSchedulesController;
     }());
-    AdminSchedulesController.$inject = [
-        "scheduleApi",
-        "talkApi"
-    ];
     Tccc.AdminSchedulesController = AdminSchedulesController;
     Tccc.App.controller("AdminSchedulesController", AdminSchedulesController);
 })(Tccc || (Tccc = {}));

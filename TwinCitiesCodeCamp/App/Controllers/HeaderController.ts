@@ -5,11 +5,9 @@
         static $inject = ["eventApi", "localStorageService"];
 
         constructor(
-            eventApi: EventService,
+            private eventApi: EventService,
             private localStorageService: ng.local.storage.ILocalStorageService) {
-
-            eventApi.getMostRecentEvent()
-                .then(e => this.event = e);
+            
         }
 
         get eventDateFriendly(): string {
@@ -18,6 +16,11 @@
             }
 
             return "";
+        }
+
+        $onInit() {
+            this.eventApi.getMostRecentEvent()
+                .then(e => this.event = e);
         }
     }
 

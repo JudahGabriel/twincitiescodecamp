@@ -5,7 +5,11 @@
         static $inject = ["eventApi"];
 
         constructor(private eventApi: EventService) {
-            eventApi.getAll()
+            
+        }
+
+        $onInit() {
+            this.eventApi.getAll()
                 .then(events => this.allEvents = events);
         }
     }

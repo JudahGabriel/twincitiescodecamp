@@ -20,7 +20,7 @@ namespace TwinCitiesCodeCamp.Controllers
             using (DbSession.Advanced.DocumentStore.AggressivelyCacheFor(TimeSpan.FromDays(7)))
             { 
                 return DbSession.Query<Schedule>()
-                    .FirstAsync(s => s.EventId == eventId);
+                    .FirstOrDefaultAsync(s => s.EventId == eventId);
             }
         }
 

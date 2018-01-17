@@ -5,10 +5,11 @@
         currentSponsor: Sponsor | null = null;
         mostRecentEventId: string | null = null;
         sponsorshipLevels = [
+            { name: "Diamond", value: SponsorshipLevel.Diamond },
             { name: "Platinum", value: SponsorshipLevel.Platinum },
             { name: "Gold", value: SponsorshipLevel.Gold },
             { name: "Silver", value: SponsorshipLevel.Silver },
-            { name: "Bronze", value: SponsorshipLevel.Bronze }
+            { name: "Bronze", value: SponsorshipLevel.Bronze },
         ];
 
         static $inject = [
@@ -23,11 +24,13 @@
             private sponsorApi: SponsorService,
             private isUserAdmin: boolean,
             private $sce: ng.ISCEService) {
+        }
 
+        $onInit() {
             this.eventApi.getMostRecentEvent()
                 .then(e => this.mostRecentEventLoaded(e));
 
-            if (!isUserAdmin) {
+            if (!this.isUserAdmin) {
                 window.location.href = "/account/login";
             }
         }

@@ -4,14 +4,25 @@
     </div>
 
     <!--If we're accepting submissions-->
-    <div class="alert alert-info" ng-show="vm.event.isAcceptingTalkSubmissions">
-        <h2>
-            <i class="fa fa-info-circle"></i> Interested in speaking at Twin Cities Code Camp? We're accepting submissions.
-            <br />
-            <br />
-            <a class="btn btn-primary" href="#/callforspeakers">Submit your talk</a>
-        </h2>
-        <p><span>Already submitted a talk? <a href="#/talks/mine">Check if your talk has been approved</a></span></p>
+    <div ng-show="vm.event.isAcceptingTalkSubmissions">
+        <div class="jumbotron">
+            <h1>Submit your talk</h1>
+            <p>
+                <a class="btn btn-primary" href="#/callforspeakers">Submit your talk</a>
+                <a class="btn btn-info" href="#/talks/mine">Check my talk status</a>
+            </p>
+            <p>
+                We’d like to extend the invitation to you to speak at <a ng-href="{{'https://twitter.com/search?q=%23tccc' + vm.event.number}}">#tccc{{vm.event.number}}</a>. The same rules from the previous Twin Cities Code Camp events apply:
+                <ul>
+                    <li>We’ll take as many ideas as we get until midnight, March 4th. After that, we’ll select the sessions and let everyone know if their ideas were accepted or not the following weekend. We'll have 7 rooms available so that means we need 35 sessions. We realize with those who would have to travel that this may be too short of notice, so we’ll try to give those out-of-towners enough notice if their session is in.</li>
+                    <li>Feel free to send us multiple sessions, but please keep in mind we usually have only one session per speaker.</li>
+                    <li>The length of a session is 60 minutes.</li>
+                </ul>
+
+                If you have any questions, reach out to us <a href="https://twitter.com/tccodecamp">on Twitter</a> or <a href="mailto:tccodecamp@gmail.com">email</a>. Also, please spread the word to other individuals that you think may be interested in speaking at this event.
+            </p>
+
+        </div>
     </div>
 
     <!--No talks yet, and we're not yet accepting submissions-->

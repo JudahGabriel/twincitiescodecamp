@@ -1,8 +1,7 @@
 var Tccc;
 (function (Tccc) {
-    var AdminSponsorsController = (function () {
+    var AdminSponsorsController = /** @class */ (function () {
         function AdminSponsorsController(eventApi, sponsorApi, isUserAdmin, $sce) {
-            var _this = this;
             this.eventApi = eventApi;
             this.sponsorApi = sponsorApi;
             this.isUserAdmin = isUserAdmin;
@@ -12,17 +11,21 @@ var Tccc;
             this.currentSponsor = null;
             this.mostRecentEventId = null;
             this.sponsorshipLevels = [
+                { name: "Diamond", value: Tccc.SponsorshipLevel.Diamond },
                 { name: "Platinum", value: Tccc.SponsorshipLevel.Platinum },
                 { name: "Gold", value: Tccc.SponsorshipLevel.Gold },
                 { name: "Silver", value: Tccc.SponsorshipLevel.Silver },
-                { name: "Bronze", value: Tccc.SponsorshipLevel.Bronze }
+                { name: "Bronze", value: Tccc.SponsorshipLevel.Bronze },
             ];
+        }
+        AdminSponsorsController.prototype.$onInit = function () {
+            var _this = this;
             this.eventApi.getMostRecentEvent()
                 .then(function (e) { return _this.mostRecentEventLoaded(e); });
-            if (!isUserAdmin) {
+            if (!this.isUserAdmin) {
                 window.location.href = "/account/login";
             }
-        }
+        };
         AdminSponsorsController.prototype.mostRecentEventLoaded = function (e) {
             var _this = this;
             this.mostRecentEventId = e.id;
@@ -72,14 +75,14 @@ var Tccc;
                     .finally(function () { return _this.isSaving = false; });
             }
         };
+        AdminSponsorsController.$inject = [
+            "eventApi",
+            "sponsorApi",
+            "isUserAdmin",
+            "$sce"
+        ];
         return AdminSponsorsController;
     }());
-    AdminSponsorsController.$inject = [
-        "eventApi",
-        "sponsorApi",
-        "isUserAdmin",
-        "$sce"
-    ];
     Tccc.AdminSponsorsController = AdminSponsorsController;
     Tccc.App.controller("AdminSponsorsController", AdminSponsorsController);
 })(Tccc || (Tccc = {}));

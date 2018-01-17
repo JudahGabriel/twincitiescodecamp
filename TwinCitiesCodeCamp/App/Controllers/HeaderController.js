@@ -1,12 +1,10 @@
 var Tccc;
 (function (Tccc) {
-    var HeaderController = (function () {
+    var HeaderController = /** @class */ (function () {
         function HeaderController(eventApi, localStorageService) {
-            var _this = this;
+            this.eventApi = eventApi;
             this.localStorageService = localStorageService;
             this.event = null;
-            eventApi.getMostRecentEvent()
-                .then(function (e) { return _this.event = e; });
         }
         Object.defineProperty(HeaderController.prototype, "eventDateFriendly", {
             get: function () {
@@ -18,9 +16,14 @@ var Tccc;
             enumerable: true,
             configurable: true
         });
+        HeaderController.prototype.$onInit = function () {
+            var _this = this;
+            this.eventApi.getMostRecentEvent()
+                .then(function (e) { return _this.event = e; });
+        };
+        HeaderController.$inject = ["eventApi", "localStorageService"];
         return HeaderController;
     }());
-    HeaderController.$inject = ["eventApi", "localStorageService"];
     Tccc.HeaderController = HeaderController;
     Tccc.App.controller("HeaderController", HeaderController);
 })(Tccc || (Tccc = {}));

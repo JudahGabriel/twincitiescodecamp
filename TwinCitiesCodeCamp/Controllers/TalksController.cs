@@ -53,9 +53,10 @@ namespace TwinCitiesCodeCamp.Controllers
         [Route("getSubmissions")]
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public Task<IList<TalkSubmission>> GetSubmissions()
+        public Task<IList<TalkSubmission>> GetSubmissions(string eventId)
         {
             return DbSession.Query<TalkSubmission>()
+                .Where(s => s.EventId == eventId)
                 .ToListAsync();
         }
 

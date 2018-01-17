@@ -1,6 +1,6 @@
 var Tccc;
 (function (Tccc) {
-    var ApiService = (function () {
+    var ApiService = /** @class */ (function () {
         function ApiService(loadingProgress, $http, $q) {
             this.loadingProgress = loadingProgress;
             this.$http = $http;
@@ -71,9 +71,9 @@ var Tccc;
             //        .result.finally(() => this.isShowingApiError = false);
             //}
         };
+        ApiService.$inject = ["loadingProgress", "$http", "$q"];
         return ApiService;
     }());
-    ApiService.$inject = ["loadingProgress", "$http", "$q"];
     Tccc.ApiService = ApiService;
     Tccc.App.service("apiService", ApiService);
 })(Tccc || (Tccc = {}));

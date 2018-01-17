@@ -1,6 +1,6 @@
 var Tccc;
 (function (Tccc) {
-    var Event = (function () {
+    var Event = /** @class */ (function () {
         function Event(serverObj) {
             if (serverObj) {
                 angular.copy(serverObj, this);

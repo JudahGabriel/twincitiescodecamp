@@ -10,7 +10,9 @@
         constructor(
             private isSignedIn: boolean,
             private talkApi: TalkService) {
+        }
 
+        $onInit() {
             this.submissions.fetch();
         }
     }

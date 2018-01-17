@@ -1,6 +1,6 @@
 var Tccc;
 (function (Tccc) {
-    var ScheduleTimeslot = (function () {
+    var ScheduleTimeslot = /** @class */ (function () {
         function ScheduleTimeslot(serverObj) {
             angular.copy(serverObj, this);
             this.items = serverObj.items.map(function (i) { return new Tccc.ScheduleItem(i); });

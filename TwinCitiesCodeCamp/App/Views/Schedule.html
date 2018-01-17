@@ -1,13 +1,24 @@
 ﻿<section class="schedule-page" ng-controller="ScheduleController as vm">
     <div class="page-header">
-        <h1><strong>Schedule</strong> - #tcc{{vm.event.number}}</h1>
+        <h1><strong>Schedule</strong> - #tccc{{vm.event.number}}</h1>
         <a href="#/schedule/printable"><i class="fa fa-print"></i> Printable schedule</a>
     </div>
     <p>
         
     </p>
 
-    <div class="schedule">
+    <!--No schedule yet-->
+    <div class="alert alert-info" ng-show="vm.hasAbsentSchedule">
+        <h2>
+            <i class="fa fa-info-circle"></i> You're early!
+        </h2>
+        <p>
+            No schedule yet for #tccc{{vm.event.number}}. Check back later.
+        </p>
+        <a href="#" class="alert-link" ng-href="{{'#/events/' + (vm.event.number - 1) + '/talks'}}">View talks from last event</a>
+    </div>
+
+    <div class="schedule" ng-show="vm.schedule.timeslots.length">
         <div class="timeslot" ng-repeat="timeslot in vm.schedule.timeslots">
             <h1 class="time">{{timeslot.startFriendly}}</h1>
             <div class="well item" ng-repeat="item in timeslot.items">

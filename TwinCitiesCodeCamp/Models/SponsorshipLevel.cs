@@ -7,6 +7,7 @@ namespace TwinCitiesCodeCamp.Models
 {
     public enum SponsorshipLevel
     {
+        Diamond,
         Platinum,
         Gold,
         Silver,

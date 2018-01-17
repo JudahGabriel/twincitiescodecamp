@@ -39,6 +39,10 @@
                 this.submission.authorBio;
         }
 
+        $onInit() {
+
+        }
+
         save() {
             if (!this.isSaving && this.isValid) {
                 this.submissionSuccessful = false;

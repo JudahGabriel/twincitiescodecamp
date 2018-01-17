@@ -1,6 +1,6 @@
 var Tccc;
 (function (Tccc) {
-    var Sponsor = (function () {
+    var Sponsor = /** @class */ (function () {
         function Sponsor(serverObj, $sce) {
             angular.copy(serverObj, this);
             if (this.about) {

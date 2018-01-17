@@ -1,6 +1,6 @@
 var Tccc;
 (function (Tccc) {
-    var TalkService = (function () {
+    var TalkService = /** @class */ (function () {
         function TalkService(apiService) {
             this.apiService = apiService;
         }
@@ -17,8 +17,11 @@ var Tccc;
         TalkService.prototype.submitTalk = function (talk) {
             return this.apiService.post("/talks/submit", talk);
         };
-        TalkService.prototype.getSubmissions = function () {
-            return this.apiService.query("/talks/getSubmissions");
+        TalkService.prototype.getSubmissions = function (eventId) {
+            var args = {
+                eventId: eventId
+            };
+            return this.apiService.query("/talks/getSubmissions", args);
         };
         TalkService.prototype.getMySubmissions = function () {
             return this.apiService.query("/talks/getMySubmissions");
@@ -29,9 +32,9 @@ var Tccc;
         TalkService.prototype.reject = function (talkSubmissionId) {
             return this.apiService.post("/talks/reject?talkSubmissionId=" + talkSubmissionId, null);
         };
+        TalkService.$inject = ["apiService"];
         return TalkService;
     }());
-    TalkService.$inject = ["apiService"];
     Tccc.TalkService = TalkService;
     Tccc.App.service("talkApi", TalkService);
 })(Tccc || (Tccc = {}));

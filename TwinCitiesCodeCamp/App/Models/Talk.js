@@ -1,6 +1,6 @@
 var Tccc;
 (function (Tccc) {
-    var Talk = (function () {
+    var Talk = /** @class */ (function () {
         function Talk(serverObj) {
             angular.copy(serverObj, this);
         }

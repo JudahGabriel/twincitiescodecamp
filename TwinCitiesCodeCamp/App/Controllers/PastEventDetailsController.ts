@@ -6,11 +6,18 @@
 
         static $inject = ["talkApi", "eventApi", "$routeParams"];
 
-        constructor(talkApi: TalkService, eventApi: EventService, $routeParams: ng.route.IRouteParamsService) {
-            var rawId = $routeParams["id"];
+        constructor(
+            private talkApi: TalkService,
+            private eventApi: EventService,
+            private $routeParams: ng.route.IRouteParamsService) {
+            
+        }
+
+        $onInit() {
+            var rawId = this.$routeParams["id"];
             var eventId = `Events/${rawId}`;
-            talkApi.getTalks(eventId).then(results => this.talks = results);
-            eventApi.getEvent(eventId).then(results => this.event = results);
+            this.talkApi.getTalks(eventId).then(results => this.talks = results);
+            this.eventApi.getEvent(eventId).then(results => this.event = results);
         }
     }
 

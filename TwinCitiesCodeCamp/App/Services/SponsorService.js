@@ -1,6 +1,6 @@
 var Tccc;
 (function (Tccc) {
-    var SponsorService = (function () {
+    var SponsorService = /** @class */ (function () {
         function SponsorService(apiService, $sce) {
             this.apiService = apiService;
             this.$sce = $sce;
@@ -17,9 +17,9 @@ var Tccc;
         SponsorService.prototype.delete = function (sponsorId) {
             return this.apiService.post("/sponsors/delete?sponsorId=" + sponsorId, null);
         };
+        SponsorService.$inject = ["apiService", "$sce"];
         return SponsorService;
     }());
-    SponsorService.$inject = ["apiService", "$sce"];
     Tccc.SponsorService = SponsorService;
     Tccc.App.service("sponsorApi", SponsorService);
 })(Tccc || (Tccc = {}));

@@ -22,8 +22,11 @@
             return this.apiService.post("/talks/submit", talk);
         }
 
-        getSubmissions(): ng.IPromise<Server.TalkSubmission[]> {
-            return this.apiService.query("/talks/getSubmissions");
+        getSubmissions(eventId: string): ng.IPromise<Server.TalkSubmission[]> {
+            var args = {
+                eventId: eventId
+            };
+            return this.apiService.query("/talks/getSubmissions", args);
         }
 
         getMySubmissions(): ng.IPromise<Server.TalkSubmission[]> {

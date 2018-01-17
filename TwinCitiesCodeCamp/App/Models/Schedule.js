@@ -1,6 +1,6 @@
 var Tccc;
 (function (Tccc) {
-    var Schedule = (function () {
+    var Schedule = /** @class */ (function () {
         function Schedule(serverObj) {
             this.isSaving = false;
             angular.copy(serverObj, this);

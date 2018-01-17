@@ -290,26 +290,6 @@ header .content .title .fa-code {
   padding: 7px;
   text-align: center;
   margin-bottom: 10px;
-}
-.sponsorship-opportunities-page .sponsorship-level.silver {
-  background-color: #f2f2f2;
-  color: #1e242a;
-}
-.sponsorship-opportunities-page .sponsorship-level.silver small {
-  color: darkgray;
-}
-.sponsorship-opportunities-page .sponsorship-level.silver .list-unstyled li {
-  color: #757f91;
-}
-.sponsorship-opportunities-page .sponsorship-level.gold {
-  background-color: #0d3c59;
-  color: white;
-}
-.sponsorship-opportunities-page .sponsorship-level.platinum {
-  background-color: #0d3c59;
-  color: white;
-}
-.sponsorship-opportunities-page .sponsorship-level.diamond {
   background-color: #0d3c59;
   color: white;
 }

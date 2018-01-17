@@ -14,15 +14,17 @@
         constructor(
             private eventApi: EventService,
             private talkApi: TalkService,
-            $routeParams: ng.route.IRouteParamsService) {
+            private $routeParams: ng.route.IRouteParamsService) {
             
             this.eventId = $routeParams["eventId"];
             const talksCacheKey = TalksController.talksCacheKey + this.eventId;
-            this.talks = new List<Talk>(() => this.fetchTalks(`Events/${this.eventId}`), talksCacheKey);
-            this.talks.fetch();
+            this.talks = new List<Talk>(() => this.fetchTalks(`Events/${this.eventId}`), talksCacheKey);            
+        }
 
-            eventApi.getEvent(`Events/${this.eventId}`)
+        $onInit() {
+            this.eventApi.getEvent(`events/${this.eventId}`)
                 .then(loadedEvent => this.event = loadedEvent);
+            this.talks.fetch();
         }
 
         fetchTalks(eventId: string): ng.IPromise<Talk[]> {

@@ -5,12 +5,15 @@
         static $inject = ["eventApi"];
 
         constructor(private eventApi: EventService) {
-            eventApi.getMostRecentEvent()
-                .then(e => this.event = e);
         }
 
         get escapedAddress(): string {
             return this.event ? encodeURIComponent(this.event.address) : "";
+        }
+
+        $onInit() {
+            this.eventApi.getMostRecentEvent()
+                .then(e => this.event = e);
         }
     }
 

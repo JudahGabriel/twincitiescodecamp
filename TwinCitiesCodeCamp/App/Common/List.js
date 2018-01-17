@@ -3,7 +3,7 @@ var Tccc;
     /**
      * A list that fetches its items asynchronously. Provides optional caching via local storage.
      */
-    var List = (function () {
+    var List = /** @class */ (function () {
         function List(fetcher, cacheKey) {
             this.fetcher = fetcher;
             this.cacheKey = cacheKey;

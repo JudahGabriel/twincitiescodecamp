@@ -1,7 +1,8 @@
 var Tccc;
 (function (Tccc) {
-    var AdminSubmissionsController = (function () {
-        function AdminSubmissionsController(isUserAdmin, talkApi) {
+    var AdminSubmissionsController = /** @class */ (function () {
+        function AdminSubmissionsController(isUserAdmin, talkApi, $routeParams) {
+            this.isUserAdmin = isUserAdmin;
             this.talkApi = talkApi;
             this.totalTalks = 0;
             this.pendingSubmissions = [];
@@ -15,11 +16,14 @@ var Tccc;
                 { value: Tccc.TalkApproval.Rejected, name: "Rejected", collection: this.rejectedSubmissions },
             ];
             this.isSaving = false;
-            if (!isUserAdmin) {
+            this.eventId = "events/" + $routeParams["eventNumber"];
+        }
+        AdminSubmissionsController.prototype.$onInit = function () {
+            if (!this.isUserAdmin) {
                 window.location.href = "/account/login";
             }
             this.fetchSubmissions();
-        }
+        };
         Object.defineProperty(AdminSubmissionsController.prototype, "currentTalkEmail", {
             get: function () {
                 return this.currentTalk && this.currentTalk.submittedByUserId ?
@@ -57,7 +61,7 @@ var Tccc;
         });
         AdminSubmissionsController.prototype.fetchSubmissions = function () {
             var _this = this;
-            this.talkApi.getSubmissions()
+            this.talkApi.getSubmissions(this.eventId)
                 .then(function (results) {
                 (_a = _this.pendingSubmissions).push.apply(_a, results.filter(function (t) { return t.status === Tccc.TalkApproval.Pending; }));
                 (_b = _this.approvedSubmissions).push.apply(_b, results.filter(function (t) { return t.status === Tccc.TalkApproval.Approved; }));
@@ -95,12 +99,13 @@ var Tccc;
                 }
             }
         };
+        AdminSubmissionsController.$inject = [
+            "isUserAdmin",
+            "talkApi",
+            "$routeParams"
+        ];
         return AdminSubmissionsController;
     }());
-    AdminSubmissionsController.$inject = [
-        "isUserAdmin",
-        "talkApi"
-    ];
     Tccc.AdminSubmissionsController = AdminSubmissionsController;
     Tccc.App.controller("AdminSubmissionsController", AdminSubmissionsController);
 })(Tccc || (Tccc = {}));

@@ -6,14 +6,16 @@
 
         constructor(
             private talkApi: TalkService,
-            $sce: ng.ISCEService,
-            $routeParams: ng.route.IRouteParamsService) {
+            private $sce: ng.ISCEService,
+            private $routeParams: ng.route.IRouteParamsService) {
+        }
 
-            var talkId = $routeParams["id"];
-            talkApi.get("Talks/" + talkId).then(talk => {
+        $onInit() {
+            var talkId = this.$routeParams["id"];
+            this.talkApi.get("Talks/" + talkId).then(talk => {
                 this.talk = talk;
-                this.talk.htmlSafeAbstract = $sce.trustAsHtml(talk.abstract);
-                this.talk.htmlSafeBio = $sce.trustAsHtml(talk.authorBio);
+                this.talk.htmlSafeAbstract = this.$sce.trustAsHtml(talk.abstract);
+                this.talk.htmlSafeBio = this.$sce.trustAsHtml(talk.authorBio);
             });
         }
     }

@@ -1,6 +1,6 @@
 var Tccc;
 (function (Tccc) {
-    var SubmitTalkController = (function () {
+    var SubmitTalkController = /** @class */ (function () {
         function SubmitTalkController(isSignedIn, talkApi) {
             this.isSignedIn = isSignedIn;
             this.talkApi = talkApi;
@@ -34,6 +34,8 @@ var Tccc;
             enumerable: true,
             configurable: true
         });
+        SubmitTalkController.prototype.$onInit = function () {
+        };
         SubmitTalkController.prototype.save = function () {
             var _this = this;
             if (!this.isSaving && this.isValid) {
@@ -46,13 +48,13 @@ var Tccc;
                     .finally(function () { return _this.isSaving = false; });
             }
         };
+        SubmitTalkController.$inject = [
+            "isSignedIn",
+            "talkApi",
+            "eventApi"
+        ];
         return SubmitTalkController;
     }());
-    SubmitTalkController.$inject = [
-        "isSignedIn",
-        "talkApi",
-        "eventApi"
-    ];
     Tccc.SubmitTalkController = SubmitTalkController;
     Tccc.App.controller("SubmitTalkController", SubmitTalkController);
 })(Tccc || (Tccc = {}));

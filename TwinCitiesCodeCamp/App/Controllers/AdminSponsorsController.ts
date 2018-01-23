@@ -3,7 +3,7 @@
         sponsors: Sponsor[] = [];
         isSaving = false;
         currentSponsor: Sponsor | null = null;
-        mostRecentEventId: string | null = null;
+        readonly eventId: string;
         sponsorshipLevels = [
             { name: "Diamond", value: SponsorshipLevel.Diamond },
             { name: "Platinum", value: SponsorshipLevel.Platinum },
@@ -16,28 +16,23 @@
             "eventApi",
             "sponsorApi",
             "isUserAdmin",
-            "$sce"
+            "$sce",
+            "$routeParams"
         ];
 
         constructor(
             private eventApi: EventService,
             private sponsorApi: SponsorService,
             private isUserAdmin: boolean,
-            private $sce: ng.ISCEService) {
+            private $sce: ng.ISCEService,
+            private $routeParams: ng.route.IRouteParamsService) {
+
+            const eventNumber = $routeParams["eventNumber"];
+            this.eventId = `events/${eventNumber}`;
         }
 
         $onInit() {
-            this.eventApi.getMostRecentEvent()
-                .then(e => this.mostRecentEventLoaded(e));
-
-            if (!this.isUserAdmin) {
-                window.location.href = "/account/login";
-            }
-        }
-
-        mostRecentEventLoaded(e: Event) {
-            this.mostRecentEventId = e.id;
-            this.sponsorApi.getSponsorsForEvent(e.id)
+            this.sponsorApi.getSponsorsForEvent(this.eventId)
                 .then(results => {
                     this.sponsors = results;
                     this.currentSponsor = results[0];
@@ -45,11 +40,11 @@
         }
 
         addSponsor() {
-            if (this.mostRecentEventId) {
+            if (this.eventId) {
                 var newSponsor = new Sponsor({
                     about: "",
                     createDate: moment().toISOString(),
-                    eventId: this.mostRecentEventId,
+                    eventId: this.eventId,
                     id: null,
                     level: SponsorshipLevel.Bronze,
                     logo: "",

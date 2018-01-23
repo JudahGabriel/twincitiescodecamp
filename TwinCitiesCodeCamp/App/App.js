@@ -29,18 +29,22 @@ var Tccc;
                 .when("/talks/mine", { templateUrl: "/App/Views/MyTalks.html" })
                 .when("/talks/:id", { templateUrl: "/App/Views/TalkProfile.html" })
                 .when("/policies", { templateUrl: "/App/Views/Policies.html" })
-                .when("/register/notopened", { templateUrl: "/App/Views/RegistrationNotOpened.html" })
+                .when("/register/notopened", { templateUrl: "/App/Views/RegistrationNotOpened.html" }) // use this as the registration link when the event isn't opened for registration
                 .when("/callforspeakers", { templateUrl: "/App/Views/SubmitTalk.html" })
+                .when("/admin", { redirectTo: "/admin/events" })
+                .when("/admin/events", { templateUrl: "/App/Views/AdminEvents.html" })
                 .when("/admin/events/:eventNumber/talks", { templateUrl: "/App/Views/AdminTalks.html" })
-                .when("/admin/sponsors", { templateUrl: "/App/Views/AdminSponsors.html" })
-                .when("/admin/schedules", { templateUrl: "/App/Views/AdminSchedules.html" })
+                .when("/admin/events/:eventNumber/sponsors", { templateUrl: "/App/Views/AdminSponsors.html" })
+                .when("/admin/events/:eventNumber/schedule", { templateUrl: "/App/Views/AdminSchedules.html" })
                 .otherwise({ redirectTo: "/home" });
         }]);
     // Store the partials and modals as constants. These values will be cache-busted by the build. See AngularViewCacheBuster.cs
     var partials = {
         header: "/App/Views/Header.html",
+        adminNav: "/App/Views/AdminNav.html"
     };
     Tccc.App.constant("partials", partials);
+    Tccc.Partials = partials; // Needed for component registration
     // Store some initialization config passedin from Razor as Angular constants for use in our controllers.
     var homeViewModel = window["Tccc.HomeViewModel"];
     if (homeViewModel) {
@@ -51,13 +55,22 @@ var Tccc;
     }
     Tccc.App.run([
         "partials",
+        "isUserAdmin",
+        "$location",
         "$rootScope",
-        function (partials, $rootScope) {
-            // Attach the names of the partials to the root scope so that we can refer to them in the views.
-            // This allows us to bust invalidated view caches while still refering to these partials inside other views.
-            for (var prop in partials) {
-                $rootScope[prop] = partials[prop];
-            }
+        function (partials, isUserAdmin, $location, $rootScope) {
+            $rootScope["Partials"] = partials;
+            var adminRoute = "/admin";
+            $rootScope.$on("$routeChangeStart", function (_e, next) {
+                var path = ($location.path() || "").toLowerCase();
+                var route = next["$$route"];
+                // If we're not signed in, we can only access anonymous paths.
+                if (route && path.includes(adminRoute)) {
+                    if (!isUserAdmin) {
+                        window.location.href = "/account/login";
+                    }
+                }
+            });
         }
     ]);
     function goLlamas() {

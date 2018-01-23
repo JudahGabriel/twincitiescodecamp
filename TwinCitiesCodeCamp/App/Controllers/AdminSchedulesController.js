@@ -1,42 +1,47 @@
 var Tccc;
 (function (Tccc) {
     var AdminSchedulesController = /** @class */ (function () {
-        function AdminSchedulesController(scheduleApi, talkApi) {
+        function AdminSchedulesController(scheduleApi, talkApi, $routeParams) {
             this.scheduleApi = scheduleApi;
             this.talkApi = talkApi;
-            this.schedules = [];
-            this.selectedSchedule = null;
+            this.$routeParams = $routeParams;
+            this.hasLoadedSchedule = false;
             this.talks = [];
+            var eventNumber = $routeParams["eventNumber"];
+            this.eventId = "events/" + eventNumber;
         }
+        Object.defineProperty(AdminSchedulesController.prototype, "canAddSchedule", {
+            get: function () {
+                return this.hasLoadedSchedule && !this.schedule;
+            },
+            enumerable: true,
+            configurable: true
+        });
         AdminSchedulesController.prototype.$onInit = function () {
             var _this = this;
-            this.scheduleApi.getAll()
-                .then(function (results) {
-                _this.schedules = results;
-                _this.setSelectedSchedule(results[0]);
+            this.loadTalksForEvent();
+            this.scheduleApi.getScheduleForEvent(this.eventId)
+                .then(function (result) {
+                _this.hasLoadedSchedule = true;
+                _this.schedule = result;
             });
         };
         AdminSchedulesController.prototype.addSchedule = function () {
-            var newSched = Tccc.Schedule.empty();
-            this.schedules.push(newSched);
-            this.selectedSchedule = newSched;
-        };
-        AdminSchedulesController.prototype.setSelectedSchedule = function (schedule) {
-            var _this = this;
-            this.selectedSchedule = schedule;
-            this.talks = [];
-            if (schedule) {
-                this.talkApi.getTalks(schedule.eventId)
-                    .then(function (results) {
-                    if (_this.selectedSchedule === schedule) {
-                        _this.talks = results.sort(function (a, b) { return a.title.localeCompare(b.title); });
-                    }
-                });
+            if (this.hasLoadedSchedule && !this.schedule) {
+                var newSched = Tccc.Schedule.empty();
+                newSched.eventId = this.eventId;
+                this.schedule = newSched;
+                this.loadTalksForEvent();
             }
         };
+        AdminSchedulesController.prototype.loadTalksForEvent = function () {
+            var _this = this;
+            this.talkApi.getTalks(this.eventId)
+                .then(function (results) { return _this.talks = results.sort(function (a, b) { return a.title.localeCompare(b.title); }); });
+        };
         AdminSchedulesController.prototype.addTimeslot = function () {
-            if (this.selectedSchedule) {
-                this.selectedSchedule.timeslots.push(new Tccc.ScheduleTimeslot({
+            if (this.schedule) {
+                this.schedule.timeslots.push(new Tccc.ScheduleTimeslot({
                     start: 0,
                     duration: 0,
                     items: []
@@ -44,8 +49,8 @@ var Tccc;
             }
         };
         AdminSchedulesController.prototype.removeTimeslot = function (timeslot) {
-            if (this.selectedSchedule) {
-                _.pull(this.selectedSchedule.timeslots, timeslot);
+            if (this.schedule) {
+                _.pull(this.schedule.timeslots, timeslot);
             }
         };
         AdminSchedulesController.prototype.addTimeslotItem = function (timeslot) {
@@ -59,12 +64,13 @@ var Tccc;
         AdminSchedulesController.prototype.removeTimeslotItem = function (item, timeslot) {
             _.pull(timeslot.items, item);
         };
-        AdminSchedulesController.prototype.saveSchedule = function (schedule) {
-            if (!schedule.isSaving) {
-                schedule.isSaving = true;
-                this.scheduleApi.save(schedule)
-                    .then(function (result) { return angular.merge(schedule, result); })
-                    .finally(function () { return schedule.isSaving = false; });
+        AdminSchedulesController.prototype.saveSchedule = function () {
+            var _this = this;
+            if (this.schedule && !this.schedule.isSaving) {
+                this.schedule.isSaving = true;
+                this.scheduleApi.save(this.schedule)
+                    .then(function (result) { return angular.merge(_this.schedule, result); })
+                    .finally(function () { return _this.schedule.isSaving = false; });
             }
         };
         AdminSchedulesController.prototype.talkSetForTimeslotItem = function (item) {
@@ -78,7 +84,8 @@ var Tccc;
         };
         AdminSchedulesController.$inject = [
             "scheduleApi",
-            "talkApi"
+            "talkApi",
+            "$routeParams"
         ];
         return AdminSchedulesController;
     }());

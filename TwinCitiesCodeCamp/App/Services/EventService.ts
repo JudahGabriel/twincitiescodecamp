@@ -41,9 +41,16 @@
             return this.apiService.query("/events/get", args, selector);
         }
 
-        getAll(): ng.IPromise<Event[]> {
+        getAll(descending: boolean = false): ng.IPromise<Event[]> {
+            var args = {
+                descending: descending
+            };
             var selector = (events: Server.Event[]) => events.map(e => new Event(e));
-            return this.apiService.query("/events/getall", null, selector);
+            return this.apiService.query("/events/getall", args, selector);
+        }
+
+        save(event: Event): ng.IPromise<Event> {
+            return this.apiService.post("/events/save", event, (e: Server.Event) => new Event(e));
         }
     }
 

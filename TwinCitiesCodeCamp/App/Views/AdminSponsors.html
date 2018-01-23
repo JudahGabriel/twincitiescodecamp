@@ -1,4 +1,6 @@
 ﻿<section class="admin-submissions" ng-controller="AdminSponsorsController as vm">
+    <admin-nav page="sponsors" event-id="vm.eventId"></admin-nav>
+
     <h2>{{vm.sponsors.length}} sponsors</h2>
     <div class="row">
         <div class="col-xs-12 col-sm-4">
@@ -9,7 +11,7 @@
                 <li role="presentation" ng-repeat="sponsor in vm.sponsors" ng-class="{ active: vm.currentSponsor === sponsor }" ng-click="vm.currentSponsor = sponsor">
                     <a href="javascript:void(0)">
                         {{sponsor.name}}
-                        - 
+                        -
                         <i class="fa fa-circle" ng-style="{ color: sponsor.levelColor }"></i>
                         {{sponsor.levelText}}
                     </a>
@@ -47,9 +49,7 @@
 
                     <div class="form-group">
                         <label>Sponsorship Level</label>
-                        <select class="form-control" ng-model="vm.currentSponsor.level" ng-options="level.value as level.name for level in vm.sponsorshipLevels">
-                            
-                        </select>
+                        <select class="form-control" ng-model="vm.currentSponsor.level" ng-options="level.value as level.name for level in vm.sponsorshipLevels"></select>
                     </div>
 
                     <div class="pull-right">

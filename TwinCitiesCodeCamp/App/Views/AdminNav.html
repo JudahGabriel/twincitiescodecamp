@@ -1,0 +1,49 @@
+﻿<div class="admin-nav">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#/admin">Admin</a>
+        </li>
+        <li>
+            <a href="#/admin/events">Events</a>
+        </li>
+        <li ng-show="vm.eventId && vm.page !== 'events'">
+            <div class="dropdown event-dropdown">
+                <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    {{vm.getEventNameFromId(vm.eventId)}}
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li ng-repeat="ev in vm.events.items" ng-class="{ 'active': vm.isSelectedEvent(ev) }">
+                        <a ng-href="{{::vm.getUrlForEvent(ev)}}">
+                            {{::vm.getEventNameFromId(ev.id)}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="active" ng-show="vm.page === 'talks'">
+            <a ng-href="{{'#/admin/' + vm.eventId + '/talks'}}">Talks</a>
+        </li>
+        <li class="active" ng-show="vm.page === 'sponsors'">
+            <a ng-href="{{'#/admin/' + vm.eventId + '/sponsors'}}">Sponsors</a>
+        </li>
+        <li class="active" ng-show="vm.page === 'schedule'">
+            <a ng-href="{{'#/admin/' + vm.eventId + '/schedule'}}">Schedule</a>
+        </li>
+    </ol>
+
+    <!--<ul class="nav nav-pills">
+        <li ng-class="{ active: vm.page === 'events' }">
+            <a href="#/admin/events">Events</a>
+        </li>
+        <li ng-class="{ active: vm.page === 'talks' }" ng-show="vm.eventId">
+            <a ng-href="{{'#/admin/' + vm.eventId + '/talks'}}">Talks</a>
+        </li>
+        <li ng-class="{ active: vm.page === 'sponsors' }" ng-show="vm.eventId">
+            <a ng-href="{{'#/admin/' + vm.eventId + '/sponsors'}}">Sponsors</a>
+        </li>
+        <li ng-class="{ active: vm.page === 'schedule' }" ng-show="vm.eventId">
+            <a ng-href="{{'#/admin/' + vm.eventId + '/schedule'}}">Schedule</a>
+        </li>
+    </ul>-->
+</div>

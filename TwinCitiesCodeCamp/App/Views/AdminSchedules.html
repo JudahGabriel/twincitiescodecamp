@@ -1,84 +1,74 @@
 ﻿<section ng-controller="AdminSchedulesController as vm">
-    <br />
-    <div class="row">
-        <div class="col-xs-12 col-sm-2">
-            <h3>Schedules</h3>
-            <div class="list-group">
-                <a href="javascript:void(0)" class="list-group-item" ng-repeat="schedule in vm.schedules" ng-class="{ active: vm.selectedSchedule === schedule }" ng-click="vm.setSelectedSchedule(schedule)">
-                    {{schedule.friendlyName}}
-                </a>
-            </div>
+    <admin-nav page="schedule" event-id="vm.eventId"></admin-nav>
 
-            <button class="btn btn-default btn-block" ng-click="vm.addSchedule()">
-                <i class="fa fa-plus"></i>
-                Add schedule
-            </button>
+    <p ng-show="vm.canAddSchedule">
+        <div class="alert alert-info" role="alert">
+            <i class="fa fa-info-circle"></i> There is no schedule for this event. <a href="javascript:void(0)" ng-click="vm.addSchedule()">Create one now</a>.
         </div>
+    </p>
 
-        <div class="col-xs-12 col-sm-10">
-            <h3>Event</h3>
-            <input class="form-control" ng-model="vm.selectedSchedule.eventId" placeholder="Events/21" />
+    <div ng-show="vm.schedule">
+        <h3>Event</h3>
+        <input class="form-control" ng-model="vm.schedule.eventId" placeholder="Events/21" readonly="readonly" />
 
-            <h3>Timeslots</h3>
-            <div class="schedule" ng-show="vm.selectedSchedule">
-                <div class="timeslot" ng-repeat="timeslot in vm.selectedSchedule.timeslots">
-                    <div class="row">
-                        <div class="col-xs-5">
-                            <label>Start</label>
-                            <div class="input-group">
-                                <input class="form-control" type="number" ng-model="timeslot.start" />
-                                <span class="input-group-addon" id="basic-addon2">{{timeslot.startFriendly}}</span>
-                            </div>
-                        </div>
-                        <div class="col-xs-5">
-                            <label>Duration</label>
-                            <div class="input-group">
-                                <input class="form-control" type="number" ng-model="timeslot.duration" />
-                                <span class="input-group-addon" id="basic-addon2">hours</span>
-                            </div>
-                        </div>
-                        <div class="col-xs-offset-1 col-xs-1">
-                            <label>Delete</label>
-                            <button class="btn btn-default" ng-click="vm.removeTimeslot(timeslot)">
-                                <i class="fa fa-trash-o"></i>
-                            </button>
+        <h3>Timeslots</h3>
+        <div class="schedule" ng-show="vm.schedule">
+            <div class="timeslot" ng-repeat="timeslot in vm.schedule.timeslots">
+                <div class="row">
+                    <div class="col-xs-5">
+                        <label>Start</label>
+                        <div class="input-group">
+                            <input class="form-control" type="number" ng-model="timeslot.start" />
+                            <span class="input-group-addon" id="basic-addon2">{{timeslot.startFriendly}}</span>
                         </div>
                     </div>
-                    <br />
-                    <div class="well item" ng-repeat="item in timeslot.items">
-                        <button class="btn btn-default pull-right" ng-click="vm.removeTimeslotItem(item, timeslot)">
+                    <div class="col-xs-5">
+                        <label>Duration</label>
+                        <div class="input-group">
+                            <input class="form-control" type="number" ng-model="timeslot.duration" />
+                            <span class="input-group-addon" id="basic-addon2">hours</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-offset-1 col-xs-1">
+                        <label>Delete</label>
+                        <button class="btn btn-default" ng-click="vm.removeTimeslot(timeslot)">
                             <i class="fa fa-trash-o"></i>
                         </button>
-                        <div class="clearfix"></div>
-                        <input class="form-control" type="text" placeholder="Title" ng-model="item.title" />
-                        <input class="form-control" type="text" placeholder="Room name" ng-model="item.room" />
-                        <input class="form-control" type="text" placeholder="Author" ng-model="item.author" />
-                        <select class="form-control" ng-options="talk.id as talk.title for talk in vm.talks" ng-model="item.talkId" ng-change="vm.talkSetForTimeslotItem(item)">
-                            <option value="">[No talk]</option>
-                        </select>
                     </div>
-                    <button class="btn btn-default btn-block" ng-click="vm.addTimeslotItem(timeslot)">
-                        <i class="fa fa-plus"></i>
-                        Add talk or other item
-                    </button>
-                    <hr />
                 </div>
-
-                <button class="btn btn-block btn-default" ng-click="vm.addTimeslot()">
+                <br />
+                <div class="well item" ng-repeat="item in timeslot.items">
+                    <button class="btn btn-default pull-right" ng-click="vm.removeTimeslotItem(item, timeslot)">
+                        <i class="fa fa-trash-o"></i>
+                    </button>
+                    <div class="clearfix"></div>
+                    <input class="form-control" type="text" placeholder="Title" ng-model="item.title" />
+                    <input class="form-control" type="text" placeholder="Room name" ng-model="item.room" />
+                    <input class="form-control" type="text" placeholder="Author" ng-model="item.author" />
+                    <select class="form-control" ng-options="talk.id as talk.title for talk in vm.talks" ng-model="item.talkId" ng-change="vm.talkSetForTimeslotItem(item)">
+                        <option value="">[No talk]</option>
+                    </select>
+                </div>
+                <button class="btn btn-default btn-block" ng-click="vm.addTimeslotItem(timeslot)">
                     <i class="fa fa-plus"></i>
-                    Add timeslot
+                    Add talk or other item
                 </button>
+                <hr />
             </div>
 
-            <br />
-            <br />
-            <button class="btn btn-primary pull-right btn-lg" ng-click="vm.saveSchedule(vm.selectedSchedule)" ng-disabled="vm.selectedSchedule.isSaving" ng-show="vm.selectedSchedule">
-                <i class="fa fa-save"></i>
-                Save
+            <button class="btn btn-block btn-default" ng-click="vm.addTimeslot()">
+                <i class="fa fa-plus"></i>
+                Add timeslot
             </button>
-            <div class="clearfix"></div>
         </div>
+
+        <br />
+        <br />
+        <button class="btn btn-primary pull-right btn-lg" ng-click="vm.saveSchedule()" ng-disabled="vm.selectedSchedule.isSaving" ng-show="vm.selectedSchedule">
+            <i class="fa fa-save"></i>
+            Save
+        </button>
+        <div class="clearfix"></div>
     </div>
-    
 
 </section>

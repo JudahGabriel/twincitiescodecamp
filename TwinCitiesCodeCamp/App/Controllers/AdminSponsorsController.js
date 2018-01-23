@@ -1,15 +1,15 @@
 var Tccc;
 (function (Tccc) {
     var AdminSponsorsController = /** @class */ (function () {
-        function AdminSponsorsController(eventApi, sponsorApi, isUserAdmin, $sce) {
+        function AdminSponsorsController(eventApi, sponsorApi, isUserAdmin, $sce, $routeParams) {
             this.eventApi = eventApi;
             this.sponsorApi = sponsorApi;
             this.isUserAdmin = isUserAdmin;
             this.$sce = $sce;
+            this.$routeParams = $routeParams;
             this.sponsors = [];
             this.isSaving = false;
             this.currentSponsor = null;
-            this.mostRecentEventId = null;
             this.sponsorshipLevels = [
                 { name: "Diamond", value: Tccc.SponsorshipLevel.Diamond },
                 { name: "Platinum", value: Tccc.SponsorshipLevel.Platinum },
@@ -17,30 +17,23 @@ var Tccc;
                 { name: "Silver", value: Tccc.SponsorshipLevel.Silver },
                 { name: "Bronze", value: Tccc.SponsorshipLevel.Bronze },
             ];
+            var eventNumber = $routeParams["eventNumber"];
+            this.eventId = "events/" + eventNumber;
         }
         AdminSponsorsController.prototype.$onInit = function () {
             var _this = this;
-            this.eventApi.getMostRecentEvent()
-                .then(function (e) { return _this.mostRecentEventLoaded(e); });
-            if (!this.isUserAdmin) {
-                window.location.href = "/account/login";
-            }
-        };
-        AdminSponsorsController.prototype.mostRecentEventLoaded = function (e) {
-            var _this = this;
-            this.mostRecentEventId = e.id;
-            this.sponsorApi.getSponsorsForEvent(e.id)
+            this.sponsorApi.getSponsorsForEvent(this.eventId)
                 .then(function (results) {
                 _this.sponsors = results;
                 _this.currentSponsor = results[0];
             });
         };
         AdminSponsorsController.prototype.addSponsor = function () {
-            if (this.mostRecentEventId) {
+            if (this.eventId) {
                 var newSponsor = new Tccc.Sponsor({
                     about: "",
                     createDate: moment().toISOString(),
-                    eventId: this.mostRecentEventId,
+                    eventId: this.eventId,
                     id: null,
                     level: Tccc.SponsorshipLevel.Bronze,
                     logo: "",
@@ -79,7 +72,8 @@ var Tccc;
             "eventApi",
             "sponsorApi",
             "isUserAdmin",
-            "$sce"
+            "$sce",
+            "$routeParams"
         ];
         return AdminSponsorsController;
     }());

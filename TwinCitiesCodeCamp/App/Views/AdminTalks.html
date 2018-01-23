@@ -1,4 +1,6 @@
 ﻿<section class="admin-submissions" ng-controller="AdminSubmissionsController as vm">
+    <admin-nav page="talks" event-id="vm.eventId"></admin-nav>
+
     <h2>
         {{vm.totalTalks}} talk submissions
         <a class="btn btn-default pull-right" href="/files/GetTalkSubmissionsCsv"><i class="fa fa-file-excel-o" style="color: white; background-color: rgb(31, 112, 68)"></i> Generate CSV</a>

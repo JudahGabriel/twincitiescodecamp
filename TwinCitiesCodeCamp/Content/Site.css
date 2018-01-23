@@ -376,3 +376,19 @@ footer {
   padding-top: 10px;
   height: 30px;
 }
+.admin-nav {
+  margin-top: 20px;
+}
+.admin-nav .event-dropdown {
+  display: inline;
+}
+.admin-nav .event-dropdown button {
+  color: #DF691A;
+}
+.admin-events .event-list {
+  max-height: 500px;
+  overflow: auto;
+}
+.admin-events .event-list a {
+  outline: none;
+}

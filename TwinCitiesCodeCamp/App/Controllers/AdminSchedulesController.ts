@@ -1,50 +1,56 @@
 ﻿namespace Tccc {
     export class AdminSchedulesController {
-
-        schedules: Schedule[] = [];
-        selectedSchedule: Schedule | null = null;
+        
+        schedule: Schedule | null;
+        hasLoadedSchedule = false;
         talks: Talk[] = [];
+        readonly eventId: string;
 
         static $inject = [
             "scheduleApi",
-            "talkApi"
+            "talkApi",
+            "$routeParams"
         ];
 
         constructor(
             private scheduleApi: ScheduleService,
-            private talkApi: TalkService) {
+            private talkApi: TalkService,
+            private $routeParams: ng.route.IRouteParamsService) {
+
+            const eventNumber = $routeParams["eventNumber"];
+            this.eventId = `events/${eventNumber}`;
+        }
+
+        get canAddSchedule(): boolean {
+            return this.hasLoadedSchedule && !this.schedule;
         }
 
         $onInit() {
-            this.scheduleApi.getAll()
-                .then(results => {
-                    this.schedules = results;
-                    this.setSelectedSchedule(results[0]);
+            this.loadTalksForEvent();
+            this.scheduleApi.getScheduleForEvent(this.eventId)
+                .then(result => {
+                    this.hasLoadedSchedule = true;
+                    this.schedule = result;
                 });
         }
 
         addSchedule() {
-            var newSched = Schedule.empty();
-            this.schedules.push(newSched);
-            this.selectedSchedule = newSched;
-        }
-
-        setSelectedSchedule(schedule: Schedule | null) {
-            this.selectedSchedule = schedule;
-            this.talks = [];
-            if (schedule) {
-                this.talkApi.getTalks(schedule.eventId)
-                    .then(results => {
-                        if (this.selectedSchedule === schedule) {
-                            this.talks = results.sort((a, b) => a.title.localeCompare(b.title));
-                        }
-                    });
+            if (this.hasLoadedSchedule && !this.schedule) {
+                var newSched = Schedule.empty();
+                newSched.eventId = this.eventId;
+                this.schedule = newSched;
+                this.loadTalksForEvent();
             }
         }
 
+        loadTalksForEvent() {
+            this.talkApi.getTalks(this.eventId)
+                .then(results => this.talks = results.sort((a, b) => a.title.localeCompare(b.title)));
+        }
+
         addTimeslot() {
-            if (this.selectedSchedule) {
-                this.selectedSchedule.timeslots.push(new ScheduleTimeslot({
+            if (this.schedule) {
+                this.schedule.timeslots.push(new ScheduleTimeslot({
                     start: 0,
                     duration: 0,
                     items: []
@@ -53,8 +59,8 @@
         }
 
         removeTimeslot(timeslot: ScheduleTimeslot) {
-            if (this.selectedSchedule) {
-                _.pull(this.selectedSchedule.timeslots, timeslot);
+            if (this.schedule) {
+                _.pull(this.schedule.timeslots, timeslot);
             }
         }
 
@@ -71,12 +77,12 @@
             _.pull(timeslot.items, item);
         }
 
-        saveSchedule(schedule: Schedule) {
-            if (!schedule.isSaving) {
-                schedule.isSaving = true;
-                this.scheduleApi.save(schedule)
-                    .then(result => angular.merge(schedule, result))
-                    .finally(() => schedule.isSaving = false);
+        saveSchedule() {
+            if (this.schedule && !this.schedule.isSaving) {
+                this.schedule.isSaving = true;
+                this.scheduleApi.save(this.schedule)
+                    .then(result => angular.merge(this.schedule, result))
+                    .finally(() => this.schedule!.isSaving = false);
             }
         }
 

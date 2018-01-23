@@ -1,0 +1,59 @@
+﻿<section class="admin-events" ng-controller="AdminEventsController as vm">
+    <admin-nav page="events" event-id="vm.selectedEvent.id"></admin-nav>
+    <div class="row">
+        <div class="col-xs-12 col-sm-3">
+            <div class="list-group event-list">
+                <a href="javascript:void(0)" class="list-group-item" ng-repeat="event in vm.events.items" ng-class="{ active: vm.selectedEvent === event }" ng-click="vm.selectedEvent = event">
+                    TCCC {{event.number}} - {{event.seasonYear}}
+                </a>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-9">
+            <div ng-show="vm.selectedEvent">
+                <h3>TCCC {{vm.selectedEvent.number}} - {{vm.selectedEvent.seasonYear}}</h3>
+                <p>
+                    <a class="btn btn-default" ng-href="{{'#/admin/' + vm.selectedEvent.id + '/talks'}}" role="button">Talk submissions</a>
+                    <a class="btn btn-default" ng-href="{{'#/admin/' + vm.selectedEvent.id + '/schedule'}}" role="button">Schedule</a>
+                    <a class="btn btn-default" ng-href="{{'#/admin/' + vm.selectedEvent.id + '/sponsors'}}" role="button">Sponsors</a>
+                </p>
+                <br />
+                <form>
+                    <div class="form-group">
+                        <label>Event number</label>
+                        <input class="form-control" type="number" placeholder="23" ng-model="vm.selectedEvent.number" />
+                    </div>
+                    <div class="form-group">
+                        <label>Season Year</label>
+                        <input class="form-control" type="text" placeholder="Spring 2025" ng-model="vm.selectedEvent.seasonYear" />
+                    </div>
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input class="form-control" type="date" ng-model="vm.selectedEvent.rawDate" />
+                    </div>
+                    <div class="form-group">
+                        <label>Registration URL</label>
+                        <input class="form-control" type="text" ng-model="vm.selectedEvent.registerUrl" />
+                    </div>
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input class="form-control" type="text" placeholder="Location friendly name" ng-model="vm.selectedEvent.locationFriendlyName" />
+                    </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input class="form-control" type="text" placeholder="123 Some Stree Coldstone MN" ng-model="vm.selectedEvent.address" />
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="vm.selectedEvent.isAcceptingTalkSubmissions"> Accepting talk submissions
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-default pull-right" ng-disabled="vm.selectedEvent.isSaving" ng-click="vm.save()">
+                        <i class="fa fa-save"></i> Save
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

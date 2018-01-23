@@ -265,7 +265,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\Views\AboutUs.html" />
+    <Content Include="App\Views\AdminEvents.html" />
     <Content Include="App\Views\AdminSchedules.html" />
+    <Content Include="App\Views\AdminNav.html" />
     <Content Include="App\Views\AdminSponsors.html" />
     <Content Include="App\Views\AdminTalks.html" />
     <Content Include="App\Views\CallForSpeakers.html" />
@@ -434,6 +436,9 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="App\App.ts" />
+    <TypeScriptCompile Include="App\Common\AngularBindings.ts" />
+    <TypeScriptCompile Include="App\Controllers\AdminEventsController.ts" />
+    <TypeScriptCompile Include="App\Controllers\AdminNavController.ts" />
     <TypeScriptCompile Include="App\Controllers\AdminSchedulesController.ts" />
     <TypeScriptCompile Include="App\Controllers\AdminSponsorsController.ts" />
     <TypeScriptCompile Include="App\Common\List.ts" />

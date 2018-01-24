@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-xs-12 col-sm-3">
             <div class="list-group event-list">
-                <a href="javascript:void(0)" class="list-group-item" ng-repeat="event in vm.events.items" ng-class="{ active: vm.selectedEvent === event }" ng-click="vm.selectedEvent = event">
+                <a href="javascript:void(0)" class="list-group-item" ng-repeat="event in vm.events" ng-class="{ active: vm.selectedEvent === event }" ng-click="vm.selectedEvent = event">
                     TCCC {{event.number}} - {{event.seasonYear}}
                 </a>
             </div>

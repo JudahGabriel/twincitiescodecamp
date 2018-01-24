@@ -345,13 +345,15 @@
     <Content Include="Content\Site.less" />
     <Content Include="App_Readme\NProgressjs_README.md" />
     <Content Include="App_Readme\NProgressjs_LICENSE" />
+    <Content Include="AppSettings.Secrets.Debug.config" />
+    <Content Include="AppSettings.Secrets.Release.config" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <Content Include="Content\variables.less" />
-    <Content Include="ConnectionStrings.Debug.Secrets.config" />
-    <Content Include="ConnectionStrings.Release.Secrets.config" />
+    <Content Include="ConnectionStrings.Secrets.Debug.config" />
+    <Content Include="ConnectionStrings.Secrets.Release.config" />
     <None Include="Properties\PublishProfiles\bitshuva - Web Deploy.pubxml" />
     <Content Include="Scripts\angular-local-storage.min.js.map" />
     <Content Include="Scripts\angular.min.js.map" />

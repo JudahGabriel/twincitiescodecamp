@@ -5,6 +5,17 @@
 <h2>@ViewBag.Title.</h2>
 <div>
     <p>
-        Thank you for confirming your email. Please @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+        Thank you for confirming your email. 
+    </p>
+</div>
+
+<div class="jumbotron">
+    <h1>
+        <i class="fa fa-check-circle text-success"></i>
+        You're confirmed!
+    </h1>
+    <p>
+        Thanks for registering with Code Camp.
+        <a class="btn btn-primary btn-lg" href="/account/login" role="button">Log in</a>
     </p>
 </div>

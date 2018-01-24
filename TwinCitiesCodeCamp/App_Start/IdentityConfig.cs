@@ -11,6 +11,9 @@ using Microsoft.Owin.Security;
 using TwinCitiesCodeCamp.Models;
 using RavenDB.AspNet.Identity;
 using Raven.Client;
+using System.Configuration;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace TwinCitiesCodeCamp
 {
@@ -18,8 +21,20 @@ namespace TwinCitiesCodeCamp
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            var apiKey = ConfigurationManager.AppSettings["SendGridApiKey"];
+            var sendGrid = new SendGridClient(apiKey);
+            var email = new SendGridMessage
+            {
+                From = new EmailAddress("tccodecamp@gmail.com", "Twin Cities Code Camp"),
+                Subject = message.Subject,
+                HtmlContent = message.Body
+            };
+
+            var recipients = message.Destination
+                .Split(new[] { ",", ";" }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(destination => new EmailAddress(destination));
+            email.AddTos(recipients.ToList());
+            return sendGrid.SendEmailAsync(email);
         }
     }
 

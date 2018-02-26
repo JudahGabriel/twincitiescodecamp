@@ -26,27 +26,42 @@
         }
 
         get levelText(): string {
+            if (this.level === SponsorshipLevel.Diamond) {
+                return "Diamond";
+            }
+
             if (this.level === SponsorshipLevel.Platinum) {
                 return "Platinum";
-            } else if (this.level === SponsorshipLevel.Gold) {
-                return "Gold";
-            } else if (this.level === SponsorshipLevel.Silver) {
-                return "Silver";
-            } else {
-                return "Bronze";
             }
+
+            if (this.level === SponsorshipLevel.Gold) {
+                return "Gold";
+            }
+
+            if (this.level === SponsorshipLevel.Silver) {
+                return "Silver";
+            }
+
+            return "Bronze";
         }
 
         get levelColor(): string {
+            if (this.level === SponsorshipLevel.Diamond) {
+                return "white";
+            }
             if (this.level === SponsorshipLevel.Platinum) {
                 return "rgb(229, 228, 226)";
-            } else if (this.level === SponsorshipLevel.Gold) {
-                return "gold";
-            } else if (this.level === SponsorshipLevel.Silver) {
-                return "silver";
-            } else {
-                return "rgb(205, 127, 50)";
             }
+
+            if (this.level === SponsorshipLevel.Gold) {
+                return "gold";
+            }
+
+            if (this.level === SponsorshipLevel.Silver) {
+                return "silver";
+            }
+
+            return "rgb(205, 127, 50)";
         }
     }
 }

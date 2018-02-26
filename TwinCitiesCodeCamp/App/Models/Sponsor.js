@@ -12,36 +12,38 @@ var Tccc;
         }
         Object.defineProperty(Sponsor.prototype, "levelText", {
             get: function () {
+                if (this.level === Tccc.SponsorshipLevel.Diamond) {
+                    return "Diamond";
+                }
                 if (this.level === Tccc.SponsorshipLevel.Platinum) {
                     return "Platinum";
                 }
-                else if (this.level === Tccc.SponsorshipLevel.Gold) {
+                if (this.level === Tccc.SponsorshipLevel.Gold) {
                     return "Gold";
                 }
-                else if (this.level === Tccc.SponsorshipLevel.Silver) {
+                if (this.level === Tccc.SponsorshipLevel.Silver) {
                     return "Silver";
                 }
-                else {
-                    return "Bronze";
-                }
+                return "Bronze";
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(Sponsor.prototype, "levelColor", {
             get: function () {
+                if (this.level === Tccc.SponsorshipLevel.Diamond) {
+                    return "white";
+                }
                 if (this.level === Tccc.SponsorshipLevel.Platinum) {
                     return "rgb(229, 228, 226)";
                 }
-                else if (this.level === Tccc.SponsorshipLevel.Gold) {
+                if (this.level === Tccc.SponsorshipLevel.Gold) {
                     return "gold";
                 }
-                else if (this.level === Tccc.SponsorshipLevel.Silver) {
+                if (this.level === Tccc.SponsorshipLevel.Silver) {
                     return "silver";
                 }
-                else {
-                    return "rgb(205, 127, 50)";
-                }
+                return "rgb(205, 127, 50)";
             },
             enumerable: true,
             configurable: true

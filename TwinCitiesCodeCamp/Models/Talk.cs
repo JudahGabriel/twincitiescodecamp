@@ -12,6 +12,7 @@ namespace TwinCitiesCodeCamp.Models
         public string Abstract { get; set; }
         public string Author { get; set; }
         public string AuthorBio { get; set; }
+        public string AuthorEmail { get; set; }
         public string AuthorUrl { get; set; }
         public string AuthorTwitter { get; set; }
         public string AuthorGitHub { get; set; }

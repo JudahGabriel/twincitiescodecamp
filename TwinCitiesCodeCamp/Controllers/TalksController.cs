@@ -43,6 +43,7 @@ namespace TwinCitiesCodeCamp.Controllers
                 .FirstAsync();
 
             talk.Id = null;
+            talk.AuthorEmail = User.Identity.Name;
             talk.SubmissionDate = DateTime.UtcNow;
             talk.SubmittedByUserId = "ApplicationUsers/" + User.Identity.Name;
             talk.EventId = mostRecentEvent.Id;

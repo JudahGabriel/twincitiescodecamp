@@ -17,6 +17,7 @@ namespace TwinCitiesCodeCamp.Models
             {
                 Abstract = Abstract,
                 Author = Author,
+                AuthorEmail = AuthorEmail,
                 AuthorBio = AuthorBio,
                 AuthorGitHub = AuthorGitHub,
                 AuthorTwitter = AuthorTwitter,

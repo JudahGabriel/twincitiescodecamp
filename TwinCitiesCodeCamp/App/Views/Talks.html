@@ -28,10 +28,10 @@
     <!--No talks yet, and we're not yet accepting submissions-->
     <div class="alert alert-info" ng-show="vm.event.isAcceptingTalkSubmissions === false && vm.talks.isLoadedAndEmpty">
         <h2>
-            <i class="fa fa-info-circle"></i> You're early!
+            <i class="fa fa-info-circle"></i> We're not accepting talk submissions
         </h2>
         <p>
-            We're not yet accepting talks for #tccc{{vm.event.number}}. Check back later.
+            We're not accepting talks for #tccc{{vm.event.number}} at this time.
         </p>
         <a href="#" class="alert-link" ng-href="{{'#/events/' + (vm.event.number - 1) + '/talks'}}">View talks from last event</a>
     </div>

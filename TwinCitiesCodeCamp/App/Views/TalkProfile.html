@@ -9,20 +9,23 @@
         <div class="media-body">
             <h2 class="media-heading">{{vm.talk.title}} </h2>
             <h4>
-                <small class="text-muted">by</small> 
-                {{vm.talk.author}} 
-                <br ng-show="vm.talk.authorTwitter" />
-                <i class="fa fa-twitter" style="color: #00aced" ng-show="vm.talk.authorTwitter"></i>
-                <a ng-show="vm.talk.authorTwitter" ng-href="https://twitter.com/{{vm.talk.authorTwitter}}"> 
+                <small class="text-muted">by</small>
+                {{vm.talk.author}}
+                <a ng-show="vm.talk.authorTwitter" ng-href="https://twitter.com/{{vm.talk.authorTwitter}}" style="padding-left: 10px;">
+                    <i class="fa fa-twitter" style="color: #00aced" ng-show="vm.talk.authorTwitter"></i>
                     {{vm.talk.authorTwitter}}
-                </a> 
+                </a>
+                <a ng-show="vm.talk.authorGitHub" ng-href="https://github.com/{{vm.talk.authorGitHub}}" style="padding-left: 10px;">
+                    <i class="fa fa-github" style="color: black;" ng-show="vm.talk.authorGitHub"></i>
+                    {{vm.talk.authorGitHub}}
+                </a>
                 <br ng-show="vm.talk.authorUrl" />
                 <i class="fa fa-link" ng-show="vm.talk.authorUl"></i>
                 <a ng-show="vm.talk.authorUrl" ng-href="{{vm.talk.authorUrl}}">
                     {{vm.talk.authorUrl}}
                 </a>
                 <br />
-                <small class="text-muted">in</small> 
+                <small class="text-muted">in</small>
                 {{vm.talk.room}}
                 <br />
                 <small class="text-muted">at</small>

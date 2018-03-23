@@ -28,6 +28,8 @@ namespace TwinCitiesCodeCamp.Controllers
             {
                 return DbSession.Query<Talk>()
                     .Where(s => s.EventId == eventId)
+                    .OrderBy(s => s.Hour)
+                    .ThenBy(s => s.Title)
                     .ToListAsync();
             }
         }

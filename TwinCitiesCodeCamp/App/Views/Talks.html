@@ -47,7 +47,18 @@
             <h2 class="media-heading">
                 <a ng-href="#/{{talk.id}}">{{talk.title}}</a>
             </h2>
-            <h4><small class="text-muted">by</small> {{talk.author}}</h4>
+            <h4>
+                <small class="text-muted">by</small>
+                {{talk.author}}
+                <a ng-show="talk.authorTwitter" href="#" target="_blank" rel="noreferrer" ng-href="{{'https://twitter.com/' + talk.authorTwitter}}" style="padding-left: 10px;">
+                    <i class="fa fa-twitter" style="color: #00aced"></i>
+                    {{talk.authorTwitter}}
+                </a>
+                <a ng-show="talk.authorGitHub" href="#" target="_blank" rel="noreferrer" ng-href="{{'https://github.com/' + talk.authorGitHub}}" style="padding-left: 10px;">
+                    <i class="fa fa-github" style="color: black"></i>
+                    {{talk.authorGitHub}}
+                </a>
+            </h4>
             <p class="abstract" ng-bind-html="talk.abstract"></p>
         </div>
     </div>

@@ -77,7 +77,7 @@ var Tccc;
         var script = document.createElement("script");
         script.type = "text/javascript";
         script.async = true;
-        script.onload = function () { return window["jwerty"].key("↑,↑,↓,↓,←,→,←,→,B,A,↩", function () { return window.location.href = "https://www.youtube.com/watch?v=bHNczNvOnGc"; }); };
+        script.onload = function () { return window["jwerty"].key("↑,↑,↓,↓,←,→,←,→,B,A,↩", function () { return window.location.href = "https://www.youtube.com/watch?v=zRozKfYGFVc"; }); };
         script.src = "https://cdnjs.cloudflare.com/ajax/libs/jwerty/0.3.2/jwerty.min.js";
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
     }

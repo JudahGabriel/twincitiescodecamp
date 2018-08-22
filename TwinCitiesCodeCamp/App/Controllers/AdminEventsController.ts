@@ -45,6 +45,7 @@
             }
 
             this.events.unshift(event);
+            this.selectedEvent = event;
         }
 
         save() {

@@ -41,6 +41,7 @@ var Tccc;
                 });
             }
             this.events.unshift(event);
+            this.selectedEvent = event;
         };
         AdminEventsController.prototype.save = function () {
             var ev = this.selectedEvent;

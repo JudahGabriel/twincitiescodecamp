@@ -2,7 +2,7 @@
     export class AdminEventsController {
         selectedEvent: Event | null = null;
         events: Event[] = [];
-
+        
         static $inject = [
             "eventApi"
         ];
@@ -16,6 +16,35 @@
                     this.events = results;
                     this.selectedEvent = this.events[0];
                 });
+        }
+
+        addEvent() {
+            let event: Event;
+            if (this.selectedEvent) {
+                event = new Event({
+                    address: this.selectedEvent.address,
+                    dateTime: new Date().toISOString(),
+                    id: "",
+                    isAcceptingTalkSubmissions: false,
+                    locationFriendlyName: this.selectedEvent.locationFriendlyName,
+                    number: this.selectedEvent.number + 1,
+                    registerUrl: "",
+                    seasonYear: ""
+                });
+            } else {
+                event = new Event({
+                    address: "",
+                    dateTime: new Date().toISOString(),
+                    id: "",
+                    isAcceptingTalkSubmissions: false,
+                    locationFriendlyName: "",
+                    number: 0,
+                    registerUrl: "",
+                    seasonYear: ""
+                });
+            }
+
+            this.events.unshift(event);
         }
 
         save() {

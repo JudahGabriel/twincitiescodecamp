@@ -51,6 +51,19 @@ namespace TwinCitiesCodeCamp.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<Event> Save(Event ev)
         {
+            if (ev.Number == 0)
+            {
+                throw new ArgumentOutOfRangeException("Event must have a non-zero event number");
+            }
+
+            var isNewEvent = string.IsNullOrEmpty(ev.Id);
+            if (isNewEvent)
+            {
+                var id = $"events/{ev.Number}";
+                await DbSession.StoreAsync(ev, id);
+                return ev;
+            }
+            
             var existingEvent = await DbSession.LoadAsync<Event>(ev.Id);
             existingEvent.CopyFrom(ev);
             return existingEvent;

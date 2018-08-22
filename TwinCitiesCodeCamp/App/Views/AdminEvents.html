@@ -2,6 +2,9 @@
     <admin-nav page="events" event-id="vm.selectedEvent.id"></admin-nav>
     <div class="row">
         <div class="col-xs-12 col-sm-3">
+            <button class="btn btn-default btn-block" ng-click="vm.addEvent()">
+                <i class="fa fa-plus"></i> Add new event
+            </button>
             <div class="list-group event-list">
                 <a href="javascript:void(0)" class="list-group-item" ng-repeat="event in vm.events" ng-class="{ active: vm.selectedEvent === event }" ng-click="vm.selectedEvent = event">
                     TCCC {{event.number}} - {{event.seasonYear}}

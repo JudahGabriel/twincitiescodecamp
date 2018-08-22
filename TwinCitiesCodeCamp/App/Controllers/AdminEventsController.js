@@ -14,6 +14,34 @@ var Tccc;
                 _this.selectedEvent = _this.events[0];
             });
         };
+        AdminEventsController.prototype.addEvent = function () {
+            var event;
+            if (this.selectedEvent) {
+                event = new Tccc.Event({
+                    address: this.selectedEvent.address,
+                    dateTime: new Date().toISOString(),
+                    id: "",
+                    isAcceptingTalkSubmissions: false,
+                    locationFriendlyName: this.selectedEvent.locationFriendlyName,
+                    number: this.selectedEvent.number + 1,
+                    registerUrl: "",
+                    seasonYear: ""
+                });
+            }
+            else {
+                event = new Tccc.Event({
+                    address: "",
+                    dateTime: new Date().toISOString(),
+                    id: "",
+                    isAcceptingTalkSubmissions: false,
+                    locationFriendlyName: "",
+                    number: 0,
+                    registerUrl: "",
+                    seasonYear: ""
+                });
+            }
+            this.events.unshift(event);
+        };
         AdminEventsController.prototype.save = function () {
             var ev = this.selectedEvent;
             if (ev && !ev.isSaving) {

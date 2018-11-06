@@ -300,8 +300,10 @@
     <Content Include="Content\Images\People\bock.jpg" />
     <Content Include="Content\Images\People\sheila.jpg" />
     <Content Include="Content\Images\Sponsors\BeaconHill.jpg" />
+    <Content Include="Content\Images\Sponsors\Daugherty.jpg" />
     <Content Include="Content\Images\Sponsors\DevJam.jpg" />
     <Content Include="Content\Images\Sponsors\IlmService.gif" />
+    <Content Include="Content\Images\Sponsors\JetBrains.png" />
     <Content Include="Content\Images\Sponsors\LifeTouch.jpg" />
     <Content Include="Content\Images\Sponsors\Magenic.jpg" />
     <Content Include="Content\Images\Sponsors\Improving.jpg" />
@@ -309,7 +311,7 @@
     <Content Include="Content\Images\Sponsors\OpenSystems.jpg" />
     <Content Include="Content\Images\Sponsors\PowerObjects.jpg" />
     <Content Include="Content\Images\Sponsors\Microsoft.jpg" />
-    <Content Include="Content\Images\Sponsors\RavenDB.jpg" />
+    <Content Include="Content\Images\Sponsors\RavenDB.png" />
     <Content Include="Content\Images\Sponsors\SoftwareGuild.jpg" />
     <Content Include="Content\Images\Sponsors\SuperGoFaster.jpg" />
     <Content Include="Content\Images\Sponsors\Target.gif" />

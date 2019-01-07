@@ -8,6 +8,7 @@
         number: number;
         seasonYear: string;
         isAcceptingTalkSubmissions: boolean;
+        noTalkSubmissionsAfter: string | null;
 
         lastRawDate: Date | null = null;
         isSaving = false;

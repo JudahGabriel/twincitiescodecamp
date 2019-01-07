@@ -15,6 +15,7 @@
         number: number;
         seasonYear: string;
         isAcceptingTalkSubmissions: boolean;
+        noTalkSubmissionsAfter: string | null;
     }
 
     export interface Talk {

@@ -13,7 +13,7 @@
     <div ng-show="vm.submissions.isLoadedWithData">
         <ul class="list-group">
             <li class="list-group-item" ng-repeat="submission in vm.submissions.items" ng-class="{ 'list-group-item-success': submission.status === 2, 'list-group-item-danger': submission.status === 1 }">
-                <h4 class="list-group-item-heading">
+                <h3 class="list-group-item-heading">
                     {{submission.title}}
                     <span class="pull-right">
                         Status: 
@@ -25,16 +25,20 @@
                         <span ng-show="submission.status === 1">
                             <i class="fa fa-ban"></i> Rejected 
                             <br />
-                            <small>Oh noes! Sorry, this talk didn't make the cut. ಥ_ಥ</small>
+                            <small>Oh noes! Sorry, this talk didn't make the cut for {{vm.getFriendlyEventName(submission)}}. ಥ_ಥ</small>
                         </span>
                         <span ng-show="submission.status === 2">
                             <i class="fa fa-check"></i> Approved 
                             <br />
-                            <small>You're giving this talk at Code Camp! ヾ(⌐■_■)ノ♪</small>
+                            <small>You're giving this talk at {{vm.getFriendlyEventName(submission)}}! ヾ(⌐■_■)ノ♪</small>
                         </span>
                     </span>
-                </h4>
-                <p class="list-group-item-text">{{submission.abstract}}</p>
+                </h3>
+                <br />
+                <h4 class="clearfix">Abstract</h4>
+                <p class="list-group-item-text" ng-bind-html="submission.abstract">
+                    {{submission.abstract}}
+                </p>
             </li>
         </ul>
     </div>

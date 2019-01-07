@@ -25,7 +25,8 @@ var Tccc;
                     locationFriendlyName: this.selectedEvent.locationFriendlyName,
                     number: this.selectedEvent.number + 1,
                     registerUrl: "",
-                    seasonYear: ""
+                    seasonYear: "",
+                    noTalkSubmissionsAfter: this.selectedEvent.noTalkSubmissionsAfter
                 });
             }
             else {
@@ -37,7 +38,8 @@ var Tccc;
                     locationFriendlyName: "",
                     number: 0,
                     registerUrl: "",
-                    seasonYear: ""
+                    seasonYear: "",
+                    noTalkSubmissionsAfter: null
                 });
             }
             this.events.unshift(event);

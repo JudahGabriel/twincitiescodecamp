@@ -10,6 +10,16 @@ var Tccc;
             var talksCacheKey = TalksController.talksCacheKey + this.eventId;
             this.talks = new Tccc.List(function () { return _this.fetchTalks("Events/" + _this.eventId); }, talksCacheKey);
         }
+        Object.defineProperty(TalksController.prototype, "friendlyLastSubmissionDate", {
+            get: function () {
+                if (this.event && this.event.noTalkSubmissionsAfter) {
+                    return moment(this.event.noTalkSubmissionsAfter).format("MMMM Do");
+                }
+                return "[submission end date coming soon]";
+            },
+            enumerable: true,
+            configurable: true
+        });
         TalksController.prototype.$onInit = function () {
             var _this = this;
             this.eventApi.getEvent("events/" + this.eventId)

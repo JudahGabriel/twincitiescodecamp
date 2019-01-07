@@ -16,6 +16,16 @@ var Tccc;
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(HeaderController.prototype, "registerUrl", {
+            get: function () {
+                if (this.event && this.event.registerUrl) {
+                    return this.event.registerUrl;
+                }
+                return "#/register/notopened";
+            },
+            enumerable: true,
+            configurable: true
+        });
         HeaderController.prototype.$onInit = function () {
             var _this = this;
             this.eventApi.getMostRecentEvent()

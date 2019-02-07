@@ -21,6 +21,14 @@
             this.talks = new List<Talk>(() => this.fetchTalks(`Events/${this.eventId}`), talksCacheKey);            
         }
 
+        get friendlyLastSubmissionDate(): string {
+            if (this.event && this.event.noTalkSubmissionsAfter) {
+                return moment(this.event.noTalkSubmissionsAfter).format("MMMM Do");
+            }
+
+            return "[submission end date coming soon]";
+        }
+
         $onInit() {
             this.eventApi.getEvent(`events/${this.eventId}`)
                 .then(loadedEvent => this.event = loadedEvent);

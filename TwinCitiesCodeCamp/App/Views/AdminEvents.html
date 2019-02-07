@@ -51,6 +51,10 @@
                             <input type="checkbox" ng-model="vm.selectedEvent.isAcceptingTalkSubmissions"> Accepting talk submissions
                         </label>
                     </div>
+                    <div class="form-group" ng-show="vm.selectedEvent.isAcceptingTalkSubmissions">
+                        <label>No talk submissions after</label>
+                        <input class="form-control" type="date" ng-model="vm.selectedEvent.noTalkSubmissionsAfter" />
+                    </div>
 
                     <button type="submit" class="btn btn-default pull-right" ng-disabled="vm.selectedEvent.isSaving" ng-click="vm.save()">
                         <i class="fa fa-save"></i> Save

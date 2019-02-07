@@ -18,6 +18,14 @@
             return "";
         }
 
+        get registerUrl(): string {
+            if (this.event && this.event.registerUrl) {
+                return this.event.registerUrl;
+            }
+
+            return "#/register/notopened";
+        }
+
         $onInit() {
             this.eventApi.getMostRecentEvent()
                 .then(e => this.event = e);

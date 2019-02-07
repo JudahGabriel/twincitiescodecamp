@@ -29,7 +29,8 @@
                     locationFriendlyName: this.selectedEvent.locationFriendlyName,
                     number: this.selectedEvent.number + 1,
                     registerUrl: "",
-                    seasonYear: ""
+                    seasonYear: "",
+                    noTalkSubmissionsAfter: this.selectedEvent.noTalkSubmissionsAfter
                 });
             } else {
                 event = new Event({
@@ -40,7 +41,8 @@
                     locationFriendlyName: "",
                     number: 0,
                     registerUrl: "",
-                    seasonYear: ""
+                    seasonYear: "",
+                    noTalkSubmissionsAfter: null
                 });
             }
 

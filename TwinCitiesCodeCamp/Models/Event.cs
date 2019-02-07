@@ -15,6 +15,7 @@ namespace TwinCitiesCodeCamp.Models
         public int Number { get; set; }
         public string SeasonYear { get; set; }
         public bool IsAcceptingTalkSubmissions { get; set; }
+        public DateTimeOffset? NoTalkSubmissionsAfter { get; set; }
 
         public void CopyFrom(Event other)
         {
@@ -25,6 +26,7 @@ namespace TwinCitiesCodeCamp.Models
             this.Number = other.Number;
             this.SeasonYear = other.SeasonYear;
             this.IsAcceptingTalkSubmissions = other.IsAcceptingTalkSubmissions;
+            this.NoTalkSubmissionsAfter = other.NoTalkSubmissionsAfter;
         }
     }
 }

@@ -23,20 +23,48 @@
         </div>
         <div class="col-xs-12 col-sm-8">
             <div class="well">
+
+                <!--<input ng-model="vm.getGoogleDocText" />-->
+
                 <form ng-show="vm.currentTalk">
-                    <div class="form-group">
-                        <label>Author</label>
-                        <p class="form-control-static">{{vm.currentTalk.author}}</p>
+                    <div class="form-group pull-right">
+                        <p class="form-control-static">
+                            <a ng-href="#/{{vm.currentTalk.id}}" title="Preview this talk submission" style="margin-right: 15px;">
+                                <i class="fa fa-eye fa-2x"></i>
+                            </a>
+                            <a ng-href="#/talks/mine/edit/{{vm.currentTalk.id}}" title="Edit this talk submission">
+                                <i class="fa fa-pencil fa-2x"></i>
+                            </a>
+                        </p>
                     </div>
-
                     <div class="form-group">
-                        <label>Email</label>
-                        <p class="form-control-static">{{vm.currentTalkEmail}}</p>
+                        <p class="form-control-static">
+                            <h3>
+                                {{vm.currentTalk.title}}
+                            </h3>
+                            <span ng-repeat="tag in vm.currentTalk.tags" style="padding: 5px; margin-right: 5px; display: inline-block;">
+                                <i class="fa fa-tag"></i>
+                                {{tag}}
+                            </span>
+                        </p>
                     </div>
-
                     <div class="form-group">
-                        <label>Title</label>
-                        <p class="form-control-static">{{vm.currentTalk.title}}</p>
+                        <p class="form-control-static">
+                            <img ng-show="vm.currentTalk.pictureUrlOrDefault" ng-src="{{vm.currentTalk.pictureUrlOrDefault}}" class="img-rounded" style="max-width: 50px; max-height: 50px; border-radius: 100px; margin-right: 10px;">
+                            {{vm.currentTalk.author}}
+                            <span ng-show="{{vm.currentTalkEmail}}">
+                                <i class="fa fa-email"></i> {{vm.currentTalkEmail}}
+                            </span>
+                            <a ng-show="{{vm.currentTalk.authorTwitter}}" ng-href="https://twitter.com/{{vm.currentTalk.authorTwitter}}">
+                                <i class="fa fa-twitter"></i> {{vm.currentTalk.authorTwitter}}
+                            </a>
+                            <a ng-show="{{vm.currentTalk.authorGitHub}}" ng-href="https://github.com/{{vm.currentTalk.authorGitHub}}">
+                                <i class="fa fa-github"></i> {{vm.currentTalk.authorGitHub}}
+                            </a>
+                            <a ng-show="{{vm.currentTalk.authorUrl}}" ng-href="{{vm.currentTalk.authorUrl}}">
+                                <i class="fa fa-link"></i> {{vm.currentTalk.authorUrl}}
+                            </a>
+                        </p>
                     </div>
 
                     <div class="form-group">
@@ -47,16 +75,6 @@
                     <div class="form-group">
                         <label>Bio</label>
                         <p class="form-control-static">{{vm.currentTalk.authorBio}}</p>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Twitter handle</label>
-                        <p class="form-control-static">{{vm.currentTalk.authorTwitter}}</p>
-                    </div>
-
-                    <div class="form-group">
-                        <label>GitHub account</label>
-                        <p class="form-control-static">{{vm.currentTalk.authorGitHub}}</p>
                     </div>
 
                     <div class="btn-group">

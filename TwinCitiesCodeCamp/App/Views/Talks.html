@@ -4,7 +4,7 @@
     </div>
 
     <!--If we're accepting submissions-->
-    <div ng-show="vm.event.isAcceptingTalkSubmissions">
+    <div ng-show="vm.callForSpeakersOpened">
         <div class="jumbotron">
             <h1>Submit your talk</h1>
             <p>
@@ -25,19 +25,25 @@
         </div>
     </div>
 
-    <!--No talks yet, and we're not yet accepting submissions-->
-    <div class="alert alert-info" ng-show="vm.event.isAcceptingTalkSubmissions === false && vm.talks.isLoadedAndEmpty">
+    <!--No talks yet, and we're not yet accepting submissions (e.g. we're reviewing talk submissions) -->
+    <div class="alert alert-info" ng-show="vm.callForSpeakersOpened === false && vm.talks.isLoadedAndEmpty">
         <h2>
-            <i class="fa fa-info-circle"></i> We're not accepting talk submissions
+            <i class="fa fa-info-circle"></i> 
+            We're not accepting talk submissions.
         </h2>
         <p>
-            We're not accepting talks for #tccc{{vm.event.number}} at this time.
+            <span ng-show="vm.callForSpeakersEndFriendlyDate">
+                Call for speakers ended on {{vm.callForSpeakersEndFriendlyDate}}.
+            </span>
+            <span ng-hide="vm.callForSpeakersEndFriendlyDate">
+                We're not accepting talks for #tccc{{vm.event.number}} at this time.
+            </span>
         </p>
         <a href="#" class="alert-link" ng-href="{{'#/events/' + (vm.event.number - 1) + '/talks'}}">View talks from last event</a>
     </div>
 
-    <!--We're not accepting submissions, and we have talks. Display them!-->
-    <div class="media" ng-show="vm.event.isAcceptingTalkSubmissions === false && vm.talks.isLoadedWithData" ng-repeat="talk in vm.talks.items">
+    <!--We're not accepting new submissions, and we have talks. Display them!-->
+    <div class="media" ng-show="vm.callForSpeakersOpened === false && vm.talks.isLoadedWithData" ng-repeat="talk in vm.talks.items">
         <div class="media-left">
             <a ng-href="#/{{talk.id}}">
                 <img class="media-object img-circle" ng-src="{{talk.pictureUrlOrDefault}}" alt="Profile pic of {{talk.author}}">

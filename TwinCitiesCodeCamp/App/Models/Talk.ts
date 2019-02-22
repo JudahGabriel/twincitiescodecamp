@@ -11,6 +11,10 @@
         hour: number;
         eventId: string;
         pictureUrl: string;
+        tags: string[];
+        submissionDate: string;
+        submittedByUserId: string;
+        status: TalkApproval;
 
         htmlSafeAbstract: any;
         htmlSafeBio: any;
@@ -20,7 +24,7 @@
         }
 
         get pictureUrlOrDefault(): string {
-            return this.pictureUrl || "../Content/Images/unknown-speaker.jpg";
+            return `/files/getTalkProfileImage?talkId=${this.id}` || "../Content/Images/unknown-speaker.jpg";
         }
 
         get timeFriendly(): string {

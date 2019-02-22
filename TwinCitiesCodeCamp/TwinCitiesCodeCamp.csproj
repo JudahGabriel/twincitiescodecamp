@@ -59,7 +59,7 @@
     <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>0</WarningLevel>
     <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
     <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
@@ -246,6 +246,7 @@
     <Compile Include="Controllers\SponsorsController.cs" />
     <Compile Include="Controllers\TalksController.cs" />
     <Compile Include="Data\RavenContext.cs" />
+    <Compile Include="Data\Talks_Tags.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -261,7 +262,6 @@
     <Compile Include="Models\SponsorshipLevel.cs" />
     <Compile Include="Models\Talk.cs" />
     <Compile Include="Models\TalkApproval.cs" />
-    <Compile Include="Models\TalkSubmission.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

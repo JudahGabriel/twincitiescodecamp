@@ -2,12 +2,33 @@
     export class AdminEventsController {
         selectedEvent: Event | null = null;
         events: Event[] = [];
+        jsDates = {};
         
         static $inject = [
             "eventApi"
         ];
 
         constructor(private eventApi: EventService) {
+        }
+
+        get noTalksSubmissionsAfterDate(): Date | null {
+            if (!this.selectedEvent || !this.selectedEvent.noTalkSubmissionsAfter) {
+                return null;
+            }
+
+            let existingJsDate: Date | undefined = this.jsDates[this.selectedEvent.noTalkSubmissionsAfter];
+            if (!existingJsDate) {
+                existingJsDate = new Date(this.selectedEvent.noTalkSubmissionsAfter);
+                this.jsDates[this.selectedEvent.noTalkSubmissionsAfter] = existingJsDate;
+            }
+
+            return existingJsDate;
+        }
+
+        set noTalksSubmissionsAfterDate(val: Date | null) {
+            if (this.selectedEvent) {
+                this.selectedEvent.noTalkSubmissionsAfter = val ? val.toISOString() : null;
+            }
         }
         
         $onInit() {

@@ -2,10 +2,10 @@
     export class AdminSubmissionsController {
 
         totalTalks = 0;
-        pendingSubmissions: Server.TalkSubmission[] = [];
-        approvedSubmissions: Server.TalkSubmission[] = [];
-        rejectedSubmissions: Server.TalkSubmission[] = [];
-        currentTalk: Server.TalkSubmission | null = null;
+        pendingSubmissions: Talk[] = [];
+        approvedSubmissions: Talk[] = [];
+        rejectedSubmissions: Talk[] = [];
+        currentTalk: Talk | null = null;
         selectedFilter = TalkApproval.Pending;
         approvalOptions = [
             { value: TalkApproval.Pending, name: "Pending", collection: this.pendingSubmissions },
@@ -37,12 +37,22 @@
             this.fetchSubmissions();
         }
 
+        //get getGoogleDocText() {
+        //    if (this.currentTalk) {
+        //        var idLower = this.currentTalk.id ? this.currentTalk.id.toLowerCase() : "";
+        //        var tags = this.currentTalk.tags.map(t => "🏷️ " + t).join(", ");
+        //        return `${this.currentTalk.title} https://twincitiescodecamp.com/#/${idLower} ${tags}`;
+        //    }
+
+        //    return "";
+        //}
+
         get currentTalkEmail(): string {
             return this.currentTalk && this.currentTalk.submittedByUserId ?
                 this.currentTalk.submittedByUserId.replace("ApplicationUsers/", "") : "";
         }
 
-        get submissions(): Server.TalkSubmission[] {
+        get submissions(): Talk[] {
             if (this.selectedFilter === TalkApproval.Approved) {
                 return this.approvedSubmissions;
             } else if (this.selectedFilter === TalkApproval.Rejected) {
@@ -75,7 +85,7 @@
                 });
         }
 
-        setApprovalStatus(talk: Server.TalkSubmission, status: TalkApproval) {
+        setApprovalStatus(talk: Talk, status: TalkApproval) {
             if (!this.isSaving && talk.id) {
                 this.isSaving = true;
                 if (status === TalkApproval.Approved) {

@@ -30,9 +30,7 @@
         hour: number;
         eventId: string;
         pictureUrl: string;
-    }
-
-    export interface TalkSubmission extends Talk {
+        tags: string[];
         submissionDate: string;
         submittedByUserId: string;
         status: TalkApproval;

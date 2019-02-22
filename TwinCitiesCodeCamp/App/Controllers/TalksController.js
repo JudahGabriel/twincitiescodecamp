@@ -20,6 +20,25 @@ var Tccc;
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(TalksController.prototype, "callForSpeakersOpened", {
+            get: function () {
+                var callForSpeakersStarted = !!this.event && this.event.isAcceptingTalkSubmissions;
+                var callForSpakersEnded = !!this.event && !!this.event.noTalkSubmissionsAfter && new Date() > new Date(this.event.noTalkSubmissionsAfter);
+                return callForSpeakersStarted && !callForSpakersEnded;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(TalksController.prototype, "callForSpeakersEndFriendlyDate", {
+            get: function () {
+                if (!!this.event && !!this.event.noTalkSubmissionsAfter) {
+                    return moment(this.event.noTalkSubmissionsAfter).format("MMMM Do");
+                }
+                return "";
+            },
+            enumerable: true,
+            configurable: true
+        });
         TalksController.prototype.$onInit = function () {
             var _this = this;
             this.eventApi.getEvent("events/" + this.eventId)

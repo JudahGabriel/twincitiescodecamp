@@ -7,8 +7,20 @@
             </a>
         </div>
         <div class="media-body">
+            <div class="alert alert-info" ng-if="vm.canEditTalk">
+                <i class="fa fa-info-circle"></i>
+                This is your talk. You can <a ng-href="#/talks/mine/edit/{{vm.talk.id}}"><i class="fa fa-pencil"></i> update it</a>.
+            </div>
+
             <h2 class="media-heading">{{vm.talk.title}} </h2>
             <h4>
+                <span ng-show="vm.talk.tags">
+                    <span class="tag" ng-repeat="tag in vm.talk.tags">
+                        <i class="fa fa-tag"></i>
+                        {{tag}}
+                    </span>
+                    <br />
+                </span>
                 <small class="text-muted">by</small>
                 {{vm.talk.author}}
                 <a ng-show="vm.talk.authorTwitter" ng-href="https://twitter.com/{{vm.talk.authorTwitter}}" style="padding-left: 10px;">
@@ -19,17 +31,23 @@
                     <i class="fa fa-github" style="color: black;" ng-show="vm.talk.authorGitHub"></i>
                     {{vm.talk.authorGitHub}}
                 </a>
-                <br ng-show="vm.talk.authorUrl" />
-                <i class="fa fa-link" ng-show="vm.talk.authorUl"></i>
-                <a ng-show="vm.talk.authorUrl" ng-href="{{vm.talk.authorUrl}}">
-                    {{vm.talk.authorUrl}}
-                </a>
-                <br />
-                <small class="text-muted">in</small>
-                {{vm.talk.room}}
-                <br />
-                <small class="text-muted">at</small>
-                {{vm.talk.timeFriendly}}
+                <span ng-show="vm.talk.authorUrl">
+                    <br />
+                    <i class="fa fa-link"></i>
+                    <a ng-show="vm.talk.authorUrl" ng-href="{{vm.talk.authorUrl}}">
+                        {{vm.talk.authorUrl}}
+                    </a>
+                </span>
+                <span ng-show="vm.talk.room">
+                    <br />
+                    <small class="text-muted">in</small>
+                    {{vm.talk.room}}
+                </span>
+                <span ng-show="vm.talk.timeFriendly">
+                    <br />
+                    <small class="text-muted">at</small>
+                    {{vm.talk.timeFriendly}}
+                </span>
             </h4>
             <p class="abstract" ng-bind-html="vm.talk.htmlSafeAbstract"></p>
             <hr />

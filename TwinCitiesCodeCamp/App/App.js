@@ -26,11 +26,12 @@ var Tccc;
                 .when("/sponsor/cancel", { templateUrl: "/App/Views/SponsorCancel.html" })
                 .when("/pastevents", { templateUrl: "/App/Views/PastEvents.html" })
                 .when("/about", { templateUrl: "/App/Views/AboutUs.html" })
-                .when("/talks/mine", { templateUrl: "/App/Views/MyTalks.html" })
-                .when("/talks/:id", { templateUrl: "/App/Views/TalkProfile.html" })
+                .when("/talks/mine", { templateUrl: "/App/Views/MyTalks.html" }) // View all my talks.
+                .when("/talks/:id", { templateUrl: "/App/Views/TalkProfile.html" }) // view a single talk. Readonly.
                 .when("/policies", { templateUrl: "/App/Views/Policies.html" })
                 .when("/register/notopened", { templateUrl: "/App/Views/RegistrationNotOpened.html" }) // use this as the registration link when the event isn't opened for registration
-                .when("/callforspeakers", { templateUrl: "/App/Views/SubmitTalk.html" })
+                .when("/callforspeakers", { templateUrl: "/App/Views/SubmitTalk.html" }) // submit a talk
+                .when("/talks/mine/edit/talks/:talkId", { templateUrl: "/App/Views/SubmitTalk.html" }) // edit a talk
                 .when("/admin", { redirectTo: "/admin/events" })
                 .when("/admin/events", { templateUrl: "/App/Views/AdminEvents.html" })
                 .when("/admin/events/:eventNumber/talks", { templateUrl: "/App/Views/AdminTalks.html" })

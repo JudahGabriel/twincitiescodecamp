@@ -20,5 +20,6 @@ namespace TwinCitiesCodeCamp.Models
         public double Hour { get; set; }
         public string PictureUrl { get; set; }
         public string EventId { get; set; }
+        public List<string> Tags { get; set; }
     }
 }

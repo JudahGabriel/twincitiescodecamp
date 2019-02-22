@@ -25,6 +25,14 @@ var Tccc;
             this.fetchSubmissions();
         };
         Object.defineProperty(AdminSubmissionsController.prototype, "currentTalkEmail", {
+            //get getGoogleDocText() {
+            //    if (this.currentTalk) {
+            //        var idLower = this.currentTalk.id ? this.currentTalk.id.toLowerCase() : "";
+            //        var tags = this.currentTalk.tags.map(t => "🏷️ " + t).join(", ");
+            //        return `${this.currentTalk.title} https://twincitiescodecamp.com/#/${idLower} ${tags}`;
+            //    }
+            //    return "";
+            //}
             get: function () {
                 return this.currentTalk && this.currentTalk.submittedByUserId ?
                     this.currentTalk.submittedByUserId.replace("ApplicationUsers/", "") : "";

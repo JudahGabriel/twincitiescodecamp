@@ -1,6 +1,6 @@
 ﻿namespace Tccc {
     export class MyTalksController {
-        submissions = new List<Server.TalkSubmission>(() => this.getMySubmissions());
+        submissions = new List<Talk>(() => this.getMySubmissions());
 
         static $inject = [
             "isSignedIn",
@@ -14,10 +14,10 @@
             private readonly $sce: ng.ISCEService) {
         }
 
-        getFriendlyEventName(submission: Server.TalkSubmission) {
+        getFriendlyEventName(submission: Talk) {
             const eventIdPrefix = "events/";
             if (submission.eventId && submission.eventId.length > eventIdPrefix.length) {
-                return "TCC " + submission.eventId.substring(eventIdPrefix.length);
+                return "#tccc" + submission.eventId.substring(eventIdPrefix.length);
             }
 
             return "Twin Cities Code Camp";
@@ -27,7 +27,7 @@
             this.submissions.fetch();
         }
 
-        getMySubmissions(): ng.IPromise<Server.TalkSubmission[]> {
+        getMySubmissions(): ng.IPromise<Talk[]> {
             const fetchTask = this.talkApi.getMySubmissions();
             return fetchTask
                 .then(results => {

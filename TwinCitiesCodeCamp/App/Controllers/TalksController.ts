@@ -29,6 +29,20 @@
             return "[submission end date coming soon]";
         }
 
+        get callForSpeakersOpened(): boolean {
+            const callForSpeakersStarted = !!this.event && this.event.isAcceptingTalkSubmissions;
+            const callForSpakersEnded = !!this.event && !!this.event.noTalkSubmissionsAfter && new Date() > new Date(this.event.noTalkSubmissionsAfter);
+            return callForSpeakersStarted && !callForSpakersEnded;
+        }
+
+        get callForSpeakersEndFriendlyDate(): string {
+            if (!!this.event && !!this.event.noTalkSubmissionsAfter) {
+                return moment(this.event.noTalkSubmissionsAfter).format("MMMM Do");
+            }
+
+            return "";
+        }
+
         $onInit() {
             this.eventApi.getEvent(`events/${this.eventId}`)
                 .then(loadedEvent => this.event = loadedEvent);

@@ -27,8 +27,22 @@ namespace TwinCitiesCodeCamp.Models
                 Id = null,
                 PictureUrl = PictureUrl,
                 Room = Room,
-                Title = Title
+                Title = Title,
+                Tags = Tags
             };
+        }
+
+        public void Update(TalkSubmission other)
+        {
+            this.Abstract = other.Abstract;
+            this.Author = other.Author;
+            this.AuthorBio = other.AuthorBio;
+            this.AuthorGitHub = other.AuthorGitHub;
+            this.AuthorTwitter = other.AuthorTwitter;
+            this.AuthorUrl = other.AuthorUrl;
+            this.PictureUrl = other.PictureUrl;
+            this.Title = other.Title;
+            this.Tags = other.Tags;
         }
     }
 }

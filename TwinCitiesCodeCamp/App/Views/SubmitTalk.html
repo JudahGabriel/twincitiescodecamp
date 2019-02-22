@@ -3,12 +3,34 @@
     <br />
     <div class="alert alert-info" ng-hide="vm.isSignedIn">
         <h2>
-            Before submitting a talk, please <a class="alert-link" href="/account/login?returnUrl=%2F%23%2Fsubmittalk"><i class="fa fa-sign-in"></i> sign in</a> or <a class="alert-link" href="/account/register"><i class="fa fa-user-plus"></i> create a new account</a>.
+            Before submitting a talk, please
+            <a class="alert-link" href="/account/login?returnUrl=%2F%23%2Fsubmittalk">
+                <i class="fa fa-sign-in"></i>
+                sign in
+            </a>
+            or
+            <a class="alert-link" href="/account/register">
+                <i class="fa fa-user-plus"></i> create a new account
+            </a>.
         </h2>
     </div>
 
     <div class="alert alert-success" ng-show="vm.submissionSuccessful">
-        <h2><i class="fa fa-check"></i> Celebrate! (づ｡◕‿‿◕｡)づ</h2> <br />Your talk is submitted. We'll let you know via email whether your talk is approved.
+        <h2>
+            <i class="fa fa-check"></i>
+            Celebrate! (づ｡◕‿‿◕｡)づ
+        </h2>
+        <br />
+        Your talk is submitted. We'll let you know via email whether your talk is approved.
+        <a href="#/talks/mine">View my talk submissions</a>.
+    </div>
+    <div class="alert alert-success" ng-show="vm.updateSuccessful">
+        <h2>
+            <i class="fa fa-check"></i>
+            We've received your updated talk 😎
+        </h2>
+        <br />
+        <a href="#/talks/mine">View my talk submissions</a>.
     </div>
 
     <div ng-show="vm.isSignedIn && !vm.submissionSuccessful">
@@ -16,6 +38,11 @@
             <div class="form-group" ng-class="{ 'has-error': talkForm.nameInput.$invalid && talkForm.nameInput.$touched }">
                 <label for="nameInput">Your name</label>
                 <input type="text" name="nameInput" class="form-control" id="nameInput" ng-model="vm.submission.author" placeholder="Louis Llama" required>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': talkForm.nameInput.$invalid && talkForm.nameInput.$touched }">
+                <label for="photoUrlInput">Your photo</label>
+                <input type="url" name="photoUrlInput" class="form-control" id="photoUrlInput" ng-model="vm.submission.pictureUrl" placeholder="https://upload.wikimedia.org/wikipedia/commons/b/b9/Llama_lying_down.jpg">
+                <p class="help-block">Give us a URL to a photo we can use. Should be square-ish.</p>
             </div>
             <div class="form-group" ng-class="{ 'has-error': talkForm.titleInput.$invalid && talkForm.titleInput.$touched }">
                 <label for="titleInput">Talk title</label>
@@ -33,9 +60,34 @@
             </div>
 
             <div class="form-group">
+                <label for="tagsInput"><i class="fa fa-tags"></i> What are some tags that describe your talk?</label>
+                <div class="tags-container">
+                    <div class="tag" ng-repeat="tag in vm.tags">
+                        <i class="fa fa-tag"></i>
+                        {{tag}}
+                        <button type="button" class="close" data-dismiss="modal" ng-click="vm.removeTag(tag)" aria-hidden="true" title="Remove tag">×</button>
+                    </div>
+                </div>
+                <input type="text" class="form-control" id="tagsInput" ng-attr-placeholder="{{vm.tagPlaceholder}}" ng-model="vm.tagsInput" ng-change="vm.tagsInputChanged()"
+                       uib-typeahead="tag for tag in vm.searchTags($viewValue) | limitTo:8"
+                       typeahead-min-length="1"
+                       typeahead-show-hint="true"
+                       typeahead-select-on-exact="false"
+                       typeahead-select-on-blur="false"
+                       typeahead-editable="true"
+                       typeahead-focus-first="false"
+                       typeahead-on-select="vm.autoCompleteTagSelected($item)"
+                       enter-handler="vm.tagsEnterKeyPressed()">
+                <p class="help-block">Tags, comma-separated. Example: web, beginner, react</p>
+            </div>
+
+            <div class="form-group">
                 <label for="twitterInput">Twitter handle</label>
                 <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-twitter"></i></span>
+                    <span class="input-group-addon" id="basic-addon1">
+                        <i class="fa fa-twitter"></i>
+                        twitter.com/
+                    </span>
                     <input type="text" id="twitterInput" class="form-control" placeholder="@llamadelrey" aria-describedby="basic-addon1" ng-model="vm.submission.authorTwitter">
                 </div>
                 <p class="help-block">Optional. Got a Twitter handle?</p>
@@ -44,22 +96,21 @@
             <div class="form-group">
                 <label for="gitHubInput">GitHub account</label>
                 <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon2"><i class="fa fa-github"></i></span>
+                    <span class="input-group-addon" id="basic-addon2">
+                        <i class="fa fa-github"></i>
+                        github.com/
+                    </span>
                     <input type="text" id="gitHubInput" class="form-control" placeholder="LlamasLoveYou" aria-describedby="basic-addon2" ng-model="vm.submission.authorGitHub">
                 </div>
+
                 <p class="help-block">Optional. Got a GitHub account?</p>
             </div>
 
-            <!--<div class="form-group">
-                <label for="urlImg">Your profile pic URL [optional]</label>
-                <input type="email" class="form-control" id="emailInput" placeholder="http://mywebsite.com/arentipretty.jpg">
-                <p class="help-block">Optional. This should be a URL to a JPG. Should be square unless you want to look weird on this site. Should be smaller than a few MB.</p>
-            </div>-->
             <button type="submit" class="btn btn-default" ng-disabled="vm.isSaving || talkForm.$invalid" ng-click="vm.save()">
                 <i ng-show="vm.isSaving" class="fa fa-spin fa-cog"></i>
                 Submit
             </button>
-            
+
             <!--Show any error upon submission-->
             <div ng-show="vm.submissionError" class="alert alert-danger" role="alert">
                 <i class="fa fa-exclamation-circle"></i>

@@ -72,8 +72,8 @@
                 const unknownSpeakerImage = "../Content/Images/unknown-speaker.jpg";
                 var talk = this.talks.items.find(t => t.id == item.talkId);
                 if (talk) {
-                    this.talkIdImageUrls[item.talkId] = talk.pictureUrl || unknownSpeakerImage;
-                    return talk.pictureUrl;
+                    this.talkIdImageUrls[item.talkId] = talk.pictureUrlOrDefault;
+                    return talk.pictureUrlOrDefault;
                 } else {
                     return unknownSpeakerImage;
                 }

@@ -11,7 +11,7 @@ var Tccc;
         MyTalksController.prototype.getFriendlyEventName = function (submission) {
             var eventIdPrefix = "events/";
             if (submission.eventId && submission.eventId.length > eventIdPrefix.length) {
-                return "TCC " + submission.eventId.substring(eventIdPrefix.length);
+                return "#tccc" + submission.eventId.substring(eventIdPrefix.length);
             }
             return "Twin Cities Code Camp";
         };

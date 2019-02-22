@@ -18,5 +18,10 @@ namespace TwinCitiesCodeCamp.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public bool IsAdmin()
+        {
+            return this.Roles.Contains("Admin");
+        }
     }
 }

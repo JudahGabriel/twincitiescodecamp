@@ -10,6 +10,8 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 using Microsoft.AspNet.Identity.Owin;
 using TwinCitiesCodeCamp.Data;
+using TwinCitiesCodeCamp.Models;
+using Optional;
 
 namespace TwinCitiesCodeCamp.Controllers
 {
@@ -35,6 +37,18 @@ namespace TwinCitiesCodeCamp.Controllers
                     throw;
                 }
             }
+        }
+
+        protected async Task<Option<ApplicationUser>> GetCurrentUser()
+        {
+            if (string.IsNullOrEmpty(User.Identity.Name))
+            {
+                return Option.None<ApplicationUser>();
+            }
+
+            var userId = "ApplicationUsers/" + User.Identity.Name;
+            var user = await DbSession.LoadAsync<ApplicationUser>(userId);
+            return user.SomeNotNull();
         }
 
         //added to allow getting db data was throwing exception

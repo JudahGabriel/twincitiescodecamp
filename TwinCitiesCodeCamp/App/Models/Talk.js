@@ -6,7 +6,7 @@ var Tccc;
         }
         Object.defineProperty(Talk.prototype, "pictureUrlOrDefault", {
             get: function () {
-                return this.pictureUrl || "../Content/Images/unknown-speaker.jpg";
+                return "/files/getTalkProfileImage?talkId=" + this.id || "../Content/Images/unknown-speaker.jpg";
             },
             enumerable: true,
             configurable: true

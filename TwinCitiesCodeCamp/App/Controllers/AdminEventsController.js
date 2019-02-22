@@ -5,7 +5,28 @@ var Tccc;
             this.eventApi = eventApi;
             this.selectedEvent = null;
             this.events = [];
+            this.jsDates = {};
         }
+        Object.defineProperty(AdminEventsController.prototype, "noTalksSubmissionsAfterDate", {
+            get: function () {
+                if (!this.selectedEvent || !this.selectedEvent.noTalkSubmissionsAfter) {
+                    return null;
+                }
+                var existingJsDate = this.jsDates[this.selectedEvent.noTalkSubmissionsAfter];
+                if (!existingJsDate) {
+                    existingJsDate = new Date(this.selectedEvent.noTalkSubmissionsAfter);
+                    this.jsDates[this.selectedEvent.noTalkSubmissionsAfter] = existingJsDate;
+                }
+                return existingJsDate;
+            },
+            set: function (val) {
+                if (this.selectedEvent) {
+                    this.selectedEvent.noTalkSubmissionsAfter = val ? val.toISOString() : null;
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
         AdminEventsController.prototype.$onInit = function () {
             var _this = this;
             this.eventApi.getAll(true)

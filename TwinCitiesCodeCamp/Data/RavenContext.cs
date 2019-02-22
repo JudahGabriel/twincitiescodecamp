@@ -17,6 +17,9 @@ namespace TwinCitiesCodeCamp.Data
             {
                 Db = new DocumentStore { ConnectionStringName = "RavenDb" };
                 Db.Initialize();
+
+                // Create our indexes.
+                new Talks_Tags().Execute(Db);
             }
         }
     }

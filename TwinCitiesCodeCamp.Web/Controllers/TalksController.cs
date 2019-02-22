@@ -54,6 +54,16 @@ namespace TwinCitiesCodeCamp.Controllers
                 .OrderByDescending(e => e.DateTime)
                 .FirstAsync();
 
+            // Make sure the event is not closed for talks.
+            if (!mostRecentEvent.IsAcceptingTalkSubmissions)
+            {
+                throw new InvalidOperationException("This event is not currently accepting talk submissions");
+            }
+            if (mostRecentEvent.NoTalkSubmissionsAfter.HasValue && DateTime.UtcNow > mostRecentEvent.NoTalkSubmissionsAfter)
+            {
+                throw new InvalidOperationException("This event is closed for new talks");
+            }
+
             talk.Id = null;
             talk.AuthorEmail = User.Identity.Name;
             talk.SubmissionDate = DateTime.UtcNow;
@@ -63,6 +73,25 @@ namespace TwinCitiesCodeCamp.Controllers
             return talk;
         }
 
+        [Route("update")]
+        [HttpPost]
+        [Authorize]
+        public async Task<TalkSubmission> Update(TalkSubmission talk)
+        {
+            // Authorize: you can only update your talks.
+            var existingTalk = await DbSession.LoadRequiredAsync<TalkSubmission>(talk.Id);
+            var currentUser = await this.GetUserOrThrow();
+            var isTalkOwner = string.Equals(currentUser.Id, existingTalk.SubmittedByUserId, StringComparison.InvariantCultureIgnoreCase);
+            var isAdmin = currentUser.Roles.Contains(Roles.Admin);
+            if (!isTalkOwner && !isAdmin)
+            {
+                throw new UnauthorizedAccessException();
+            }
+
+            existingTalk.Update(talk);
+            return existingTalk;
+        }
+
         [HttpGet]
         [Authorize(Roles = Roles.Admin)]
         public Task<List<TalkSubmission>> GetSubmissions(string eventId)
@@ -70,6 +99,31 @@ namespace TwinCitiesCodeCamp.Controllers
             return DbSession.Query<TalkSubmission>()
                 .Where(s => s.EventId == eventId)
                 .ToListAsync();
+        }
+
+        [Route("getSubmission")]
+        [HttpGet]
+        public async Task<TalkSubmission> GetSubmission(string talkSubmissionId)
+        {
+            if (!talkSubmissionId.StartsWith("talksubmissions/", StringComparison.InvariantCultureIgnoreCase))
+            {
+                throw new ArgumentException("Only talk submissions can be loaded.");
+            }
+
+            // Authorize: we must be an amdin, or alternately, the talk must be for the most recent event.
+            var currentEvent = await DbSession.Query<Event>()
+                .OrderByDescending(e => e.Number)
+                .FirstAsync();
+            var submission = await DbSession.LoadRequiredAsync<TalkSubmission>(talkSubmissionId);
+            var currentUser = await this.GetUser();
+            var isAdmin = currentUser.Exists(u => u.Roles.Contains(Roles.Admin));
+            var isSubmissionForCurrentEvent = string.Equals(submission.EventId, currentEvent.Id, StringComparison.InvariantCultureIgnoreCase);
+            if (!isAdmin && !isSubmissionForCurrentEvent)
+            {
+                throw new UnauthorizedAccessException("You're not authorized to view this submission");
+            }
+
+            return submission;
         }
 
         [HttpGet]
@@ -106,6 +160,16 @@ namespace TwinCitiesCodeCamp.Controllers
             var talkSubmission = await DbSession.LoadRequiredAsync<TalkSubmission>(talkSubmissionId);
             talkSubmission.Status = TalkApproval.Rejected;
             return talkSubmission;
+        }
+
+        [HttpGet]
+        public Task<IList<string>> SearchTags(string search)
+        {
+            return DbSession.Query<Talks_Tags.Result, Talks_Tags>()
+                .Search(i => i.Name, search + "*", 1, SearchOptions.Guess)
+                .Take(10)
+                .Select(i => i.Name)
+                .ToListAsync();
         }
     }
 }

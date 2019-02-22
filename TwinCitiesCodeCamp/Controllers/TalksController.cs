@@ -21,7 +21,7 @@ namespace TwinCitiesCodeCamp.Controllers
         {
             return DbSession.LoadAsync<Talk>(talkId);
         }
-
+               
         [Route("getTalksForEvent")]
         public Task<IList<Talk>> GetTalksForEvent(string eventId)
         {
@@ -86,6 +86,13 @@ namespace TwinCitiesCodeCamp.Controllers
                 throw new UnauthorizedAccessException();
             }
 
+            // You can't update a talk if its event has already taken place.
+            var codeCampEvent = await DbSession.LoadNotNull<Event>(talk.EventId);
+            if (codeCampEvent.DateTime < DateTime.UtcNow)
+            {
+                throw new InvalidOperationException("Can't update talks for code camps that have already taken place.");
+            }
+
             existingTalk.Update(talk);
             return existingTalk;
         }
@@ -94,7 +101,7 @@ namespace TwinCitiesCodeCamp.Controllers
         [HttpGet]
         public async Task<Talk> GetSubmission(string talkSubmissionId)
         {
-            if (!talkSubmissionId.StartsWith("talk/", StringComparison.InvariantCultureIgnoreCase))
+            if (!talkSubmissionId.StartsWith("talks/", StringComparison.InvariantCultureIgnoreCase))
             {
                 throw new ArgumentException("Only talks can be loaded.");
             }

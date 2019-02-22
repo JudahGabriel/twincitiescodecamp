@@ -28,7 +28,7 @@
     <!--No talks yet, and we're not yet accepting submissions (e.g. we're reviewing talk submissions) -->
     <div class="alert alert-info" ng-show="vm.callForSpeakersOpened === false && vm.talks.isLoadedAndEmpty">
         <h2>
-            <i class="fa fa-info-circle"></i> 
+            <i class="fa fa-info-circle"></i>
             We're not accepting talk submissions.
         </h2>
         <p>
@@ -39,7 +39,8 @@
                 We're not accepting talks for #tccc{{vm.event.number}} at this time.
             </span>
         </p>
-        <a href="#" class="alert-link" ng-href="{{'#/events/' + (vm.event.number - 1) + '/talks'}}">View talks from last event</a>
+        Submitted a talk? <a class="alert-link" href="#/talks/mine">Check if your talk has been accepted</a>.
+        You can also <a href="#" class="alert-link" ng-href="{{'#/events/' + (vm.event.number - 1) + '/talks'}}">view talks from last event</a>.
     </div>
 
     <!--We're not accepting new submissions, and we have talks. Display them!-->

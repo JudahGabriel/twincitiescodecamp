@@ -1,4 +1,5 @@
 ﻿using Raven.Identity;
+using System.Linq;
 
 namespace TwinCitiesCodeCamp.Models
 {
@@ -8,5 +9,10 @@ namespace TwinCitiesCodeCamp.Models
         public string PicUrl { get; set; }
 
         public const string IdPrefix = "AppUsers/";
+
+        public bool IsAdmin()
+        {
+            return this.Roles.Contains(Models.Roles.Admin);
+        }
     }
 }

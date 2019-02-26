@@ -25,8 +25,7 @@ namespace TwinCitiesCodeCamp.Controllers
             var dbUrl = this.DbSession.Advanced.DocumentStore.Url;
             var dbName = ((DocumentStore)this.DbSession.Advanced.DocumentStore).DefaultDatabase;
             var entityName = nameof(Talk) + "s";
-            var url = $"{dbUrl}/databases/{dbName}/streams/query/Raven/DocumentsByEntityName?format=excel&download=true&query=Tag%3A{entityName}and%20Status%3APending";
-
+            var url = $"{dbUrl}/databases/{dbName}/streams/query/Talks/ByStatus?query=Status%3A%20%22Pending%22&format=excel&download=true";
             using (var webClient = new WebClient())
             {
                 var bytes = await webClient.DownloadDataTaskAsync(new Uri(url));

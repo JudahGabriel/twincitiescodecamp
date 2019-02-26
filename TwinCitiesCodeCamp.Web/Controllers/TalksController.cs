@@ -38,7 +38,7 @@ namespace TwinCitiesCodeCamp.Controllers
             using (DbSession.Advanced.DocumentStore.AggressivelyCacheFor(TimeSpan.FromDays(7)))
             {
                 return DbSession.Query<Talk>()
-                    .Where(s => s.EventId == eventId)
+                    .Where(s => s.EventId == eventId && s.Status == TalkApproval.Approved)
                     .OrderBy(s => s.Hour)
                     .ThenBy(s => s.Title)
                     .ToListAsync();
@@ -47,7 +47,7 @@ namespace TwinCitiesCodeCamp.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<TalkSubmission> Submit(TalkSubmission talk)
+        public async Task<Talk> Submit(Talk talk)
         {
             var mostRecentEvent = await DbSession
                 .Query<Event>()
@@ -61,62 +61,66 @@ namespace TwinCitiesCodeCamp.Controllers
             }
             if (mostRecentEvent.NoTalkSubmissionsAfter.HasValue && DateTime.UtcNow > mostRecentEvent.NoTalkSubmissionsAfter)
             {
-                throw new InvalidOperationException("This event is closed for new talks");
+                throw new InvalidOperationException("Call for speakers has ended");
             }
 
             talk.Id = null;
             talk.AuthorEmail = User.Identity.Name;
             talk.SubmissionDate = DateTime.UtcNow;
-            talk.SubmittedByUserId = "ApplicationUsers/" + User.Identity.Name;
+            talk.SubmittedByUserId = "AppUsers/" + User.Identity.Name;
             talk.EventId = mostRecentEvent.Id;
+            talk.Status = TalkApproval.Pending;
             await DbSession.StoreAsync(talk);
             return talk;
         }
 
-        [Route("update")]
         [HttpPost]
         [Authorize]
-        public async Task<TalkSubmission> Update(TalkSubmission talk)
+        public async Task<Talk> Update(Talk talk)
         {
             // Authorize: you can only update your talks.
-            var existingTalk = await DbSession.LoadRequiredAsync<TalkSubmission>(talk.Id);
+            var existingTalk = await DbSession.LoadRequiredAsync<Talk>(talk.Id);
             var currentUser = await this.GetUserOrThrow();
             var isTalkOwner = string.Equals(currentUser.Id, existingTalk.SubmittedByUserId, StringComparison.InvariantCultureIgnoreCase);
-            var isAdmin = currentUser.Roles.Contains(Roles.Admin);
+            var isAdmin = currentUser.IsAdmin();
             if (!isTalkOwner && !isAdmin)
             {
                 throw new UnauthorizedAccessException();
+            }
+
+            // Authorize: you can only update talks that are in pending state.
+            if (existingTalk.Status != TalkApproval.Pending)
+            {
+                throw new UnauthorizedAccessException();
+            }
+
+            // You can't update a talk if its event has already taken place.
+            var codeCampEvent = await DbSession.LoadRequiredAsync<Event>(talk.EventId);
+            if (codeCampEvent.DateTime < DateTime.UtcNow)
+            {
+                throw new InvalidOperationException("Can't update talks for code camps that have already taken place.");
             }
 
             existingTalk.Update(talk);
             return existingTalk;
         }
 
-        [HttpGet]
-        [Authorize(Roles = Roles.Admin)]
-        public Task<List<TalkSubmission>> GetSubmissions(string eventId)
-        {
-            return DbSession.Query<TalkSubmission>()
-                .Where(s => s.EventId == eventId)
-                .ToListAsync();
-        }
-
         [Route("getSubmission")]
         [HttpGet]
-        public async Task<TalkSubmission> GetSubmission(string talkSubmissionId)
+        public async Task<Talk> GetSubmission(string talkSubmissionId)
         {
-            if (!talkSubmissionId.StartsWith("talksubmissions/", StringComparison.InvariantCultureIgnoreCase))
+            if (!talkSubmissionId.StartsWith("talks/", StringComparison.InvariantCultureIgnoreCase))
             {
-                throw new ArgumentException("Only talk submissions can be loaded.");
+                throw new ArgumentException("Only talks can be loaded.");
             }
 
             // Authorize: we must be an amdin, or alternately, the talk must be for the most recent event.
             var currentEvent = await DbSession.Query<Event>()
                 .OrderByDescending(e => e.Number)
                 .FirstAsync();
-            var submission = await DbSession.LoadRequiredAsync<TalkSubmission>(talkSubmissionId);
-            var currentUser = await this.GetUser();
-            var isAdmin = currentUser.Exists(u => u.Roles.Contains(Roles.Admin));
+            var submission = await DbSession.LoadNotNull<Talk>(talkSubmissionId);
+            var currentUser = await this.GetCurrentUser();
+            var isAdmin = currentUser.Exists(u => u.IsAdmin());
             var isSubmissionForCurrentEvent = string.Equals(submission.EventId, currentEvent.Id, StringComparison.InvariantCultureIgnoreCase);
             if (!isAdmin && !isSubmissionForCurrentEvent)
             {
@@ -126,49 +130,61 @@ namespace TwinCitiesCodeCamp.Controllers
             return submission;
         }
 
+        [Route("getSubmissions")]
         [HttpGet]
-        [Authorize]
-        public async Task<IList<TalkSubmission>> GetMySubmissions()
+        [Authorize(Roles = "Admin")]
+        public Task<IList<Talk>> GetSubmissions(string eventId)
         {
-            var userId = this.GetUserId();
-            if (!userId.HasValue)
-            {
-                return new List<TalkSubmission>(0);
-            }
-
-            var userIdVal = userId.ValueOrDefault();
-            return await DbSession.Query<TalkSubmission>()
-                .Where(t => t.SubmittedByUserId == userIdVal)
+            return DbSession.Query<Talk>()
+                .Where(s => s.EventId == eventId)
                 .ToListAsync();
         }
 
-        [HttpPost]
-        [Authorize(Roles = Roles.Admin)]
-        public async Task<TalkSubmission> Approve(string talkSubmissionId)
+        [Route("getMySubmissions")]
+        [HttpGet]
+        [Authorize]
+        public async Task<IList<Talk>> GetMySubmissions()
         {
-            var talkSubmission = await DbSession.LoadRequiredAsync<TalkSubmission>(talkSubmissionId);
+            var userId = "ApplicationUsers/" + User.Identity.Name;
+            var user = await DbSession.LoadAsync<ApplicationUser>(userId);
+            if (user == null)
+            {
+                return new List<Talk>(0);
+            }
+
+            return await DbSession.Query<Talk>()
+                .Where(t => t.SubmittedByUserId == userId)
+                .ToListAsync();
+        }
+
+        [Route("approve")]
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<Talk> Approve(string talkSubmissionId)
+        {
+            var talkSubmission = await DbSession.LoadNotNull<Talk>(talkSubmissionId);
             talkSubmission.Status = TalkApproval.Approved;
-            var talk = talkSubmission.ToTalk();
-            await DbSession.StoreAsync(talk);
             return talkSubmission;
         }
 
+        [Route("reject")]
         [HttpPost]
-        [Authorize(Roles = Roles.Admin)]
-        public async Task<TalkSubmission> Reject(string talkSubmissionId)
+        [Authorize(Roles = "Admin")]
+        public async Task<Talk> Reject(string talkSubmissionId)
         {
-            var talkSubmission = await DbSession.LoadRequiredAsync<TalkSubmission>(talkSubmissionId);
+            var talkSubmission = await DbSession.LoadNotNull<Talk>(talkSubmissionId);
             talkSubmission.Status = TalkApproval.Rejected;
             return talkSubmission;
         }
 
+        [Route("searchTags")]
         [HttpGet]
         public Task<IList<string>> SearchTags(string search)
         {
             return DbSession.Query<Talks_Tags.Result, Talks_Tags>()
-                .Search(i => i.Name, search + "*", 1, SearchOptions.Guess)
-                .Take(10)
+                .Search(i => i.Name, search + "*", 1, SearchOptions.Guess, EscapeQueryOptions.AllowPostfixWildcard)
                 .Select(i => i.Name)
+                .Take(10)
                 .ToListAsync();
         }
     }

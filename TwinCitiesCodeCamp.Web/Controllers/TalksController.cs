@@ -118,8 +118,8 @@ namespace TwinCitiesCodeCamp.Controllers
             var currentEvent = await DbSession.Query<Event>()
                 .OrderByDescending(e => e.Number)
                 .FirstAsync();
-            var submission = await DbSession.LoadNotNull<Talk>(talkSubmissionId);
-            var currentUser = await this.GetCurrentUser();
+            var submission = await DbSession.LoadRequiredAsync<Talk>(talkSubmissionId);
+            var currentUser = await this.GetUser();
             var isAdmin = currentUser.Exists(u => u.IsAdmin());
             var isSubmissionForCurrentEvent = string.Equals(submission.EventId, currentEvent.Id, StringComparison.InvariantCultureIgnoreCase);
             if (!isAdmin && !isSubmissionForCurrentEvent)
@@ -133,7 +133,7 @@ namespace TwinCitiesCodeCamp.Controllers
         [Route("getSubmissions")]
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public Task<IList<Talk>> GetSubmissions(string eventId)
+        public Task<List<Talk>> GetSubmissions(string eventId)
         {
             return DbSession.Query<Talk>()
                 .Where(s => s.EventId == eventId)
@@ -145,13 +145,8 @@ namespace TwinCitiesCodeCamp.Controllers
         [Authorize]
         public async Task<IList<Talk>> GetMySubmissions()
         {
-            var userId = "ApplicationUsers/" + User.Identity.Name;
-            var user = await DbSession.LoadAsync<ApplicationUser>(userId);
-            if (user == null)
-            {
-                return new List<Talk>(0);
-            }
-
+            var userId = this.GetUserId().ValueOrDefault();
+            
             return await DbSession.Query<Talk>()
                 .Where(t => t.SubmittedByUserId == userId)
                 .ToListAsync();
@@ -162,7 +157,7 @@ namespace TwinCitiesCodeCamp.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<Talk> Approve(string talkSubmissionId)
         {
-            var talkSubmission = await DbSession.LoadNotNull<Talk>(talkSubmissionId);
+            var talkSubmission = await DbSession.LoadRequiredAsync<Talk>(talkSubmissionId);
             talkSubmission.Status = TalkApproval.Approved;
             return talkSubmission;
         }
@@ -172,7 +167,7 @@ namespace TwinCitiesCodeCamp.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<Talk> Reject(string talkSubmissionId)
         {
-            var talkSubmission = await DbSession.LoadNotNull<Talk>(talkSubmissionId);
+            var talkSubmission = await DbSession.LoadRequiredAsync<Talk>(talkSubmissionId);
             talkSubmission.Status = TalkApproval.Rejected;
             return talkSubmission;
         }

@@ -15,6 +15,7 @@ using Raven.Client.Documents.Session;
 using Microsoft.Extensions.Logging;
 using Raven.Client.Documents;
 using Optional.Unsafe;
+using TwinCitiesCodeCamp.Data;
 
 namespace TwinCitiesCodeCamp.Controllers
 {
@@ -174,10 +175,10 @@ namespace TwinCitiesCodeCamp.Controllers
 
         [Route("searchTags")]
         [HttpGet]
-        public Task<IList<string>> SearchTags(string search)
+        public Task<List<string>> SearchTags(string search)
         {
             return DbSession.Query<Talks_Tags.Result, Talks_Tags>()
-                .Search(i => i.Name, search + "*", 1, SearchOptions.Guess, EscapeQueryOptions.AllowPostfixWildcard)
+                .Search(i => i.Name, search + "*", 1, SearchOptions.Guess)
                 .Select(i => i.Name)
                 .Take(10)
                 .ToListAsync();

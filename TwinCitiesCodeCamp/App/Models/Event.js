@@ -36,6 +36,15 @@ var Tccc;
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(Event.prototype, "callForSpeakersOpened", {
+            get: function () {
+                var callForSpeakersStarted = this.isAcceptingTalkSubmissions;
+                var callForSpakersEnded = !!this.noTalkSubmissionsAfter && new Date() > new Date(this.noTalkSubmissionsAfter);
+                return callForSpeakersStarted && !callForSpakersEnded;
+            },
+            enumerable: true,
+            configurable: true
+        });
         return Event;
     }());
     Tccc.Event = Event;

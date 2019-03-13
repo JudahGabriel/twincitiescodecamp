@@ -1,12 +1,16 @@
 ﻿<section class="talk-profile-page" ng-controller="TalkProfileController as vm">
 
     <div class="media">
-        <div class="media-left">
+        <div class="media-left hidden-xs">
             <a href="#">
-                <img class="media-object img-circle" ng-src="{{vm.talk.pictureUrlOrDefault}}" alt="Profile pic of {{vm.talk.author}}">
+                <img class="media-object img-circle" ng-src="{{vm.talk.pictureUrlOrDefault}}" alt="Profile pic of {{vm.talk.author}}" />
             </a>
         </div>
         <div class="media-body">
+
+            <!--On mobile, we show the image inside the body.-->
+            <img class="media-object img-circle visible-xs-block" ng-src="{{vm.talk.pictureUrlOrDefault}}" alt="Profile pic of {{vm.talk.author}}" />
+
             <div class="alert alert-info" ng-if="vm.canEditTalk">
                 <i class="fa fa-info-circle"></i>
                 This is your talk. You can <a ng-href="#/talks/mine/edit/{{vm.talk.id}}"><i class="fa fa-pencil"></i> update it</a>.

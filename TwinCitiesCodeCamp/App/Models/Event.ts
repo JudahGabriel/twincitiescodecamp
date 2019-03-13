@@ -41,5 +41,11 @@
                 this.dateTime = this.lastRawDate.toISOString();
             }
         }
+
+        get callForSpeakersOpened(): boolean {
+            const callForSpeakersStarted = this.isAcceptingTalkSubmissions;
+            const callForSpakersEnded = !!this.noTalkSubmissionsAfter && new Date() > new Date(this.noTalkSubmissionsAfter);
+            return callForSpeakersStarted && !callForSpakersEnded;
+        }
     }
 }

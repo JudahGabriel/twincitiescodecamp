@@ -45,16 +45,23 @@
 
     <!--We're not accepting new submissions, and we have talks. Display them!-->
     <div class="media" ng-show="vm.callForSpeakersOpened === false && vm.talks.isLoadedWithData" ng-repeat="talk in vm.talks.items">
-        <div class="media-left">
+        <div class="media-left hidden-xs">
             <a ng-href="#/{{talk.id}}">
-                <img class="media-object img-circle" ng-src="{{talk.pictureUrlOrDefault}}" alt="Profile pic of {{talk.author}}">
+                <img class="media-object img-circle img-responsive" ng-src="{{talk.pictureUrlOrDefault}}" alt="Profile pic of {{talk.author}}">
             </a>
         </div>
         <div class="media-body">
+            <!--On mobile, the image is shown in the body-->
+            <img class="media-object img-circle img-responsive visible-xs-block" ng-src="{{talk.pictureUrlOrDefault}}" alt="Profile pic of {{talk.author}}">
+
             <h2 class="media-heading">
                 <a ng-href="#/{{talk.id}}">{{talk.title}}</a>
             </h2>
             <h4>
+                <span class="tag" ng-repeat="tag in talk.tags">
+                    <i class="fa fa-tag"></i> {{tag}}
+                </span>
+                <br />
                 <small class="text-muted">by</small>
                 {{talk.author}}
                 <a ng-show="talk.authorTwitter" href="#" target="_blank" rel="noreferrer" ng-href="{{'https://twitter.com/' + talk.authorTwitter}}" style="padding-left: 10px;">

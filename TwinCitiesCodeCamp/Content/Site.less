@@ -141,20 +141,29 @@ header {
 
         .item {
             margin: 10px;
+            display: flex;
 
-            /*&:hover {
+            @media(max-width: @screen-xs-max) {
+                display: block; // On small screens, we don't use flexbox for each talk.
+            }
+
+            &:hover {
                 img {
-                    transform: rotateZ(4deg);
+                    filter: none;
                 }
-            }*/
+            }
 
             img {
-                max-height: 127px;
-                margin-top: -20px;
+                max-height: 150px;
+                min-width: 150px;
+                /*margin-top: -20px;
                 margin-left: -20px;
-                float: left;
+                float: left;*/
                 margin-right: 20px;
                 box-shadow: -6px 0 5px 0 rgba(0,0,0,.1), 6px 0 2px 0 rgba(0,0,0,.1);
+                filter: grayscale(100%);
+                transition: all ease-in-out 1s;
+                align-self: center;
 
                 @media(max-width: @screen-xs-max) {
                     float: none;
@@ -205,28 +214,32 @@ header {
 
     .media-heading {
         font-family: 'Lato', sans-serif;
+
+        @media(max-width: @screen-xs-max) {
+            text-align: center;
+        }
     }
 
     img {
         max-width: 300px;
         margin-right: 20px;
+        box-shadow: -6px 0 5px 0 rgba(0,0,0,.1), 6px 0 2px 0 rgba(0,0,0,.1);
 
         @media(max-width: @screen-xs-max) {
-            max-width: 100px;
+            margin-bottom: 10px;
         }
     }
 
     .media-body {
         @media(max-width: @screen-xs-max) {
             overflow: visible;
-        }       
+        }
     }
 
     .abstract, .bio, hr {
         @media(max-width: @screen-xs-max) {
-            margin-left: -130px;
             padding-right: 30px;
-        }       
+        }
     }
 
     .text-muted {
@@ -278,11 +291,17 @@ header {
         margin-left: -15px;
         margin-right: -15px;
 
+        &:hover {
+            img {
+                filter: none;
+            }
+        }
+
         img {
             margin-right: 20px;
-            width: 200px;
-            height: 200px;
+            max-width: 300px;
             box-shadow: 1px 1px 15px 0 @gray-darker;
+            filter: grayscale(100%);
 
             @media(max-width: @screen-xs-max) {
                 width: 70px;
@@ -301,7 +320,7 @@ header {
                 font-size: 24px;
             }
         }
-        
+
         .media-body {
             @media(max-width: @screen-xs-max) {
                 overflow: visible;
@@ -488,7 +507,7 @@ footer {
 .tag {
     color: white;
     display: inline-block;
-    padding: 8px;
+    padding: 8px 12px 8px 12px;
     background-color: rgba(255,255,255,.3);
     margin-right: 5px;
     margin-bottom: 5px;

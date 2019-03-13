@@ -11,6 +11,7 @@ var Tccc;
             this.schedule = null;
             this.talks = new Tccc.List(function () { return _this.fetchTalks(); }, "talks");
             this.talkIdImageUrls = {};
+            this.talkIdTags = {};
             this.hasAbsentSchedule = false;
         }
         ScheduleController.prototype.$onInit = function () {
@@ -64,6 +65,21 @@ var Tccc;
                 }
             }
             return null;
+        };
+        ScheduleController.prototype.getTagsForScheduleItem = function (item) {
+            if (!item.talkId) {
+                return [];
+            }
+            // If we've already fetched them.
+            var existingTags = this.talkIdTags[item.talkId];
+            if (existingTags) {
+                return existingTags;
+            }
+            // Grab them and stash them.
+            var talk = this.talks.items.find(function (t) { return t.id === item.talkId; });
+            var tags = talk ? talk.tags : [];
+            this.talkIdTags[item.talkId] = tags;
+            return tags;
         };
         ScheduleController.$inject = [
             "eventApi",

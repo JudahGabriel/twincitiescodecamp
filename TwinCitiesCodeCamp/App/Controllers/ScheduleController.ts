@@ -5,6 +5,7 @@
         schedule: Server.Schedule | null = null;
         talks = new List<Talk>(() => this.fetchTalks(), "talks");
         talkIdImageUrls = {};
+        talkIdTags = {};
         hasAbsentSchedule = false;
 
         static $inject = [
@@ -80,6 +81,24 @@
             }
 
             return null;
+        }
+
+        getTagsForScheduleItem(item: ScheduleItem): string[] {
+            if (!item.talkId) {
+                return [];
+            }
+
+            // If we've already fetched them.
+            const existingTags = this.talkIdTags[item.talkId];
+            if (existingTags) {
+                return existingTags;
+            }
+
+            // Grab them and stash them.
+            const talk = this.talks.items.find(t => t.id === item.talkId);
+            const tags = talk ? talk.tags : [];
+            this.talkIdTags[item.talkId] = tags;
+            return tags;
         }
     }
 

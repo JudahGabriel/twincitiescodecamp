@@ -46,6 +46,20 @@ namespace TwinCitiesCodeCamp.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<List<Talk>> GetTalksForMostRecentEvent()
+        {
+            var mostRecentEventId = await DbSession
+                .Query<Event>()
+                .OrderByDescending(e => e.DateTime)
+                .Select(e => e.Id)
+                .FirstAsync();
+            var talks = await DbSession.Query<Talk>()
+                .Where(t => t.EventId == mostRecentEventId && t.Status == TalkApproval.Approved)
+                .ToListAsync();
+            return talks;
+        }
+
         [HttpPost]
         [Authorize]
         public async Task<Talk> Submit(Talk talk)

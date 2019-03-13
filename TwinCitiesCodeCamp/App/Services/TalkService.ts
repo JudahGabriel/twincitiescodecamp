@@ -25,6 +25,11 @@
             return this.apiService.query("/talks/getTalksForEvent", args, selector);
         }
 
+        getTalksForMostRecentEvent(): ng.IPromise<Talk[]> {
+            var selector = (talks: Server.Talk[]) => talks.map(t => new Talk(t));
+            return this.apiService.query("/talks/getTalksForMostRecentEvent", null, selector);
+        }
+
         submitTalk(talk: Talk): ng.IPromise<Talk> {
             return this.apiService.post("/talks/submit", talk, dto => new Talk(dto));
         }

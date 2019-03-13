@@ -20,6 +20,10 @@ var Tccc;
             var selector = function (talks) { return talks.map(function (t) { return new Tccc.Talk(t); }); };
             return this.apiService.query("/talks/getTalksForEvent", args, selector);
         };
+        TalkService.prototype.getTalksForMostRecentEvent = function () {
+            var selector = function (talks) { return talks.map(function (t) { return new Tccc.Talk(t); }); };
+            return this.apiService.query("/talks/getTalksForMostRecentEvent", null, selector);
+        };
         TalkService.prototype.submitTalk = function (talk) {
             return this.apiService.post("/talks/submit", talk, function (dto) { return new Tccc.Talk(dto); });
         };

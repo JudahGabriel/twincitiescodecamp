@@ -21,6 +21,20 @@ namespace TwinCitiesCodeCamp.Controllers
         {
             return DbSession.LoadAsync<Talk>(talkId);
         }
+
+        [Route("getTalksForMostRecentEvent")]
+        public async Task<IList<Talk>> GetTalksForMostRecentEvent()
+        {
+            var mostRecentEventId = await DbSession
+                .Query<Event>()
+                .OrderByDescending(e => e.DateTime)
+                .Select(e => e.Id)
+                .FirstAsync();
+            var talks = await DbSession.Query<Talk>()
+                .Where(t => t.EventId == mostRecentEventId && t.Status == TalkApproval.Approved)
+                .ToListAsync();
+            return talks;
+        }
                
         [Route("getTalksForEvent")]
         public Task<IList<Talk>> GetTalksForEvent(string eventId)

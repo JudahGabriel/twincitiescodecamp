@@ -453,6 +453,7 @@
     <TypeScriptCompile Include="App\Controllers\AdminSubmissionsController.ts" />
     <TypeScriptCompile Include="App\Controllers\EventController.ts" />
     <TypeScriptCompile Include="App\Controllers\HeaderController.ts" />
+    <TypeScriptCompile Include="App\Controllers\HomeController.ts" />
     <TypeScriptCompile Include="App\Controllers\MyTalksController.ts" />
     <TypeScriptCompile Include="App\Controllers\PastEventDetailsController.ts" />
     <TypeScriptCompile Include="App\Controllers\PastEventsController.ts" />

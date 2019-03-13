@@ -113,11 +113,51 @@ header {
         padding-top: 25px;
         margin-left: auto;
         margin-right: auto;
+
+        .fa {
+            color: white;
+            font-size: 50px;
+        }
     }
 
-    .fa {
-        color: white;        
-        font-size: 50px;
+    .speaker-faces {
+        display: flex;
+        flex-wrap: wrap;
+
+        img {
+            width: 60px;
+            height: 60px;
+            filter: grayscale(100%);
+            transition: all ease-in-out 0.5s;
+
+            &:hover {
+                filter: none;
+            }
+        }
+    }
+
+    .talk-slice {
+        .list-group-item {
+            text-align: left;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            &:hover {
+                img {
+                    filter: none;
+                }
+            }
+
+            img {
+                width: 64px;
+                height: 64px;
+                margin-right: 5px;
+                box-shadow: -6px 0 5px 0 rgba(0,0,0,.1), 6px 0 2px 0 rgba(0,0,0,.1);
+                filter: grayscale(100%);
+                transition: all ease-in-out 0.5s;
+            }
+        }
     }
 }
 
@@ -227,6 +267,8 @@ header {
 
         @media(max-width: @screen-xs-max) {
             margin-bottom: 10px;
+            margin-left: auto;
+            margin-right: auto;
         }
     }
 
@@ -302,10 +344,11 @@ header {
             max-width: 300px;
             box-shadow: 1px 1px 15px 0 @gray-darker;
             filter: grayscale(100%);
+            transition: all ease-in-out 1s;
 
             @media(max-width: @screen-xs-max) {
-                width: 70px;
-                height: 70px;
+                margin-right: auto;
+                margin-right: auto;
             }
         }
 
@@ -330,7 +373,6 @@ header {
         .abstract {
             @media(max-width: @screen-xs-max) {
                 margin-top: 30px;
-                margin-left: -70px;
             }
         }
 

@@ -94,9 +94,39 @@ header .content .title .fa-code {
   margin-left: auto;
   margin-right: auto;
 }
-.home-page .fa {
+.home-page .icon .fa {
   color: white;
   font-size: 50px;
+}
+.home-page .speaker-faces {
+  display: flex;
+  flex-wrap: wrap;
+}
+.home-page .speaker-faces img {
+  width: 60px;
+  height: 60px;
+  filter: grayscale(100%);
+  transition: all ease-in-out 0.5s;
+}
+.home-page .speaker-faces img:hover {
+  filter: none;
+}
+.home-page .talk-slice .list-group-item {
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.home-page .talk-slice .list-group-item:hover img {
+  filter: none;
+}
+.home-page .talk-slice .list-group-item img {
+  width: 64px;
+  height: 64px;
+  margin-right: 5px;
+  box-shadow: -6px 0 5px 0 rgba(0, 0, 0, 0.1), 6px 0 2px 0 rgba(0, 0, 0, 0.1);
+  filter: grayscale(100%);
+  transition: all ease-in-out 0.5s;
 }
 .schedule-page .timeslot h2 {
   font-family: 'Lato', sans-serif;
@@ -189,6 +219,8 @@ header .content .title .fa-code {
 @media (max-width: 767px) {
   .talk-profile-page img {
     margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 @media (max-width: 767px) {
@@ -246,11 +278,11 @@ header .content .title .fa-code {
   max-width: 300px;
   box-shadow: 1px 1px 15px 0 #222222;
   filter: grayscale(100%);
+  transition: all ease-in-out 1s;
 }
 @media (max-width: 767px) {
   .talks-page .media img {
-    width: 70px;
-    height: 70px;
+    margin-right: auto;
   }
 }
 .talks-page .media .media-heading {
@@ -272,7 +304,6 @@ header .content .title .fa-code {
 @media (max-width: 767px) {
   .talks-page .media .abstract {
     margin-top: 30px;
-    margin-left: -70px;
   }
 }
 .talks-page .media .text-muted {

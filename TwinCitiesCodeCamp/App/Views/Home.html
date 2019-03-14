@@ -36,7 +36,7 @@
                 <div class="icon bg-success text-center">
                     <i class="fa fa-thumbs-up"></i>
                 </div>
-                <h4>{{vm.talks.length}} talks</h4>
+                <h4>{{vm.talks.items.length}} talks</h4>
                 <div class="list-group talk-slice">
                     <a href="#" ng-href="{{'#/' + talk.id }}" class="list-group-item" ng-repeat="talk in vm.talkSlice">
                         <img class="img-circle" ng-src="{{talk.pictureUrlOrDefault}}" />

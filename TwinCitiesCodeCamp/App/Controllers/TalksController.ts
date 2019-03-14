@@ -7,18 +7,18 @@
         static $inject = [
             "eventApi",
             "talkApi",
-            "$routeParams"
+            "$routeParams",
         ];
         static talksCacheKey = "talks";
 
         constructor(
-            private eventApi: EventService,
-            private talkApi: TalkService,
-            private $routeParams: ng.route.IRouteParamsService) {
+            private readonly eventApi: EventService,
+            private readonly talkApi: TalkService,
+            private readonly $routeParams: ng.route.IRouteParamsService) {
             
             this.eventId = $routeParams["eventId"];
             const talksCacheKey = TalksController.talksCacheKey + this.eventId;
-            this.talks = new List<Talk>(() => this.fetchTalks(`Events/${this.eventId}`), talksCacheKey);            
+            this.talks = new List<Talk>(() => this.fetchTalks(`events/${this.eventId}`), talksCacheKey);            
         }
 
         get friendlyLastSubmissionDate(): string {

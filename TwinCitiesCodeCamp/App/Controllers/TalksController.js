@@ -8,7 +8,7 @@ var Tccc;
             this.$routeParams = $routeParams;
             this.eventId = $routeParams["eventId"];
             var talksCacheKey = TalksController.talksCacheKey + this.eventId;
-            this.talks = new Tccc.List(function () { return _this.fetchTalks("Events/" + _this.eventId); }, talksCacheKey);
+            this.talks = new Tccc.List(function () { return _this.fetchTalks("events/" + _this.eventId); }, talksCacheKey);
         }
         Object.defineProperty(TalksController.prototype, "friendlyLastSubmissionDate", {
             get: function () {
@@ -51,7 +51,7 @@ var Tccc;
         TalksController.$inject = [
             "eventApi",
             "talkApi",
-            "$routeParams"
+            "$routeParams",
         ];
         TalksController.talksCacheKey = "talks";
         return TalksController;

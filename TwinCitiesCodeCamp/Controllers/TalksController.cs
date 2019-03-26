@@ -94,11 +94,11 @@ namespace TwinCitiesCodeCamp.Controllers
                 throw new UnauthorizedAccessException();
             }
 
-            // Authorize: you can only update talks that are in pending state.
-            if (existingTalk.Status != TalkApproval.Pending)
-            {
-                throw new UnauthorizedAccessException();
-            }
+            // Authorize: you can only update talks that are in pending state
+            //if (existingTalk.Status != TalkApproval.Pending)
+            //{
+            //    throw new UnauthorizedAccessException();
+            //}
 
             // You can't update a talk if its event has already taken place.
             var codeCampEvent = await DbSession.LoadNotNull<Event>(talk.EventId);

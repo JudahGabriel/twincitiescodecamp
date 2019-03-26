@@ -16,8 +16,6 @@ namespace TwinCitiesCodeCamp.Controllers
 {
     public class FilesController : RavenController
     {
-        private static ConcurrentDictionary<string, string> profilePictures = new ConcurrentDictionary<string, string>();
-
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> GetTalkSubmissionsCsv()

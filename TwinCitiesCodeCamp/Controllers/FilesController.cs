@@ -1,4 +1,6 @@
-﻿using Raven.Client.Document;
+﻿using CsvHelper;
+using Raven.Client;
+using Raven.Client.Document;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -20,14 +22,18 @@ namespace TwinCitiesCodeCamp.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> GetTalkSubmissionsCsv()
         {
-            var dbUrl = this.DbSession.Advanced.DocumentStore.Url;
-            var dbName = ((DocumentStore)this.DbSession.Advanced.DocumentStore).DefaultDatabase;
-            var entityName = nameof(Talk) + "s";
-            var url = $"{dbUrl}/databases/{dbName}/streams/query/Talks/ByStatus?query=Status%3A%20%22Pending%22&format=excel&download=true";
-            using (var webClient = new WebClient())
+            var pendingTalks = await DbSession.Query<Talk>()
+                .Where(t => t.Status == TalkApproval.Pending)
+                .Skip(0)
+                .Take(1000) // domain-limited, generally will have under 100
+                .ToListAsync();
+
+            using (var stream = new MemoryStream())
+            using (var writer = new StreamWriter(stream))
+            using (var csv = new CsvWriter(writer))
             {
-                var bytes = await webClient.DownloadDataTaskAsync(new Uri(url));
-                return File(bytes, "text/csv", $"tccc-talk-submissions-{DateTime.UtcNow.ToShortDateString()}.csv");
+                csv.WriteRecords(pendingTalks);
+                return File(stream.ToArray(), "text/csv", $"tccc-talk-submissions-{DateTime.UtcNow.ToShortDateString()}.csv");
             }
         }
 

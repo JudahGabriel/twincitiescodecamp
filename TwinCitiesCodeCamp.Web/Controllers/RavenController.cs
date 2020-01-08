@@ -118,7 +118,7 @@ namespace TwinCitiesCodeCamp.Controllers
             var userId = GetUserId();
             if (userId != null)
             {
-                return userId;
+                return userId.ValueOr(string.Empty);
             }
 
             throw new UnauthorizedAccessException();

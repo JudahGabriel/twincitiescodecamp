@@ -11,6 +11,7 @@ using TwinCitiesCodeCamp.Models;
 namespace TwinCitiesCodeCamp.Controllers
 {
     [RequireHttps]
+    [Route("[controller]/[action]")]
     public class HomeController : RavenController
     {
         public HomeController(IAsyncDocumentSession dbSession, ILogger<HomeController> logger)

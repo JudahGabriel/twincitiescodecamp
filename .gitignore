@@ -239,3 +239,6 @@ _Pvt_Extensions
 /TwinCitiesCodeCamp/ConnectionStrings.Secrets.Release.config
 /TwinCitiesCodeCamp/AppSettings.Secrets.Debug.config
 /TwinCitiesCodeCamp/AppSettings.Secrets.Release.config
+/TwinCitiesCodeCamp.Web/appsettings.Production.json
+/TwinCitiesCodeCamp.Web/appsettings.Development.json
+/TwinCitiesCodeCamp.Web/ravendb.cloud.certificate.pfx

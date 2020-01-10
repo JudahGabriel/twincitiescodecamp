@@ -1,6 +1,7 @@
 ﻿namespace Tccc {
     export class MyTalksController {
         submissions = new List<Talk>(() => this.getMySubmissions());
+        _submissionsByEventField: { eventId: string; talks: Talk[] }[] = [];
 
         static $inject = [
             "isSignedIn",
@@ -14,13 +15,31 @@
             private readonly $sce: ng.ISCEService) {
         }
 
-        getFriendlyEventName(submission: Talk) {
+        get submissionsByEvent(): { eventId: string; talks: Talk[] }[] {
+            if (this._submissionsByEventField.length === 0 && this.submissions.isLoadedWithData) {
+                const talksByEventId = _.groupBy(this.submissions.items, t => t.eventId);
+                for (var eventId in talksByEventId) {
+                    this._submissionsByEventField.push({
+                        eventId: eventId,
+                        talks: talksByEventId[eventId]
+                    });
+                }
+            }
+            
+            return this._submissionsByEventField;
+        }
+
+        getFriendlyEventName(eventId: string) {
             const eventIdPrefix = "events/";
-            if (submission.eventId && submission.eventId.length > eventIdPrefix.length) {
-                return "#tccc" + submission.eventId.substring(eventIdPrefix.length);
+            if (eventId && eventId.length > eventIdPrefix.length) {
+                return "#tccc" + eventId.substring(eventIdPrefix.length);
             }
 
             return "Twin Cities Code Camp";
+        }
+
+        getYearForTalk(talk: Talk | undefined | null) {
+            return talk ? moment(talk.submissionDate).year() : new Date().getFullYear();
         }
 
         $onInit() {

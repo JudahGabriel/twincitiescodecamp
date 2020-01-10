@@ -20,10 +20,10 @@ namespace TwinCitiesCodeCamp.Controllers
     {
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> GetTalkSubmissionsCsv()
+        public async Task<ActionResult> GetTalkSubmissionsCsv(string eventId)
         {
             var pendingTalks = await DbSession.Query<Talk>()
-                .Where(t => t.Status == TalkApproval.Pending)
+                .Where(t => t.EventId == eventId)
                 .Skip(0)
                 .Take(1000) // domain-limited, generally will have under 100
                 .ToListAsync();

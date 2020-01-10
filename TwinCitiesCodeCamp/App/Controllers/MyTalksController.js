@@ -7,13 +7,33 @@ var Tccc;
             this.talkApi = talkApi;
             this.$sce = $sce;
             this.submissions = new Tccc.List(function () { return _this.getMySubmissions(); });
+            this._submissionsByEventField = [];
         }
-        MyTalksController.prototype.getFriendlyEventName = function (submission) {
+        Object.defineProperty(MyTalksController.prototype, "submissionsByEvent", {
+            get: function () {
+                if (this._submissionsByEventField.length === 0 && this.submissions.isLoadedWithData) {
+                    var talksByEventId = _.groupBy(this.submissions.items, function (t) { return t.eventId; });
+                    for (var eventId in talksByEventId) {
+                        this._submissionsByEventField.push({
+                            eventId: eventId,
+                            talks: talksByEventId[eventId]
+                        });
+                    }
+                }
+                return this._submissionsByEventField;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        MyTalksController.prototype.getFriendlyEventName = function (eventId) {
             var eventIdPrefix = "events/";
-            if (submission.eventId && submission.eventId.length > eventIdPrefix.length) {
-                return "#tccc" + submission.eventId.substring(eventIdPrefix.length);
+            if (eventId && eventId.length > eventIdPrefix.length) {
+                return "#tccc" + eventId.substring(eventIdPrefix.length);
             }
             return "Twin Cities Code Camp";
+        };
+        MyTalksController.prototype.getYearForTalk = function (talk) {
+            return talk ? moment(talk.submissionDate).year() : new Date().getFullYear();
         };
         MyTalksController.prototype.$onInit = function () {
             this.submissions.fetch();

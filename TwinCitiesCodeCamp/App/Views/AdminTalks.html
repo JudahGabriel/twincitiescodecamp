@@ -3,7 +3,7 @@
 
     <h2>
         {{vm.totalTalks}} talk submissions
-        <a class="btn btn-default pull-right" href="/files/GetTalkSubmissionsCsv"><i class="fa fa-file-excel-o" style="color: white; background-color: rgb(31, 112, 68)"></i> Generate CSV</a>
+        <a class="btn btn-default pull-right" ng-href="{{ '/files/GetTalkSubmissionsCsv?eventId=' + vm.eventId }}"><i class="fa fa-file-excel-o" style="color: white; background-color: rgb(31, 112, 68)"></i> Generate CSV</a>
     </h2>
     <div class="row">
         <div class="col-xs-12 col-sm-4">

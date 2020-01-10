@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using CsvHelper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Raven.Client.Documents;
 using Raven.Client.Documents.Session;
 using System;
 using System.Collections.Concurrent;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -25,10 +27,21 @@ namespace TwinCitiesCodeCamp.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> GetTalkSubmissionsCsv()
+        public async Task<ActionResult> GetTalkSubmissionsCsv(string eventId)
         {
-            // TODO: implement this
-            throw new NotImplementedException();
+            var pendingTalks = await DbSession.Query<Talk>()
+                .Where(t => t.EventId == eventId)
+                .Skip(0)
+                .Take(1000) // domain-limited, generally will have under 100
+                .ToListAsync();
+
+            using (var stream = new MemoryStream())
+            using (var writer = new StreamWriter(stream))
+            using (var csv = new CsvWriter(writer))
+            {
+                csv.WriteRecords(pendingTalks);
+                return File(stream.ToArray(), "text/csv", $"tccc-talk-submissions-{DateTime.UtcNow.ToShortDateString()}.csv");
+            }
         }
 
         /// <summary>

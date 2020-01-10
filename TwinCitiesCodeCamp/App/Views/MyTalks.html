@@ -11,50 +11,62 @@
     </div>
 
     <div ng-show="vm.submissions.isLoadedWithData">
-        <ul class="list-group">
-            <li class="list-group-item" ng-repeat="submission in vm.submissions.items">
-                <h3 class="list-group-item-heading">
-                    {{submission.title}}
-                    <span class="pull-right">
-                        Status: 
-                        <span class="text-info" ng-show="submission.status === 0" ng-class="{ 'list-group-item-success': submission.status === 2, 'list-group-item-danger': submission.status === 1 }">
-                            Under consideration 
-                            <br />
-                            <small>Check back later! ʘ‿ʘ</small>
+
+        <div ng-repeat="talksForEvent in vm.submissionsByEvent">
+
+            <!--The "#tcccxx" header-->
+            <ol class="breadcrumb">
+                <li class="active">
+                    <h3>
+                        {{vm.getFriendlyEventName(talksForEvent.eventId)}} - {{vm.getYearForTalk(talksForEvent.talks[0])}}
+                    </h3>
+                </li>
+            </ol>
+
+            <!--The list of talk submissions-->
+            <div class="panel" ng-repeat="talk in talksForEvent.talks" ng-class="{ 'panel-info': talk.status === 0, 'panel-warning': talk.status === 1, 'panel-primary': talk.status === 2 }">
+                <div class="panel-heading">
+                    <p class="panel-title">
+                        <h4>{{talk.title}}</h4>
+                    </p>
+                </div>
+                <div class="panel-body">
+                    <h4>{{talk.author}}</h4>
+                    <p>
+                        <span ng-repeat="tag in talk.tags">
+                            <i class="fa fa-tag"></i>
+                            {{tag}}
+                            &nbsp;
                         </span>
-                        <span ng-show="submission.status === 1">
-                            <i class="fa fa-ban"></i> Rejected 
-                            <br />
-                            <small>Oh noes! Sorry, this talk didn't make the cut for {{vm.getFriendlyEventName(submission)}}. ಥ_ಥ</small>
+                    </p>
+                    <br />
+                    <h4 class="clearfix">Abstract</h4>
+                    <p class="list-group-item-text" ng-bind-html="talk.abstract">
+                        {{talk.abstract}}
+                    </p>
+                    <p ng-show="talk.status === 0">
+                        <a class="btn btn-primary btn-lg" ng-href="#/talks/mine/edit/{{talk.id}}">
+                            <i class="fa fa-pencil"></i>
+                            Edit this talk
+                        </a>
+                    </p>
+                </div>
+                <div class="panel-footer">
+                    <h5>
+                        <span class="text-info" ng-show="talk.status === 0">
+                            Under consideration - check back later! ʘ‿ʘ
                         </span>
-                        <span ng-show="submission.status === 2">
-                            <i class="fa fa-check"></i> Approved 
-                            <br />
-                            <small>You're giving this talk at {{vm.getFriendlyEventName(submission)}}! ヾ(⌐■_■)ノ♪</small>
+                        <span class="text-warning" ng-show="talk.status === 1">
+                            <i class="fa fa-ban"></i> Rejected - oh noes! Sorry, this talk didn't make the cut for {{vm.getFriendlyEventName(talk.eventId)}}. ಥ_ಥ
                         </span>
-                    </span>
-                </h3>
-                <h4>{{submission.author}}</h4>
-                <p>
-                    <span ng-repeat="tag in submission.tags">
-                        <i class="fa fa-tag"></i>
-                        {{tag}}
-                        &nbsp;
-                    </span>
-                </p>
-                <br />
-                <h4 class="clearfix">Abstract</h4>
-                <p class="list-group-item-text" ng-bind-html="submission.abstract">
-                    {{submission.abstract}}
-                </p>
-                <p ng-show="submission.status === 0">
-                    <a class="btn btn-primary btn-lg" ng-href="#/talks/mine/edit/{{submission.id}}">
-                        <i class="fa fa-pencil"></i>
-                        Edit this talk
-                    </a>
-                </p>
-            </li>
-        </ul>
+                        <span class="text-success" ng-show="talk.status === 2">
+                            <i class="fa fa-check"></i> Approved - You're giving this talk at {{vm.getFriendlyEventName(talk.eventId)}}! ヾ(⌐■_■)ノ♪
+                        </span>
+                    </h5>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <div ng-show="vm.submissions.isLoadedAndEmpty">

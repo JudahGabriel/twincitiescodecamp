@@ -69,7 +69,11 @@ namespace TwinCitiesCodeCamp.Controllers
                 throw new InvalidOperationException("Call for speakers has ended");
             }
 
-            talk.Id = null;
+            if(talk.Id == string.Empty)
+            {
+                talk.Id = null;
+            }
+            
             talk.AuthorEmail = User.Identity.Name;
             talk.SubmissionDate = DateTime.UtcNow;
             talk.SubmittedByUserId = "AppUsers/" + User.Identity.Name;
@@ -160,6 +164,7 @@ namespace TwinCitiesCodeCamp.Controllers
 
             return await DbSession.Query<Talk>()
                 .Where(t => t.SubmittedByUserId == userId)
+                .OrderByDescending(t => t.SubmissionDate)
                 .ToListAsync();
         }
 

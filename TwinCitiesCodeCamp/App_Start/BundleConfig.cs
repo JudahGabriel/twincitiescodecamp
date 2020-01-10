@@ -11,12 +11,12 @@ namespace TwinCitiesCodeCamp
             var cdns = new
             {
                 JQuery = "https://code.jquery.com/jquery-2.2.4.min.js",
-                Bootstrap = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js",
+                Bootstrap = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js",
                 Moment = "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js",
-                Angular = "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js",
-                AngularAnimate = "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-animate.min.js",
-                AngularRoute = "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-route.min.js",
-                AngularSanitize = "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js",
+                Angular = "https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js",
+                AngularAnimate = "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.4/angular-animate.min.js",
+                AngularRoute = "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.4/angular-route.min.js",
+                AngularSanitize = "https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular-sanitize.js",
                 AngularBootstrap = "https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js",
                 AngularBootstrapTemplates = "https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js",
                 AngularLocalStorage = "https://cdnjs.cloudflare.com/ajax/libs/angular-local-storage/0.5.2/angular-local-storage.min.js",

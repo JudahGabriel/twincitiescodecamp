@@ -35,7 +35,10 @@
 
             this.talkSlice = _.shuffle(talks)
                 .slice(0, 5);
-            this.allTalksUrl = `#/${talks[0].eventId}/talks`;
+
+            if (this.allTalksUrl.length > 0) {
+                this.allTalksUrl = `#/${talks[0].eventId}/talks`;
+            }
         }
 
         getAllTalkTags(talks: Talk[]): string[] {

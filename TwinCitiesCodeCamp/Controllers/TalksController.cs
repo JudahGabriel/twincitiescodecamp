@@ -76,7 +76,7 @@ namespace TwinCitiesCodeCamp.Controllers
             
             talk.AuthorEmail = User.Identity.Name;
             talk.SubmissionDate = DateTime.UtcNow;
-            talk.SubmittedByUserId = "AppUsers/" + User.Identity.Name;
+            talk.SubmittedByUserId = "ApplicationUsers/" + User.Identity.Name;
             talk.EventId = mostRecentEvent.Id;
             talk.Status = TalkApproval.Pending;
             await DbSession.StoreAsync(talk);

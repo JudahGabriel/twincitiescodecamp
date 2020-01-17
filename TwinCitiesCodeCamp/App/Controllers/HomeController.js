@@ -25,7 +25,9 @@ var Tccc;
                 .sort();
             this.talkSlice = _.shuffle(talks)
                 .slice(0, 5);
-            this.allTalksUrl = "#/" + talks[0].eventId + "/talks";
+            if (this.allTalksUrl.length > 0) {
+                this.allTalksUrl = "#/" + talks[0].eventId + "/talks";
+            }
         };
         HomeController.prototype.getAllTalkTags = function (talks) {
             return _.uniq(_.flatten(talks.map(function (t) { return t.tags; })));

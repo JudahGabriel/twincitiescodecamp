@@ -224,6 +224,15 @@ namespace TwinCitiesCodeCamp.Controllers
                 var code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                 await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                await DbSession.StoreAsync(new TwinCitiesCodeCamp.Models.PasswordReset
+                {
+                    Created = DateTimeOffset.UtcNow,
+                    Code = code,
+                    UserId = user.Id,
+                    Url = callbackUrl
+                });
+
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 

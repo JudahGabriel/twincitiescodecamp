@@ -261,6 +261,7 @@
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PasswordReset.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\ScheduleItem.cs" />
     <Compile Include="Models\ScheduleTimeslot.cs" />
